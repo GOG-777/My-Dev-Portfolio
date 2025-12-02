@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Check, Link2, BarChart3, QrCode, Zap, Globe, Shield, Copy, TrendingUp, Code, Database, Mail, X, ChevronLeft, ChevronRight, ImageIcon, AlertTriangle } from 'lucide-react';
+import { ArrowLeft, Check, Link2, BarChart3, QrCode, Globe, Shield, Copy, TrendingUp, Code, Mail, X, ChevronLeft, ChevronRight, ImageIcon, AlertTriangle } from 'lucide-react';
 import GalaxyIcon from '../components/GalaxyIcon';
 
 // Define interfaces

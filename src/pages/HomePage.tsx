@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef, lazy} from 'react';
+import React, { useState, useEffect, useRef} from 'react';
 import { Link } from 'react-router-dom';
-import { Code, Zap, Database, Layers, Mail, Send, Terminal, Server, Package, Boxes, GitBranch, Cloud, Lock, BarChart3, FileSpreadsheet, Brain, Cpu, Globe, Menu, X } from 'lucide-react';
+import { Code, Zap, Database, Layers, Send, Terminal, Server, Package, Boxes, GitBranch, Cloud, Lock, BarChart3, FileSpreadsheet, Brain, Cpu, Globe, Menu, X } from 'lucide-react';
 import GalaxyIcon from '../components/GalaxyIcon';
 import DeveloperCoding from '../components/DeveloperCoding';
 import DeveloperThinking from '../components/DeveloperThinking';
@@ -49,32 +49,25 @@ interface Skill {
 
 // Main component
 const HomePage: React.FC = () => {
-  const [scrollY, setScrollY] = useState<number>(0);
   const [mousePosition, setMousePosition] = useState<MousePosition>({ x: 0, y: 0 });
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
 
-  // Refs following Google's pattern - all initialized with null
+  // Refs
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const ctxRef = useRef<CanvasRenderingContext2D | null>(null);
   const particlesRef = useRef<Particle[]>([]);
-  const animationRef = useRef<number | null>(null); // Fixed with null
+  const animationRef = useRef<number | null>(null);
 
-  // Event handlers (same as before)
+  // Event handler
   const handleMouseMove = (e: MouseEvent) => {
     setMousePosition({ x: e.clientX, y: e.clientY });
   };
 
-  const handleScroll = () => {
-    setScrollY(window.scrollY);
-  };
-
   // Effects
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
     window.addEventListener('mousemove', handleMouseMove);
-
+    
     return () => {
-      window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('mousemove', handleMouseMove);
     };
   }, []);

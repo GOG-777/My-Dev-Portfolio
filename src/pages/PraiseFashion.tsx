@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Check, ShoppingCart, CreditCard, FileText, Mail, Package, BarChart3, Shield, Zap, ImageIcon, Database, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowLeft, Check, ShoppingCart, CreditCard, FileText, Mail, Package, BarChart3, Shield, ImageIcon, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import GalaxyIcon from '../components/GalaxyIcon';
 
 // Define interfaces

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Check, BookOpen, Calculator, Users, Lock, BarChart3, Calendar, Award, Zap, Server, Shield, ImageIcon, Database, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowLeft, Check, BookOpen, Calculator, Users, Lock, BarChart3, Calendar, Award, Server, ImageIcon, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import GalaxyIcon from '../components/GalaxyIcon';
 
 // Fix for Lucide icons - they're React components with SVG props
