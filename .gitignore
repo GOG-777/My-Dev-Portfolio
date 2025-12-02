@@ -38,9 +38,6 @@ Thumbs.db
 # Docker
 docker-buildx/
 
-public/images/
-public/images/projects/
-
 docker-compose.yml
 Dockerfile
 
