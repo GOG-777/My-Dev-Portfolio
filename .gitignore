@@ -41,6 +41,8 @@ docker-buildx/
 docker-compose.yml
 Dockerfile
 
+#My personal README.md
+personalREADME.md
+
 # TypeScript
 *.tsbuildinfo
-personalREADME.md
