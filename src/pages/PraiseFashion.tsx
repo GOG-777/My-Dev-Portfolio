@@ -263,7 +263,7 @@ const PraiseFashion: React.FC = () => {
             </div>
             <div className="bg-gradient-to-br from-cyan-900/30 to-purple-900/30 border border-cyan-500/30 rounded-xl p-6">
               <p className="text-sm text-gray-400 mb-2">Status</p>
-              <p className="text-2xl font-bold text-white">Live in Production</p>
+              <p className="text-2xl font-bold text-white">Ready for deployment</p>
             </div>
           </div>
         </div>
