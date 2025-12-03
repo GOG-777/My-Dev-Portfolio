@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef} from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Code, Zap, Database, Layers, Send, Terminal, Server, Package, Boxes, GitBranch, Cloud, Lock, BarChart3, FileSpreadsheet, Brain, Cpu, Globe, Menu, X } from 'lucide-react';
 import GalaxyIcon from '../components/GalaxyIcon';
@@ -66,7 +66,7 @@ const HomePage: React.FC = () => {
   // Effects
   useEffect(() => {
     window.addEventListener('mousemove', handleMouseMove);
-    
+
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
     };
@@ -237,8 +237,8 @@ const HomePage: React.FC = () => {
       <nav className="fixed top-0 w-full z-50 bg-black/50 backdrop-blur-lg border-b border-purple-500/20">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
           <Link to="/" className="text-xl md:text-2xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent flex items-center gap-2">
-            <GalaxyIcon className="w-7 h-7" />
             GOG
+            <GalaxyIcon className="w-7 h-7" />
           </Link>
 
           <div className="hidden md:flex gap-8 text-sm">
@@ -292,10 +292,10 @@ const HomePage: React.FC = () => {
 
                 <div className="flex-1 pt-3">
                   <div className="flex items-center gap-3 mb-4">
-                    <GalaxyIcon className="w-14 h-14 sm:w-16 sm:h-16" />
                     <h1 className="text-6xl sm:text-7xl md:text-8xl font-black bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
                       GOG
                     </h1>
+                    <GalaxyIcon className="w-14 h-14 sm:w-16 sm:h-16" />
                   </div>
                   <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-100 mb-5">
                     Thegenius
