@@ -42,4 +42,4 @@ docker-compose.yml
 Dockerfile
 
 # TypeScript
-*.tsbuildinfo
+*.tsbuildinfopersonalREADME.md
