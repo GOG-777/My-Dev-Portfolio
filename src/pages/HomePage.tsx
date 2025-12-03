@@ -159,7 +159,7 @@ const HomePage: React.FC = () => {
       description: "Complete e-commerce solution built for fashion retail. Features Paystack payment integration, automated receipt generation (PDF & JPG), inventory management, admin dashboard, and full customer management system.",
       tech: ["HTML5", "Node.js", "Express.js", "PostgreSQL", "Docker", "Paystack API", "Vanilla JavaScript", "Tailwind CSS"],
       features: ["Payment Integration", "PDF Generation", "Email Automation", "Inventory Management", "Admin Panel"],
-      status: "Completed • Ready for Deployment",
+      status: "Completed",
       link: "/projects/praise-fashion"
     },
     {
@@ -168,7 +168,7 @@ const HomePage: React.FC = () => {
       description: "UNIPORT Computer Science department solution. Level-based course registration (100-400L), integrated CGPA calculator, student dashboard, course management, semester planning, and academic analytics.",
       tech: ["HTML5", "Node.js", "Express.js", "PostgreSQL", "Docker", "Nginx", "Vanilla JavaScript", "Tailwind CSS"],
       features: ["Multi-level Access", "CGPA Calculator", "Course Scheduling", "Analytics Dashboard", "Semester Planning"],
-      status: "Completed • Academic Project",
+      status: "Completed",
       link: "/projects/course-registration"
     },
     {
