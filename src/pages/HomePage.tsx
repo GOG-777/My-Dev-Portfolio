@@ -301,7 +301,7 @@ const HomePage: React.FC = () => {
                     Thegenius
                   </h2>
                   <p className="text-xl sm:text-2xl text-purple-300 font-semibold">
-                    Vibe Coder • Full-Stack Developer
+                    Prompt Engineer • Full-Stack Developer • Vibe Coder
                   </p>
                 </div>
               </div>
@@ -630,7 +630,7 @@ const HomePage: React.FC = () => {
 
           <div className="border-t border-gray-800 pt-12">
             <p className="text-gray-500 text-lg mb-3 flex items-center justify-center gap-2">
-              GOG <GalaxyIcon className="w-6 h-6" /> • Thegenius • Vibe Coder
+              GOG <GalaxyIcon className="w-6 h-6" /> • Thegenius • Vibe Coder • Prompt Engineer
             </p>
             <p className="text-gray-500 text-sm mb-2">
               Copyright &copy; {currentYear}
