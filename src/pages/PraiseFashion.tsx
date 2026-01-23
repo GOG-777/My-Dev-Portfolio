@@ -217,75 +217,75 @@ const PraiseFashion: React.FC = () => {
       </div>
 
       <nav className="fixed top-0 w-full z-50 bg-black/50 backdrop-blur-lg border-b border-purple-500/20">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
           <Link to="/" className="text-xl md:text-2xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent flex items-center gap-2">
-            <GalaxyIcon className="w-7 h-7" />
-            GOG
+            <span>GOG</span>
+            <GalaxyIcon className="w-6 h-6 md:w-7 md:h-7" />
           </Link>
-          <Link to="/" className="flex items-center gap-2 text-gray-400 hover:text-purple-400 transition-colors">
-            <ArrowLeft className="w-5 h-5" />
-            Back to Portfolio
+          <Link to="/" className="flex items-center gap-2 text-gray-400 hover:text-purple-400 transition-colors text-sm md:text-base">
+            <ArrowLeft className="w-4 h-4 md:w-5 md:h-5" />
+            <span>Back to Portfolio</span>
           </Link>
         </div>
       </nav>
 
-      <section className="relative z-10 pt-32 pb-20 px-6">
+      <section className="relative z-10 pt-24 md:pt-32 pb-16 md:pb-20 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
-          <div className="mb-8">
+          <div className="mb-6 md:mb-8">
             <span className="px-4 py-2 bg-green-500/20 border border-green-500/50 rounded-full text-sm text-green-300">
-              Production • Client Project
+              Completed
             </span>
           </div>
 
-          <h1 className="text-6xl md:text-8xl font-black mb-6 bg-gradient-to-r from-purple-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black mb-4 md:mb-6 bg-gradient-to-r from-purple-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
             Praise Fashion Hub
           </h1>
 
-          <p className="text-2xl md:text-3xl text-gray-300 mb-8">
+          <p className="text-xl md:text-2xl lg:text-3xl text-gray-300 mb-6 md:mb-8">
             Full-Stack E-Commerce Platform for Fashion Retail
           </p>
 
-          <p className="text-xl text-gray-400 max-w-4xl leading-relaxed mb-12">
+          <p className="text-base md:text-lg lg:text-xl text-gray-400 max-w-4xl leading-relaxed mb-10 md:mb-12">
             A comprehensive e-commerce solution built for a fashion retail business specializing in African fabrics and ready-made garments.
             Features complete Paystack payment integration, automated receipt generation (PDF & JPG), real-time inventory management,
-            image optimization with Sharp, and a powerful admin dashboard. Built with vanilla JavaScript frontend and Express.js backend,
+            image optimization with Sharp, and a powerful admin dashboard. Built with vanilla JavaScript on the frontend and Express.js backend,
             containerized with Docker for seamless deployment.
           </p>
 
-          <div className="grid md:grid-cols-3 gap-6 mb-12">
-            <div className="bg-gradient-to-br from-purple-900/30 to-blue-900/30 border border-purple-500/30 rounded-xl p-6">
-              <p className="text-sm text-gray-400 mb-2">Timeline</p>
-              <p className="text-2xl font-bold text-white">3 weeks</p>
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 mb-12">
+            <div className="bg-gradient-to-br from-purple-900/30 to-blue-900/30 border border-purple-500/30 rounded-xl p-5 md:p-6">
+              <p className="text-sm text-gray-400 mb-2">Development Period</p>
+              <p className="text-xl md:text-2xl font-bold text-white">3 Weeks</p>
             </div>
-            <div className="bg-gradient-to-br from-blue-900/30 to-cyan-900/30 border border-blue-500/30 rounded-xl p-6">
+            <div className="bg-gradient-to-br from-blue-900/30 to-cyan-900/30 border border-blue-500/30 rounded-xl p-5 md:p-6">
               <p className="text-sm text-gray-400 mb-2">Architecture</p>
-              <p className="text-2xl font-bold text-white">Vanilla JS + Express</p>
+              <p className="text-xl md:text-2xl font-bold text-white">Vanilla JS + Express</p>
             </div>
-            <div className="bg-gradient-to-br from-cyan-900/30 to-purple-900/30 border border-cyan-500/30 rounded-xl p-6">
+            <div className="bg-gradient-to-br from-cyan-900/30 to-purple-900/30 border border-cyan-500/30 rounded-xl p-5 md:p-6 sm:col-span-2 md:col-span-1">
               <p className="text-sm text-gray-400 mb-2">Status</p>
-              <p className="text-2xl font-bold text-white">Ready for deployment</p>
+              <p className="text-xl md:text-2xl font-bold text-white">Completed</p>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="relative z-10 py-20 px-6">
+      <section className="relative z-10 py-16 md:py-20 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-5xl font-bold mb-16 text-center bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-12 md:mb-16 text-center bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
             Key Features
           </h2>
 
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid sm:grid-cols-2 gap-6 md:gap-8">
             {features.map((feature, idx) => {
               const Icon = feature.icon;
               return (
                 <div
                   key={idx}
-                  className="bg-gradient-to-br from-purple-900/20 to-blue-900/20 border border-purple-500/30 rounded-xl p-8 hover:border-purple-500 transition-all duration-300 hover:scale-105"
+                  className="bg-gradient-to-br from-purple-900/20 to-blue-900/20 border border-purple-500/30 rounded-xl p-6 md:p-8 hover:border-purple-500 transition-all duration-300 hover:scale-105"
                 >
-                  <Icon className="w-12 h-12 text-purple-400 mb-4" />
-                  <h3 className="text-2xl font-bold mb-3 text-white">{feature.title}</h3>
-                  <p className="text-gray-400 leading-relaxed">{feature.description}</p>
+                  <Icon className="w-10 h-10 md:w-12 md:h-12 text-purple-400 mb-3 md:mb-4" />
+                  <h3 className="text-xl md:text-2xl font-bold mb-2 md:mb-3 text-white">{feature.title}</h3>
+                  <p className="text-sm md:text-base text-gray-400 leading-relaxed">{feature.description}</p>
                 </div>
               );
             })}
@@ -293,36 +293,36 @@ const PraiseFashion: React.FC = () => {
         </div>
       </section>
 
-      <section className="relative z-10 py-20 px-6 bg-gradient-to-b from-black via-purple-950/10 to-black">
+      <section className="relative z-10 py-16 md:py-20 px-4 sm:px-6 bg-gradient-to-b from-black via-purple-950/10 to-black">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-5xl font-bold mb-16 text-center bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-12 md:mb-16 text-center bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
             Technology Stack
           </h2>
 
-          <div className="grid md:grid-cols-2 gap-6 mb-12">
+          <div className="grid sm:grid-cols-2 gap-4 md:gap-6 mb-8 md:mb-12">
             {techStack.map((tech, idx) => (
               <div
                 key={idx}
-                className="bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-6 hover:border-purple-500 transition-all duration-300 flex justify-between items-center"
+                className="bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-5 md:p-6 hover:border-purple-500 transition-all duration-300 flex justify-between items-center"
               >
                 <div>
-                  <h3 className="text-xl font-bold text-white mb-1">{tech.name}</h3>
-                  <p className="text-sm text-gray-400">{tech.role}</p>
+                  <h3 className="text-lg md:text-xl font-bold text-white mb-1">{tech.name}</h3>
+                  <p className="text-xs md:text-sm text-gray-400">{tech.role}</p>
                 </div>
-                <Check className="w-6 h-6 text-green-400" />
+                <Check className="w-5 h-5 md:w-6 md:h-6 text-green-400 flex-shrink-0" />
               </div>
             ))}
           </div>
 
-          <div className="space-y-8">
+          <div className="space-y-6 md:space-y-8">
             {architecture.map((arch, idx) => (
-              <div key={idx} className="bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-8">
-                <h3 className="text-2xl font-bold text-purple-400 mb-4">{arch.section}</h3>
+              <div key={idx} className="bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-6 md:p-8">
+                <h3 className="text-xl md:text-2xl font-bold text-purple-400 mb-3 md:mb-4">{arch.section}</h3>
                 <ul className="space-y-3 text-gray-300">
                   {arch.items.map((item, i) => (
                     <li key={i} className="flex items-start gap-3">
                       <Check className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
-                      <span>{item}</span>
+                      <span className="text-sm md:text-base">{item}</span>
                     </li>
                   ))}
                 </ul>
@@ -332,13 +332,13 @@ const PraiseFashion: React.FC = () => {
         </div>
       </section>
 
-      <section className="relative z-10 py-20 px-6">
+      <section className="relative z-10 py-16 md:py-20 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-5xl font-bold mb-16 text-center bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-12 md:mb-16 text-center bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
             Project Screenshots
           </h2>
 
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid sm:grid-cols-2 gap-6 md:gap-8">
             {screenshots.map((shot, idx) => (
               <div
                 key={idx}
@@ -363,10 +363,10 @@ const PraiseFashion: React.FC = () => {
                     </div>
                   </div>
                 </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-white mb-2">{shot.title}</h3>
-                  <p className="text-gray-400 mb-3">{shot.desc}</p>
-                  <code className="text-xs text-purple-300 bg-purple-900/30 px-2 py-1 rounded">{shot.path}</code>
+                <div className="p-5 md:p-6">
+                  <h3 className="text-lg md:text-xl font-bold text-white mb-2">{shot.title}</h3>
+                  <p className="text-sm md:text-base text-gray-400 mb-3">{shot.desc}</p>
+                  <code className="text-xs text-purple-300 bg-purple-900/30 px-2 py-1 rounded break-all">{shot.path}</code>
                 </div>
               </div>
             ))}
@@ -374,81 +374,81 @@ const PraiseFashion: React.FC = () => {
         </div>
       </section>
 
-      <section className="relative z-10 py-20 px-6 bg-gradient-to-t from-purple-950/20 to-black">
+      <section className="relative z-10 py-16 md:py-20 px-4 sm:px-6 bg-gradient-to-t from-purple-950/20 to-black">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-5xl font-bold mb-16 text-center bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-12 md:mb-16 text-center bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
             Project Impact & Achievements
           </h2>
 
-          <div className="grid md:grid-cols-4 gap-6 mb-12">
-            <div className="bg-gradient-to-br from-green-900/30 to-emerald-900/30 border border-green-500/30 rounded-xl p-6 text-center">
-              <p className="text-4xl font-bold text-green-400 mb-2">14</p>
-              <p className="text-sm text-gray-300">Pages Built</p>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-8 md:mb-12">
+            <div className="bg-gradient-to-br from-green-900/30 to-emerald-900/30 border border-green-500/30 rounded-xl p-5 md:p-6 text-center">
+              <p className="text-3xl md:text-4xl font-bold text-green-400 mb-2">14</p>
+              <p className="text-xs md:text-sm text-gray-300">Pages Built</p>
             </div>
-            <div className="bg-gradient-to-br from-blue-900/30 to-cyan-900/30 border border-blue-500/30 rounded-xl p-6 text-center">
-              <p className="text-4xl font-bold text-blue-400 mb-2">100%</p>
-              <p className="text-sm text-gray-300">Payment Success</p>
+            <div className="bg-gradient-to-br from-blue-900/30 to-cyan-900/30 border border-blue-500/30 rounded-xl p-5 md:p-6 text-center">
+              <p className="text-3xl md:text-4xl font-bold text-blue-400 mb-2">100%</p>
+              <p className="text-xs md:text-sm text-gray-300">Payment Success</p>
             </div>
-            <div className="bg-gradient-to-br from-purple-900/30 to-pink-900/30 border border-purple-500/30 rounded-xl p-6 text-center">
-              <p className="text-4xl font-bold text-purple-400 mb-2">8</p>
-              <p className="text-sm text-gray-300">API Routes</p>
+            <div className="bg-gradient-to-br from-purple-900/30 to-pink-900/30 border border-purple-500/30 rounded-xl p-5 md:p-6 text-center">
+              <p className="text-3xl md:text-4xl font-bold text-purple-400 mb-2">8</p>
+              <p className="text-xs md:text-sm text-gray-300">API Routes</p>
             </div>
-            <div className="bg-gradient-to-br from-orange-900/30 to-red-900/30 border border-orange-500/30 rounded-xl p-6 text-center">
-              <p className="text-4xl font-bold text-orange-400 mb-2">Auto</p>
-              <p className="text-sm text-gray-300">Image Optimization</p>
+            <div className="bg-gradient-to-br from-orange-900/30 to-red-900/30 border border-orange-500/30 rounded-xl p-5 md:p-6 text-center">
+              <p className="text-3xl md:text-4xl font-bold text-orange-400 mb-2">Auto</p>
+              <p className="text-xs md:text-sm text-gray-300">Image Optimization</p>
             </div>
           </div>
 
-          <div className="bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-8">
-            <h3 className="text-2xl font-bold text-white mb-4">Technical Achievements</h3>
+          <div className="bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-6 md:p-8">
+            <h3 className="text-xl md:text-2xl font-bold text-white mb-4">Technical Achievements</h3>
             <ul className="space-y-3 text-gray-300">
               <li className="flex items-start gap-3">
-                <Check className="w-6 h-6 text-green-400 flex-shrink-0 mt-1" />
-                <span>Integrated Paystack payment gateway with webhook verification for secure transactions</span>
+                <Check className="w-5 h-5 md:w-6 md:h-6 text-green-400 flex-shrink-0 mt-1" />
+                <span className="text-sm md:text-base">Integrated Paystack payment gateway with webhook verification for secure transactions</span>
               </li>
               <li className="flex items-start gap-3">
-                <Check className="w-6 h-6 text-green-400 flex-shrink-0 mt-1" />
-                <span>Built custom image processing pipeline with Sharp generating thumbnails and full-size versions</span>
+                <Check className="w-5 h-5 md:w-6 md:h-6 text-green-400 flex-shrink-0 mt-1" />
+                <span className="text-sm md:text-base">Built custom image processing pipeline with Sharp generating thumbnails and full-size versions</span>
               </li>
               <li className="flex items-start gap-3">
-                <Check className="w-6 h-6 text-green-400 flex-shrink-0 mt-1" />
-                <span>Implemented automated email system with custom HTML templates for order updates</span>
+                <Check className="w-5 h-5 md:w-6 md:h-6 text-green-400 flex-shrink-0 mt-1" />
+                <span className="text-sm md:text-base">Implemented automated email system with custom HTML templates for order updates</span>
               </li>
               <li className="flex items-start gap-3">
-                <Check className="w-6 h-6 text-green-400 flex-shrink-0 mt-1" />
-                <span>Deployed with Docker for consistent development and production environments</span>
+                <Check className="w-5 h-5 md:w-6 md:h-6 text-green-400 flex-shrink-0 mt-1" />
+                <span className="text-sm md:text-base">Deployed with Docker for consistent development and production environments</span>
               </li>
               <li className="flex items-start gap-3">
-                <Check className="w-6 h-6 text-green-400 flex-shrink-0 mt-1" />
-                <span>Created pickup station system with delivery cost calculation for Nigerian locations</span>
+                <Check className="w-5 h-5 md:w-6 md:h-6 text-green-400 flex-shrink-0 mt-1" />
+                <span className="text-sm md:text-base">Created pickup station system with delivery cost calculation for Nigerian locations</span>
               </li>
               <li className="flex items-start gap-3">
-                <Check className="w-6 h-6 text-green-400 flex-shrink-0 mt-1" />
-                <span>Built with vanilla JavaScript for optimal performance and minimal dependencies</span>
+                <Check className="w-5 h-5 md:w-6 md:h-6 text-green-400 flex-shrink-0 mt-1" />
+                <span className="text-sm md:text-base">Built with vanilla JavaScript for optimal performance and minimal dependencies</span>
               </li>
             </ul>
           </div>
         </div>
       </section>
 
-      <section className="relative z-10 py-20 px-6">
+      <section className="relative z-10 py-16 md:py-20 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-bold mb-6 text-white">
-            Need an E-Commerce Solution?
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 md:mb-6 text-white">
+            Interested in Similar Work?
           </h2>
-          <p className="text-xl text-gray-400 mb-8">
+          <p className="text-lg md:text-xl text-gray-400 mb-6 md:mb-8">
             I build custom e-commerce platforms with payment integration, inventory management, and more.
           </p>
-          <div className="flex gap-6 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center">
             <Link
               to="/#contact"
-              className="px-8 py-4 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg font-semibold hover:from-purple-500 hover:to-blue-500 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-500/50"
+              className="px-6 md:px-8 py-3 md:py-4 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg font-semibold hover:from-purple-500 hover:to-blue-500 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-500/50 text-center"
             >
               Get In Touch
             </Link>
             <Link
-              to="/"
-              className="px-8 py-4 bg-blue-600/20 border border-blue-500/50 hover:border-blue-500 rounded-lg font-semibold transition-all duration-300 hover:scale-105"
+              to="/#projects"
+              className="px-6 md:px-8 py-3 md:py-4 bg-blue-600/20 border border-blue-500/50 hover:border-blue-500 rounded-lg font-semibold transition-all duration-300 hover:scale-105 text-center"
             >
               View Other Projects
             </Link>
@@ -458,32 +458,32 @@ const PraiseFashion: React.FC = () => {
 
       {/* Image Modal */}
       {selectedImage && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-lg">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-lg p-4">
           {/* Close button */}
           <button
             onClick={closeModal}
-            className="absolute top-6 right-6 z-10 p-3 bg-black/50 rounded-full hover:bg-black/70 transition-colors border border-gray-700"
+            className="absolute top-4 right-4 md:top-6 md:right-6 z-10 p-2 md:p-3 bg-black/50 rounded-full hover:bg-black/70 transition-colors border border-gray-700"
           >
-            <X className="w-6 h-6 text-white" />
+            <X className="w-5 h-5 md:w-6 md:h-6 text-white" />
           </button>
 
           {/* Navigation buttons */}
           <button
             onClick={goToPrevious}
-            className="absolute left-6 z-10 p-3 bg-black/50 rounded-full hover:bg-black/70 transition-colors border border-gray-700"
+            className="absolute left-4 md:left-6 z-10 p-2 md:p-3 bg-black/50 rounded-full hover:bg-black/70 transition-colors border border-gray-700"
           >
-            <ChevronLeft className="w-6 h-6 text-white" />
+            <ChevronLeft className="w-5 h-5 md:w-6 md:h-6 text-white" />
           </button>
 
           <button
             onClick={goToNext}
-            className="absolute right-6 z-10 p-3 bg-black/50 rounded-full hover:bg-black/70 transition-colors border border-gray-700"
+            className="absolute right-4 md:right-6 z-10 p-2 md:p-3 bg-black/50 rounded-full hover:bg-black/70 transition-colors border border-gray-700"
           >
-            <ChevronRight className="w-6 h-6 text-white" />
+            <ChevronRight className="w-5 h-5 md:w-6 md:h-6 text-white" />
           </button>
 
           {/* Image container */}
-          <div className="relative max-w-6xl max-h-[80vh] w-full mx-6">
+          <div className="relative max-w-6xl max-h-[80vh] w-full">
             <img
               src={screenshots[currentImageIndex].image}
               alt={screenshots[currentImageIndex].title}
@@ -491,15 +491,15 @@ const PraiseFashion: React.FC = () => {
             />
 
             {/* Image info */}
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/95 via-black/80 to-transparent p-3 md:p-6">
+            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/95 via-black/80 to-transparent p-3 md:p-6 rounded-b-lg">
               <h3 className="text-base md:text-2xl font-bold text-white mb-1 md:mb-2">
                 {screenshots[currentImageIndex].title}
               </h3>
-              <p className="text-xs md:text-base text-gray-300 mb-1 md:mb-2 line-clamp-2">
+              <p className="text-xs md:text-base text-gray-300 mb-1 md:mb-2">
                 {screenshots[currentImageIndex].desc}
               </p>
-              <div className="flex items-center justify-between">
-                <code className="text-xs text-purple-300 bg-purple-900/30 px-2 py-1 rounded hidden md:inline-block">
+              <div className="flex items-center justify-between flex-wrap gap-2">
+                <code className="text-xs text-purple-300 bg-purple-900/30 px-2 py-1 rounded hidden md:inline-block break-all">
                   {screenshots[currentImageIndex].path}
                 </code>
                 <p className="text-xs text-gray-400">

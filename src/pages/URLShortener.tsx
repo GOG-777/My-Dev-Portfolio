@@ -239,54 +239,55 @@ const URLShortener: React.FC = () => {
       </div>
 
       <nav className="fixed top-0 w-full z-50 bg-black/50 backdrop-blur-lg border-b border-purple-500/20">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
           <Link to="/" className="text-xl md:text-2xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent flex items-center gap-2">
-            <GalaxyIcon className="w-7 h-7" />
-            GOG
+            <span>GOG</span>
+            <GalaxyIcon className="w-6 h-6 md:w-7 md:h-7" />
           </Link>
-          <Link to="/" className="flex items-center gap-2 text-gray-400 hover:text-purple-400 transition-colors">
-            <ArrowLeft className="w-5 h-5" />
-            Back to Portfolio
+          <Link to="/" className="flex items-center gap-2 text-gray-400 hover:text-purple-400 transition-colors text-sm md:text-base">
+            <ArrowLeft className="w-4 h-4 md:w-5 md:h-5" />
+            <span>Back to Portfolio</span>
           </Link>
         </div>
       </nav>
 
-      <section className="relative z-10 pt-32 pb-20 px-6">
+      <section className="relative z-10 pt-24 md:pt-32 pb-16 md:pb-20 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
-          <div className="mb-8 flex gap-4">
+          <div className="mb-6 md:mb-8 flex flex-wrap gap-3 md:gap-4">
             <span className="px-4 py-2 bg-orange-500/20 border border-orange-500/50 rounded-full text-sm text-orange-300 flex items-center gap-2">
               <AlertTriangle className="w-4 h-4" />
-              Frontend Demo • Learning Project
+              <span>Frontend Demo • Learning Project</span>
             </span>
             <span className="px-4 py-2 bg-purple-500/20 border border-purple-500/50 rounded-full text-sm text-purple-300">
-              Archived • Exploration Phase
+              Archived
             </span>
           </div>
 
-          <h1 className="text-6xl md:text-8xl font-black mb-6 bg-gradient-to-r from-purple-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black mb-4 md:mb-6 bg-gradient-to-r from-purple-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
             URL Shortener Demo
           </h1>
 
-          <p className="text-2xl md:text-3xl text-gray-300 mb-8">
+          <p className="text-xl md:text-2xl lg:text-3xl text-gray-300 mb-6 md:mb-8">
             TypeScript Frontend Exploration Project
           </p>
 
-          <div className="bg-gradient-to-br from-orange-900/20 to-orange-900/10 border border-orange-500/30 rounded-xl p-6 mb-8">
+          <div className="bg-gradient-to-br from-orange-900/20 to-orange-900/10 border border-orange-500/30 rounded-xl p-5 md:p-6 mb-8 md:mb-10">
             <div className="flex items-start gap-3">
-              <AlertTriangle className="w-6 h-6 text-orange-400 flex-shrink-0 mt-1" />
+              <AlertTriangle className="w-5 h-5 md:w-6 md:h-6 text-orange-400 flex-shrink-0 mt-1" />
               <div>
-                <h3 className="text-xl font-bold text-orange-300 mb-2">Project Context</h3>
-                <p className="text-gray-300">
+                <h3 className="text-lg md:text-xl font-bold text-orange-300 mb-2">Project Context</h3>
+                <p className="text-sm md:text-base text-gray-300 leading-relaxed">
                   This was my first TypeScript project - an exploration of building complex frontend interfaces.
                   <strong className="text-orange-200"> It's a frontend-only demo</strong> showcasing UI/UX design, component architecture,
-                  and TypeScript patterns. The backend was never implemented, though I had some API testing that worked, the sign in and signup process, email verification, minimal backend url shortener, making it a valuable learning experience
-                  in focusing on frontend fundamentals before tackling full-stack complexity.
+                  and TypeScript patterns. I had built some working API endpoints for authentication (sign in, sign up, email verification)
+                  and basic URL shortening logic, but decided to focus on mastering frontend fundamentals before tackling full-stack complexity.
+                  This proved to be a valuable learning decision.
                 </p>
               </div>
             </div>
           </div>
 
-          <p className="text-xl text-gray-400 max-w-4xl leading-relaxed mb-12">
+          <p className="text-base md:text-lg lg:text-xl text-gray-400 max-w-4xl leading-relaxed mb-10 md:mb-12">
             A TypeScript exploration project focused on frontend architecture and complex UI development.
             Features complete dashboard navigation, authentication flows, analytics visualization mockups,
             and subscription management interfaces. Built with Vite for modern development workflows and
@@ -294,39 +295,39 @@ const URLShortener: React.FC = () => {
             component architecture, and scalable frontend structure.
           </p>
 
-          <div className="grid md:grid-cols-3 gap-6 mb-12">
-            <div className="bg-gradient-to-br from-orange-900/30 to-yellow-900/30 border border-orange-500/30 rounded-xl p-6">
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 mb-12">
+            <div className="bg-gradient-to-br from-orange-900/30 to-yellow-900/30 border border-orange-500/30 rounded-xl p-5 md:p-6">
               <p className="text-sm text-gray-400 mb-2">Focus</p>
-              <p className="text-2xl font-bold text-white">Frontend Only</p>
+              <p className="text-xl md:text-2xl font-bold text-white">Frontend Only</p>
             </div>
-            <div className="bg-gradient-to-br from-blue-900/30 to-cyan-900/30 border border-blue-500/30 rounded-xl p-6">
+            <div className="bg-gradient-to-br from-blue-900/30 to-cyan-900/30 border border-blue-500/30 rounded-xl p-5 md:p-6">
               <p className="text-sm text-gray-400 mb-2">Primary Tech</p>
-              <p className="text-2xl font-bold text-white">TypeScript + Vite</p>
+              <p className="text-xl md:text-2xl font-bold text-white">TypeScript + Vite</p>
             </div>
-            <div className="bg-gradient-to-br from-purple-900/30 to-pink-900/30 border border-purple-500/30 rounded-xl p-6">
+            <div className="bg-gradient-to-br from-purple-900/30 to-pink-900/30 border border-purple-500/30 rounded-xl p-5 md:p-6 sm:col-span-2 md:col-span-1">
               <p className="text-sm text-gray-400 mb-2">Status</p>
-              <p className="text-2xl font-bold text-white">Learning Demo</p>
+              <p className="text-xl md:text-2xl font-bold text-white">Learning Demo</p>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="relative z-10 py-20 px-6">
+      <section className="relative z-10 py-16 md:py-20 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-5xl font-bold mb-16 text-center bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-12 md:mb-16 text-center bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
             What I Built (Frontend)
           </h2>
 
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid sm:grid-cols-2 gap-6 md:gap-8">
             {features.map((feature, idx) => {
               const Icon = feature.icon;
               return (
                 <div
                   key={idx}
-                  className={`bg-gradient-to-br ${feature.status === 'implemented' ? 'from-purple-900/20 to-blue-900/20 border-purple-500/30' : 'from-gray-900/20 to-gray-800/20 border-gray-700/30'} border rounded-xl p-8 hover:border-purple-500 transition-all duration-300 hover:scale-105`}
+                  className={`bg-gradient-to-br ${feature.status === 'implemented' ? 'from-purple-900/20 to-blue-900/20 border-purple-500/30' : 'from-gray-900/20 to-gray-800/20 border-gray-700/30'} border rounded-xl p-6 md:p-8 hover:border-purple-500 transition-all duration-300 hover:scale-105`}
                 >
                   <div className="flex items-start justify-between mb-4">
-                    <Icon className="w-12 h-12 text-purple-400" />
+                    <Icon className="w-10 h-10 md:w-12 md:h-12 text-purple-400" />
                     {feature.status === 'implemented' ? (
                       <span className="px-3 py-1 bg-green-500/20 border border-green-500/50 rounded-full text-xs text-green-300">
                         Implemented
@@ -337,8 +338,8 @@ const URLShortener: React.FC = () => {
                       </span>
                     )}
                   </div>
-                  <h3 className="text-2xl font-bold mb-3 text-white">{feature.title}</h3>
-                  <p className="text-gray-400 leading-relaxed">{feature.description}</p>
+                  <h3 className="text-xl md:text-2xl font-bold mb-2 md:mb-3 text-white">{feature.title}</h3>
+                  <p className="text-sm md:text-base text-gray-400 leading-relaxed">{feature.description}</p>
                 </div>
               );
             })}
@@ -346,36 +347,36 @@ const URLShortener: React.FC = () => {
         </div>
       </section>
 
-      <section className="relative z-10 py-20 px-6 bg-gradient-to-b from-black via-purple-950/10 to-black">
+      <section className="relative z-10 py-16 md:py-20 px-4 sm:px-6 bg-gradient-to-b from-black via-purple-950/10 to-black">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-5xl font-bold mb-16 text-center bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-12 md:mb-16 text-center bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
             Technology & Architecture
           </h2>
 
-          <div className="grid md:grid-cols-2 gap-6 mb-12">
+          <div className="grid sm:grid-cols-2 gap-4 md:gap-6 mb-8 md:mb-12">
             {techStack.map((tech, idx) => (
               <div
                 key={idx}
-                className="bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-6 hover:border-purple-500 transition-all duration-300 flex justify-between items-center"
+                className="bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-5 md:p-6 hover:border-purple-500 transition-all duration-300 flex justify-between items-center"
               >
                 <div>
-                  <h3 className="text-xl font-bold text-white mb-1">{tech.name}</h3>
-                  <p className="text-sm text-gray-400">{tech.role}</p>
+                  <h3 className="text-lg md:text-xl font-bold text-white mb-1">{tech.name}</h3>
+                  <p className="text-xs md:text-sm text-gray-400">{tech.role}</p>
                 </div>
-                <Check className="w-6 h-6 text-green-400" />
+                <Check className="w-5 h-5 md:w-6 md:h-6 text-green-400 flex-shrink-0" />
               </div>
             ))}
           </div>
 
-          <div className="space-y-8">
+          <div className="space-y-6 md:space-y-8">
             {architecture.map((arch, idx) => (
-              <div key={idx} className="bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-8">
-                <h3 className="text-2xl font-bold text-purple-400 mb-4">{arch.section}</h3>
+              <div key={idx} className="bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-6 md:p-8">
+                <h3 className="text-xl md:text-2xl font-bold text-purple-400 mb-3 md:mb-4">{arch.section}</h3>
                 <ul className="space-y-3 text-gray-300">
                   {arch.items.map((item, i) => (
                     <li key={i} className="flex items-start gap-3">
                       <Check className={`w-5 h-5 ${idx === 2 ? 'text-gray-500' : 'text-green-400'} flex-shrink-0 mt-0.5`} />
-                      <span className={idx === 2 ? 'text-gray-500' : ''}>{item}</span>
+                      <span className={`text-sm md:text-base ${idx === 2 ? 'text-gray-500' : ''}`}>{item}</span>
                     </li>
                   ))}
                 </ul>
@@ -385,13 +386,13 @@ const URLShortener: React.FC = () => {
         </div>
       </section>
 
-      <section className="relative z-10 py-20 px-6">
+      <section className="relative z-10 py-16 md:py-20 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-5xl font-bold mb-16 text-center bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-12 md:mb-16 text-center bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
             UI Screenshots
           </h2>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid sm:grid-cols-2 gap-6">
             {screenshots.map((shot, idx) => (
               <div
                 key={idx}
@@ -412,27 +413,27 @@ const URLShortener: React.FC = () => {
                   {/* Overlay with click hint */}
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
                     <div className="bg-black/50 rounded-full p-3 backdrop-blur-sm">
-                      <ImageIcon className="w-6 h-6 text-white" />
+                      <ImageIcon className="w-6 h-6 md:w-8 md:h-8 text-white" />
                     </div>
                   </div>
                 </div>
-                <div className="p-4">
-                  <h3 className="text-lg font-bold text-white mb-2">{shot.title}</h3>
-                  <p className="text-sm text-gray-400 mb-2 line-clamp-2">{shot.desc}</p>
-                  <code className="text-xs text-purple-300 bg-purple-900/30 px-2 py-1 rounded truncate block">{shot.path}</code>
+                <div className="p-4 md:p-5">
+                  <h3 className="text-base md:text-lg font-bold text-white mb-2">{shot.title}</h3>
+                  <p className="text-xs md:text-sm text-gray-400 mb-2">{shot.desc}</p>
+                  <code className="text-xs text-purple-300 bg-purple-900/30 px-2 py-1 rounded break-all block">{shot.path}</code>
                 </div>
               </div>
             ))}
           </div>
 
-          <div className="mt-12 bg-gradient-to-br from-orange-900/20 to-orange-900/10 border border-orange-500/30 rounded-xl p-8 max-w-3xl mx-auto">
-            <h3 className="text-2xl font-bold text-orange-300 mb-4">Why This Project Matters</h3>
-            <p className="text-gray-300 mb-4">
+          <div className="mt-8 md:mt-12 bg-gradient-to-br from-orange-900/20 to-orange-900/10 border border-orange-500/30 rounded-xl p-6 md:p-8 max-w-3xl mx-auto">
+            <h3 className="text-xl md:text-2xl font-bold text-orange-300 mb-3 md:mb-4">Why This Project Matters</h3>
+            <p className="text-sm md:text-base text-gray-300 mb-3 md:mb-4 leading-relaxed">
               While this project never became a functional URL shortener, it was crucial in my development journey.
               It taught me TypeScript fundamentals, complex component architecture, and the importance of focusing
               on one layer (frontend) before attempting full-stack complexity.
             </p>
-            <p className="text-gray-300">
+            <p className="text-sm md:text-base text-gray-300 leading-relaxed">
               Every developer has "learning projects" - incomplete explorations that build foundational skills.
               This demo showcases my ability to design comprehensive UIs, think through user flows, and structure
               scalable frontend applications.
@@ -441,64 +442,64 @@ const URLShortener: React.FC = () => {
         </div>
       </section>
 
-      <section className="relative z-10 py-20 px-6 bg-gradient-to-b from-black via-purple-950/10 to-black">
+      <section className="relative z-10 py-16 md:py-20 px-4 sm:px-6 bg-gradient-to-b from-black via-purple-950/10 to-black">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-5xl font-bold mb-16 text-center bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-12 md:mb-16 text-center bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
             Key Learnings & Growth
           </h2>
 
-          <div className="grid md:grid-cols-3 gap-8 mb-12">
-            <div className="bg-gradient-to-br from-purple-900/30 to-blue-900/30 border border-purple-500/30 rounded-xl p-8 text-center">
-              <Code className="w-12 h-12 text-purple-400 mx-auto mb-4" />
-              <p className="text-xl font-bold text-white mb-2">TypeScript Mastery</p>
-              <p className="text-gray-400">Type-safe development, interfaces, and modern frontend patterns</p>
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 mb-8 md:mb-12">
+            <div className="bg-gradient-to-br from-purple-900/30 to-blue-900/30 border border-purple-500/30 rounded-xl p-6 md:p-8 text-center">
+              <Code className="w-10 h-10 md:w-12 md:h-12 text-purple-400 mx-auto mb-3 md:mb-4" />
+              <p className="text-lg md:text-xl font-bold text-white mb-2">TypeScript Mastery</p>
+              <p className="text-sm md:text-base text-gray-400">Type-safe development, interfaces, and modern frontend patterns</p>
             </div>
-            <div className="bg-gradient-to-br from-blue-900/30 to-cyan-900/30 border border-blue-500/30 rounded-xl p-8 text-center">
-              <Link2 className="w-12 h-12 text-blue-400 mx-auto mb-4" />
-              <p className="text-xl font-bold text-white mb-2">UI Architecture</p>
-              <p className="text-gray-400">Complex dashboard design and component organization</p>
+            <div className="bg-gradient-to-br from-blue-900/30 to-cyan-900/30 border border-blue-500/30 rounded-xl p-6 md:p-8 text-center">
+              <Link2 className="w-10 h-10 md:w-12 md:h-12 text-blue-400 mx-auto mb-3 md:mb-4" />
+              <p className="text-lg md:text-xl font-bold text-white mb-2">UI Architecture</p>
+              <p className="text-sm md:text-base text-gray-400">Complex dashboard design and component organization</p>
             </div>
-            <div className="bg-gradient-to-br from-cyan-900/30 to-purple-900/30 border border-cyan-500/30 rounded-xl p-8 text-center">
-              <AlertTriangle className="w-12 h-12 text-cyan-400 mx-auto mb-4" />
-              <p className="text-xl font-bold text-white mb-2">Project Scoping</p>
-              <p className="text-gray-400">Understanding when to pivot vs. continue building</p>
+            <div className="bg-gradient-to-br from-cyan-900/30 to-purple-900/30 border border-cyan-500/30 rounded-xl p-6 md:p-8 text-center sm:col-span-2 md:col-span-1">
+              <AlertTriangle className="w-10 h-10 md:w-12 md:h-12 text-cyan-400 mx-auto mb-3 md:mb-4" />
+              <p className="text-lg md:text-xl font-bold text-white mb-2">Project Scoping</p>
+              <p className="text-sm md:text-base text-gray-400">Understanding when to pivot vs. continue building</p>
             </div>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-8">
-              <h3 className="text-2xl font-bold text-white mb-4">What I Gained</h3>
+          <div className="grid md:grid-cols-2 gap-6 md:gap-8">
+            <div className="bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-6 md:p-8">
+              <h3 className="text-xl md:text-2xl font-bold text-white mb-3 md:mb-4">What I Gained</h3>
               <ul className="space-y-3 text-gray-300">
                 <li className="flex items-start gap-3">
-                  <Check className="w-6 h-6 text-green-400 flex-shrink-0 mt-1" />
-                  <span>TypeScript fundamentals that enabled all my later projects</span>
+                  <Check className="w-5 h-5 md:w-6 md:h-6 text-green-400 flex-shrink-0 mt-1" />
+                  <span className="text-sm md:text-base">TypeScript fundamentals that enabled all my later projects</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <Check className="w-6 h-6 text-green-400 flex-shrink-0 mt-1" />
-                  <span>Understanding of complex authentication flow design</span>
+                  <Check className="w-5 h-5 md:w-6 md:h-6 text-green-400 flex-shrink-0 mt-1" />
+                  <span className="text-sm md:text-base">Understanding of complex authentication flow design</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <Check className="w-6 h-6 text-green-400 flex-shrink-0 mt-1" />
-                  <span>Experience with Vite and modern build tooling</span>
+                  <Check className="w-5 h-5 md:w-6 md:h-6 text-green-400 flex-shrink-0 mt-1" />
+                  <span className="text-sm md:text-base">Experience with Vite and modern build tooling</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <Check className="w-6 h-6 text-green-400 flex-shrink-0 mt-1" />
-                  <span>Dashboard architecture and navigation patterns</span>
+                  <Check className="w-5 h-5 md:w-6 md:h-6 text-green-400 flex-shrink-0 mt-1" />
+                  <span className="text-sm md:text-base">Dashboard architecture and navigation patterns</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <Check className="w-6 h-6 text-green-400 flex-shrink-0 mt-1" />
-                  <span>Realization that starting with frontend-only was the right learning path</span>
+                  <Check className="w-5 h-5 md:w-6 md:h-6 text-green-400 flex-shrink-0 mt-1" />
+                  <span className="text-sm md:text-base">Realization that starting with frontend-only was the right learning path</span>
                 </li>
               </ul>
             </div>
 
-            <div className="bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-8">
-              <h3 className="text-2xl font-bold text-white mb-4">Why Archive a Demo?</h3>
-              <p className="text-gray-300 leading-relaxed mb-4">
+            <div className="bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-6 md:p-8">
+              <h3 className="text-xl md:text-2xl font-bold text-white mb-3 md:mb-4">Why Archive a Demo?</h3>
+              <p className="text-sm md:text-base text-gray-300 leading-relaxed mb-3 md:mb-4">
                 This project served its purpose perfectly - it gave me the TypeScript confidence to build
                 <strong className="text-purple-300"> actual production projects</strong> like the e-commerce platform and course registration system.
               </p>
-              <p className="text-gray-300 leading-relaxed">
+              <p className="text-sm md:text-base text-gray-300 leading-relaxed">
                 Rather than forcing completion of a saturated market solution, I chose to apply these frontend skills
                 to <strong className="text-blue-300">real client needs</strong>. The technical foundation from this exploration directly enabled
                 my later success with full-stack applications that deliver actual business value.
@@ -508,27 +509,27 @@ const URLShortener: React.FC = () => {
         </div>
       </section>
 
-      <section className="relative z-10 py-20 px-6">
+      <section className="relative z-10 py-16 md:py-20 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-bold mb-6 text-white">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 md:mb-6 text-white">
             From Learning to Building
           </h2>
-          <p className="text-xl text-gray-400 mb-8">
+          <p className="text-lg md:text-xl text-gray-400 mb-6 md:mb-8">
             This demo project was the foundation that enabled my production-ready work.
             Let's build something that delivers real value.
           </p>
-          <div className="flex gap-6 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center">
             <Link
               to="/#contact"
-              className="px-8 py-4 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg font-semibold hover:from-purple-500 hover:to-blue-500 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-500/50"
+              className="px-6 md:px-8 py-3 md:py-4 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg font-semibold hover:from-purple-500 hover:to-blue-500 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-500/50 text-center"
             >
               Get In Touch
             </Link>
             <Link
-              to="/"
-              className="px-8 py-4 bg-blue-600/20 border border-blue-500/50 hover:border-blue-500 rounded-lg font-semibold transition-all duration-300 hover:scale-105"
+              to="/#projects"
+              className="px-6 md:px-8 py-3 md:py-4 bg-blue-600/20 border border-blue-500/50 hover:border-blue-500 rounded-lg font-semibold transition-all duration-300 hover:scale-105 text-center"
             >
-              View Production Projects
+              View Other Projects
             </Link>
           </div>
         </div>
@@ -536,32 +537,32 @@ const URLShortener: React.FC = () => {
 
       {/* Image Modal */}
       {selectedImage && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-lg">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-lg p-4">
           {/* Close button */}
           <button
             onClick={closeModal}
-            className="absolute top-6 right-6 z-10 p-3 bg-black/50 rounded-full hover:bg-black/70 transition-colors border border-gray-700"
+            className="absolute top-4 right-4 md:top-6 md:right-6 z-10 p-2 md:p-3 bg-black/50 rounded-full hover:bg-black/70 transition-colors border border-gray-700"
           >
-            <X className="w-6 h-6 text-white" />
+            <X className="w-5 h-5 md:w-6 md:h-6 text-white" />
           </button>
 
           {/* Navigation buttons */}
           <button
             onClick={goToPrevious}
-            className="absolute left-6 z-10 p-3 bg-black/50 rounded-full hover:bg-black/70 transition-colors border border-gray-700"
+            className="absolute left-4 md:left-6 z-10 p-2 md:p-3 bg-black/50 rounded-full hover:bg-black/70 transition-colors border border-gray-700"
           >
-            <ChevronLeft className="w-6 h-6 text-white" />
+            <ChevronLeft className="w-5 h-5 md:w-6 md:h-6 text-white" />
           </button>
 
           <button
             onClick={goToNext}
-            className="absolute right-6 z-10 p-3 bg-black/50 rounded-full hover:bg-black/70 transition-colors border border-gray-700"
+            className="absolute right-4 md:right-6 z-10 p-2 md:p-3 bg-black/50 rounded-full hover:bg-black/70 transition-colors border border-gray-700"
           >
-            <ChevronRight className="w-6 h-6 text-white" />
+            <ChevronRight className="w-5 h-5 md:w-6 md:h-6 text-white" />
           </button>
 
           {/* Image container */}
-          <div className="relative max-w-6xl max-h-[80vh] w-full mx-6">
+          <div className="relative max-w-6xl max-h-[80vh] w-full">
             <img
               src={screenshots[currentImageIndex].image}
               alt={screenshots[currentImageIndex].title}
@@ -569,15 +570,15 @@ const URLShortener: React.FC = () => {
             />
 
             {/* Image info */}
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/95 via-black/80 to-transparent p-3 md:p-6">
+            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/95 via-black/80 to-transparent p-3 md:p-6 rounded-b-lg">
               <h3 className="text-base md:text-2xl font-bold text-white mb-1 md:mb-2">
                 {screenshots[currentImageIndex].title}
               </h3>
-              <p className="text-xs md:text-base text-gray-300 mb-1 md:mb-2 line-clamp-2">
+              <p className="text-xs md:text-base text-gray-300 mb-1 md:mb-2">
                 {screenshots[currentImageIndex].desc}
               </p>
-              <div className="flex items-center justify-between">
-                <code className="text-xs text-purple-300 bg-purple-900/30 px-2 py-1 rounded hidden md:inline-block">
+              <div className="flex items-center justify-between flex-wrap gap-2">
+                <code className="text-xs text-purple-300 bg-purple-900/30 px-2 py-1 rounded hidden md:inline-block break-all">
                   {screenshots[currentImageIndex].path}
                 </code>
                 <p className="text-xs text-gray-400">

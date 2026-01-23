@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Check, BookOpen, Calculator, Users, Lock, BarChart3, Calendar, Award, Server, ImageIcon, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowLeft, Check, BookOpen, Calculator, Users, Lock, BarChart3, Calendar, Award, Server, ImageIcon, X, ChevronLeft, ChevronRight, Github, ExternalLink } from 'lucide-react';
 import GalaxyIcon from '../components/GalaxyIcon';
 
 // Fix for Lucide icons - they're React components with SVG props
@@ -233,91 +233,117 @@ const CourseRegistration: React.FC = () => {
       </div>
 
       <nav className="fixed top-0 w-full z-50 bg-black/50 backdrop-blur-lg border-b border-purple-500/20">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
           <Link to="/" className="text-xl md:text-2xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent flex items-center gap-2">
-            <GalaxyIcon className="w-7 h-7" />
-            GOG
+            <span>GOG</span>
+            <GalaxyIcon className="w-6 h-6 md:w-7 md:h-7" />
           </Link>
-          <Link to="/" className="flex items-center gap-2 text-gray-400 hover:text-purple-400 transition-colors">
-            <ArrowLeft className="w-5 h-5" />
-            Back to Portfolio
+          <Link to="/" className="flex items-center gap-2 text-gray-400 hover:text-purple-400 transition-colors text-sm md:text-base">
+            <ArrowLeft className="w-4 h-4 md:w-5 md:h-5" />
+            <span>Back to Portfolio</span>
           </Link>
         </div>
       </nav>
 
-      <section className="relative z-10 pt-32 pb-20 px-6">
+      <section className="relative z-10 pt-24 md:pt-32 pb-16 md:pb-20 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
-          <div className="mb-8">
+          <div className="mb-6 md:mb-8">
             <span className="px-4 py-2 bg-green-500/20 border border-green-500/50 rounded-full text-sm text-green-300">
-              Deployed • IT Project
+              Academic Project
             </span>
           </div>
 
-          <h1 className="text-6xl md:text-8xl font-black mb-6 bg-gradient-to-r from-purple-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black mb-4 md:mb-6 bg-gradient-to-r from-purple-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
             Course Registration System
           </h1>
 
-          <p className="text-2xl md:text-3xl text-gray-300 mb-8">
+          <p className="text-xl md:text-2xl lg:text-3xl text-gray-300 mb-6 md:mb-8">
             UNIPORT Computer Science Department Platform
           </p>
 
-          <p className="text-xl text-gray-400 max-w-4xl leading-relaxed mb-12">
+          <p className="text-base md:text-lg lg:text-xl text-gray-400 max-w-4xl leading-relaxed mb-10 md:mb-12">
             A comprehensive course registration platform built specifically for the Computer Science department at the University of Port Harcourt.
             Features intelligent level-based course filtering, integrated CGPA calculator with semester tracking, JWT authentication, and complete
             academic management for students from 100 to 400 level. Deployed with Docker and Nginx for production-ready scalability.
           </p>
 
-          <div className="grid md:grid-cols-3 gap-6 mb-12">
-            <div className="bg-gradient-to-br from-purple-900/30 to-blue-900/30 border border-purple-500/30 rounded-xl p-6">
-              <p className="text-sm text-gray-400 mb-2">Timeline</p>
-              <p className="text-2xl font-bold text-white">1 week</p>
+          {/* GitHub Links */}
+          <div className="flex flex-col sm:flex-row gap-4 mb-10 md:mb-12">
+            
+            <a
+              href="https://github.com/GOG-777/IT-Defense-Project"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 px-6 py-3 bg-gray-800/50 border border-gray-700 hover:border-purple-500 rounded-lg transition-all duration-300 hover:scale-105 group"
+            >
+              <Github className="w-5 h-5 text-gray-400 group-hover:text-purple-400 transition-colors" />
+              <span className="text-gray-300 group-hover:text-white transition-colors">Original (Vanilla JS)</span>
+              <ExternalLink className="w-4 h-4 text-gray-500 group-hover:text-purple-400 transition-colors" />
+            </a>
+            
+            <a
+              href="https://github.com/GOG-777/course-registration-system-react-version"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 px-6 py-3 bg-blue-900/20 border border-blue-700 hover:border-blue-500 rounded-lg transition-all duration-300 hover:scale-105 group"
+            >
+              <Github className="w-5 h-5 text-blue-400 group-hover:text-blue-300 transition-colors" />
+              <span className="text-gray-300 group-hover:text-white transition-colors">Re-implemented in React</span>
+              <ExternalLink className="w-4 h-4 text-blue-500 group-hover:text-blue-400 transition-colors" />
+            </a>
+          </div>
+
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 mb-12">
+            <div className="bg-gradient-to-br from-purple-900/30 to-blue-900/30 border border-purple-500/30 rounded-xl p-5 md:p-6">
+              <p className="text-sm text-gray-400 mb-2">Development Period</p>
+              <p className="text-xl md:text-2xl font-bold text-white">1 Week +</p>
             </div>
-            <div className="bg-gradient-to-br from-blue-900/30 to-cyan-900/30 border border-blue-500/30 rounded-xl p-6">
+            <div className="bg-gradient-to-br from-blue-900/30 to-cyan-900/30 border border-blue-500/30 rounded-xl p-5 md:p-6">
               <p className="text-sm text-gray-400 mb-2">Architecture</p>
-              <p className="text-2xl font-bold text-white">Vanilla JS + Express</p>
+              <p className="text-xl md:text-2xl font-bold text-white">Vanilla JS + Express</p>
             </div>
-            <div className="bg-gradient-to-br from-cyan-900/30 to-purple-900/30 border border-cyan-500/30 rounded-xl p-6">
+            <div className="bg-gradient-to-br from-cyan-900/30 to-purple-900/30 border border-cyan-500/30 rounded-xl p-5 md:p-6 sm:col-span-2 md:col-span-1">
               <p className="text-sm text-gray-400 mb-2">Deployment</p>
-              <p className="text-2xl font-bold text-white">Docker + Nginx</p>
+              <p className="text-xl md:text-2xl font-bold text-white">Docker + Nginx</p>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="relative z-10 py-20 px-6">
+      <section className="relative z-10 py-16 md:py-20 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-5xl font-bold mb-16 text-center bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-12 md:mb-16 text-center bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
             UNIPORT CS Course Structure
           </h2>
 
-          <div className="grid md:grid-cols-4 gap-6 mb-12">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-8 md:mb-12">
             {levels.map((item, idx) => (
               <div
                 key={idx}
-                className="bg-gradient-to-br from-purple-900/20 to-blue-900/20 border border-purple-500/30 rounded-xl p-6 hover:border-purple-500 transition-all duration-300 hover:scale-105 text-center"
+                className="bg-gradient-to-br from-purple-900/20 to-blue-900/20 border border-purple-500/30 rounded-xl p-5 md:p-6 hover:border-purple-500 transition-all duration-300 hover:scale-105 text-center"
               >
-                <p className="text-2xl font-bold text-purple-400 mb-4">{item.level}</p>
+                <p className="text-xl md:text-2xl font-bold text-purple-400 mb-3 md:mb-4">{item.level}</p>
                 <div className="space-y-2">
-                  <p className="text-3xl font-black text-white">{item.courses}</p>
-                  <p className="text-sm text-gray-400">Courses</p>
-                  <div className="border-t border-gray-700 my-3"></div>
-                  <p className="text-2xl font-bold text-blue-400">{item.credits}</p>
-                  <p className="text-sm text-gray-400">Credit Units</p>
-                  <div className="border-t border-gray-700 my-3"></div>
+                  <p className="text-2xl md:text-3xl font-black text-white">{item.courses}</p>
+                  <p className="text-xs md:text-sm text-gray-400">Courses</p>
+                  <div className="border-t border-gray-700 my-2 md:my-3"></div>
+                  <p className="text-xl md:text-2xl font-bold text-blue-400">{item.credits}</p>
+                  <p className="text-xs md:text-sm text-gray-400">Credit Units</p>
+                  <div className="border-t border-gray-700 my-2 md:my-3"></div>
                   <p className="text-xs text-gray-500">{item.desc}</p>
                 </div>
               </div>
             ))}
           </div>
 
-          <div className="bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-8">
-            <h3 className="text-2xl font-bold text-white mb-4">Department Coverage</h3>
-            <p className="text-gray-300 leading-relaxed mb-4">
+          <div className="bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-6 md:p-8">
+            <h3 className="text-xl md:text-2xl font-bold text-white mb-3 md:mb-4">Department Coverage</h3>
+            <p className="text-sm md:text-base text-gray-300 leading-relaxed mb-3 md:mb-4">
               Complete course catalog for UNIPORT Computer Science department covering all four years of undergraduate study.
               The system includes core courses (Programming, Data Structures, Algorithms, Databases), electives, general studies,
               and department-specific requirements with proper prerequisite tracking and credit unit management.
             </p>
-            <p className="text-gray-400 text-sm">
+            <p className="text-gray-400 text-xs md:text-sm">
               All course data stored in <code className="text-purple-300 bg-purple-900/30 px-2 py-1 rounded">frontend/js/courses-data.js</code>
               {" "}for easy updates and maintenance.
             </p>
@@ -325,23 +351,23 @@ const CourseRegistration: React.FC = () => {
         </div>
       </section>
 
-      <section className="relative z-10 py-20 px-6 bg-gradient-to-b from-black via-purple-950/10 to-black">
+      <section className="relative z-10 py-16 md:py-20 px-4 sm:px-6 bg-gradient-to-b from-black via-purple-950/10 to-black">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-5xl font-bold mb-16 text-center bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-12 md:mb-16 text-center bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
             Key Features
           </h2>
 
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid sm:grid-cols-2 gap-6 md:gap-8">
             {features.map((feature, idx) => {
-              const Icon = feature.icon; // Capitalize for JSX
+              const Icon = feature.icon;
               return (
                 <div
                   key={idx}
-                  className="bg-gradient-to-br from-purple-900/20 to-blue-900/20 border border-purple-500/30 rounded-xl p-8 hover:border-purple-500 transition-all duration-300 hover:scale-105"
+                  className="bg-gradient-to-br from-purple-900/20 to-blue-900/20 border border-purple-500/30 rounded-xl p-6 md:p-8 hover:border-purple-500 transition-all duration-300 hover:scale-105"
                 >
-                  <Icon className="w-12 h-12 text-purple-400 mb-4" />
-                  <h3 className="text-2xl font-bold mb-3 text-white">{feature.title}</h3>
-                  <p className="text-gray-400 leading-relaxed">{feature.description}</p>
+                  <Icon className="w-10 h-10 md:w-12 md:h-12 text-purple-400 mb-3 md:mb-4" />
+                  <h3 className="text-xl md:text-2xl font-bold mb-2 md:mb-3 text-white">{feature.title}</h3>
+                  <p className="text-sm md:text-base text-gray-400 leading-relaxed">{feature.description}</p>
                 </div>
               );
             })}
@@ -349,36 +375,36 @@ const CourseRegistration: React.FC = () => {
         </div>
       </section>
 
-      <section className="relative z-10 py-20 px-6">
+      <section className="relative z-10 py-16 md:py-20 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-5xl font-bold mb-16 text-center bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-12 md:mb-16 text-center bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
             Technology Stack & Architecture
           </h2>
 
-          <div className="grid md:grid-cols-2 gap-6 mb-12">
+          <div className="grid sm:grid-cols-2 gap-4 md:gap-6 mb-8 md:mb-12">
             {techStack.map((tech, idx) => (
               <div
                 key={idx}
-                className="bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-6 hover:border-purple-500 transition-all duration-300 flex justify-between items-center"
+                className="bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-5 md:p-6 hover:border-purple-500 transition-all duration-300 flex justify-between items-center"
               >
                 <div>
-                  <h3 className="text-xl font-bold text-white mb-1">{tech.name}</h3>
-                  <p className="text-sm text-gray-400">{tech.role}</p>
+                  <h3 className="text-lg md:text-xl font-bold text-white mb-1">{tech.name}</h3>
+                  <p className="text-xs md:text-sm text-gray-400">{tech.role}</p>
                 </div>
-                <Check className="w-6 h-6 text-green-400" />
+                <Check className="w-5 h-5 md:w-6 md:h-6 text-green-400 flex-shrink-0" />
               </div>
             ))}
           </div>
 
-          <div className="space-y-8">
+          <div className="space-y-6 md:space-y-8">
             {architecture.map((arch, idx) => (
-              <div key={idx} className="bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-8">
-                <h3 className="text-2xl font-bold text-purple-400 mb-4">{arch.section}</h3>
+              <div key={idx} className="bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-6 md:p-8">
+                <h3 className="text-xl md:text-2xl font-bold text-purple-400 mb-3 md:mb-4">{arch.section}</h3>
                 <ul className="space-y-3 text-gray-300">
                   {arch.items.map((item, i) => (
                     <li key={i} className="flex items-start gap-3">
                       <Check className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
-                      <span>{item}</span>
+                      <span className="text-sm md:text-base">{item}</span>
                     </li>
                   ))}
                 </ul>
@@ -388,13 +414,13 @@ const CourseRegistration: React.FC = () => {
         </div>
       </section>
 
-      <section className="relative z-10 py-20 px-6 bg-gradient-to-b from-black via-purple-950/10 to-black">
+      <section className="relative z-10 py-16 md:py-20 px-4 sm:px-6 bg-gradient-to-b from-black via-purple-950/10 to-black">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-5xl font-bold mb-16 text-center bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-12 md:mb-16 text-center bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
             Project Screenshots
           </h2>
 
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid sm:grid-cols-2 gap-6 md:gap-8">
             {screenshots.map((shot, idx) => (
               <div
                 key={idx}
@@ -419,10 +445,10 @@ const CourseRegistration: React.FC = () => {
                     </div>
                   </div>
                 </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-white mb-2">{shot.title}</h3>
-                  <p className="text-gray-400 mb-3">{shot.desc}</p>
-                  <code className="text-xs text-purple-300 bg-purple-900/30 px-2 py-1 rounded">{shot.path}</code>
+                <div className="p-5 md:p-6">
+                  <h3 className="text-lg md:text-xl font-bold text-white mb-2">{shot.title}</h3>
+                  <p className="text-sm md:text-base text-gray-400 mb-3">{shot.desc}</p>
+                  <code className="text-xs text-purple-300 bg-purple-900/30 px-2 py-1 rounded break-all">{shot.path}</code>
                 </div>
               </div>
             ))}
@@ -430,81 +456,81 @@ const CourseRegistration: React.FC = () => {
         </div>
       </section>
 
-      <section className="relative z-10 py-20 px-6 bg-gradient-to-t from-purple-950/20 to-black">
+      <section className="relative z-10 py-16 md:py-20 px-4 sm:px-6 bg-gradient-to-t from-purple-950/20 to-black">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-5xl font-bold mb-16 text-center bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-12 md:mb-16 text-center bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
             Project Impact & Achievements
           </h2>
 
-          <div className="grid md:grid-cols-4 gap-6 mb-12">
-            <div className="bg-gradient-to-br from-green-900/30 to-emerald-900/30 border border-green-500/30 rounded-xl p-6 text-center">
-              <p className="text-4xl font-bold text-green-400 mb-2">52</p>
-              <p className="text-sm text-gray-300">Total Courses</p>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-8 md:mb-12">
+            <div className="bg-gradient-to-br from-green-900/30 to-emerald-900/30 border border-green-500/30 rounded-xl p-5 md:p-6 text-center">
+              <p className="text-3xl md:text-4xl font-bold text-green-400 mb-2">52</p>
+              <p className="text-xs md:text-sm text-gray-300">Total Courses</p>
             </div>
-            <div className="bg-gradient-to-br from-blue-900/30 to-cyan-900/30 border border-blue-500/30 rounded-xl p-6 text-center">
-              <p className="text-4xl font-bold text-blue-400 mb-2">4</p>
-              <p className="text-sm text-gray-300">Academic Levels</p>
+            <div className="bg-gradient-to-br from-blue-900/30 to-cyan-900/30 border border-blue-500/30 rounded-xl p-5 md:p-6 text-center">
+              <p className="text-3xl md:text-4xl font-bold text-blue-400 mb-2">4</p>
+              <p className="text-xs md:text-sm text-gray-300">Academic Levels</p>
             </div>
-            <div className="bg-gradient-to-br from-purple-900/30 to-pink-900/30 border border-purple-500/30 rounded-xl p-6 text-center">
-              <p className="text-4xl font-bold text-purple-400 mb-2">200</p>
-              <p className="text-sm text-gray-300">Total Credits</p>
+            <div className="bg-gradient-to-br from-purple-900/30 to-pink-900/30 border border-purple-500/30 rounded-xl p-5 md:p-6 text-center">
+              <p className="text-3xl md:text-4xl font-bold text-purple-400 mb-2">200</p>
+              <p className="text-xs md:text-sm text-gray-300">Total Credits</p>
             </div>
-            <div className="bg-gradient-to-br from-orange-900/30 to-red-900/30 border border-orange-500/30 rounded-xl p-6 text-center">
-              <p className="text-4xl font-bold text-orange-400 mb-2">6</p>
-              <p className="text-sm text-gray-300">Pages Built</p>
+            <div className="bg-gradient-to-br from-orange-900/30 to-red-900/30 border border-orange-500/30 rounded-xl p-5 md:p-6 text-center">
+              <p className="text-3xl md:text-4xl font-bold text-orange-400 mb-2">6</p>
+              <p className="text-xs md:text-sm text-gray-300">Pages Built</p>
             </div>
           </div>
 
-          <div className="bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-8">
-            <h3 className="text-2xl font-bold text-white mb-4">Technical Achievements</h3>
+          <div className="bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-6 md:p-8">
+            <h3 className="text-xl md:text-2xl font-bold text-white mb-4">Technical Achievements</h3>
             <ul className="space-y-3 text-gray-300">
               <li className="flex items-start gap-3">
-                <Check className="w-6 h-6 text-green-400 flex-shrink-0 mt-1" />
-                <span>Built complete course database for all UNIPORT CS courses from 100L to 400L</span>
+                <Check className="w-5 h-5 md:w-6 md:h-6 text-green-400 flex-shrink-0 mt-1" />
+                <span className="text-sm md:text-base">Built complete course database for all UNIPORT CS courses from 100L to 400L</span>
               </li>
               <li className="flex items-start gap-3">
-                <Check className="w-6 h-6 text-green-400 flex-shrink-0 mt-1" />
-                <span>Implemented intelligent filtering showing only eligible courses based on student level</span>
+                <Check className="w-5 h-5 md:w-6 md:h-6 text-green-400 flex-shrink-0 mt-1" />
+                <span className="text-sm md:text-base">Implemented intelligent filtering showing only eligible courses based on student level</span>
               </li>
               <li className="flex items-start gap-3">
-                <Check className="w-6 h-6 text-green-400 flex-shrink-0 mt-1" />
-                <span>Created fully functional CGPA calculator with semester-by-semester grade tracking</span>
+                <Check className="w-5 h-5 md:w-6 md:h-6 text-green-400 flex-shrink-0 mt-1" />
+                <span className="text-sm md:text-base">Created fully functional CGPA calculator with semester-by-semester grade tracking</span>
               </li>
               <li className="flex items-start gap-3">
-                <Check className="w-6 h-6 text-green-400 flex-shrink-0 mt-1" />
-                <span>Deployed with Docker Compose orchestrating multi-container architecture</span>
+                <Check className="w-5 h-5 md:w-6 md:h-6 text-green-400 flex-shrink-0 mt-1" />
+                <span className="text-sm md:text-base">Deployed with Docker Compose orchestrating multi-container architecture</span>
               </li>
               <li className="flex items-start gap-3">
-                <Check className="w-6 h-6 text-green-400 flex-shrink-0 mt-1" />
-                <span>Configured Nginx as reverse proxy for production-grade performance</span>
+                <Check className="w-5 h-5 md:w-6 md:h-6 text-green-400 flex-shrink-0 mt-1" />
+                <span className="text-sm md:text-base">Configured Nginx as reverse proxy for production-grade performance</span>
               </li>
               <li className="flex items-start gap-3">
-                <Check className="w-6 h-6 text-green-400 flex-shrink-0 mt-1" />
-                <span>Designed clean, intuitive UI with Tailwind CSS making registration effortless</span>
+                <Check className="w-5 h-5 md:w-6 md:h-6 text-green-400 flex-shrink-0 mt-1" />
+                <span className="text-sm md:text-base">Re-implemented the entire system in React with enhanced state management and UI</span>
               </li>
             </ul>
           </div>
         </div>
       </section>
 
-      <section className="relative z-10 py-20 px-6">
+      <section className="relative z-10 py-16 md:py-20 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-bold mb-6 text-white">
-            Need an Educational Platform?
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 md:mb-6 text-white">
+            Interested in Similar Work?
           </h2>
-          <p className="text-xl text-gray-400 mb-8">
+          <p className="text-lg md:text-xl text-gray-400 mb-6 md:mb-8">
             I build custom solutions for educational institutions and academic management systems.
           </p>
-          <div className="flex gap-6 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center">
             <Link
               to="/#contact"
-              className="px-8 py-4 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg font-semibold hover:from-purple-500 hover:to-blue-500 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-500/50"
+              className="px-6 md:px-8 py-3 md:py-4 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg font-semibold hover:from-purple-500 hover:to-blue-500 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-500/50 text-center"
             >
               Get In Touch
             </Link>
             <Link
-              to="/"
-              className="px-8 py-4 bg-blue-600/20 border border-blue-500/50 hover:border-blue-500 rounded-lg font-semibold transition-all duration-300 hover:scale-105"
+              to="/#projects"
+              className="px-6 md:px-8 py-3 md:py-4 bg-blue-600/20 border border-blue-500/50 hover:border-blue-500 rounded-lg font-semibold transition-all duration-300 hover:scale-105 text-center"
             >
               View Other Projects
             </Link>
@@ -514,32 +540,32 @@ const CourseRegistration: React.FC = () => {
 
       {/* Image Modal */}
       {selectedImage && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-lg">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-lg p-4">
           {/* Close button */}
           <button
             onClick={closeModal}
-            className="absolute top-6 right-6 z-10 p-3 bg-black/50 rounded-full hover:bg-black/70 transition-colors border border-gray-700"
+            className="absolute top-4 right-4 md:top-6 md:right-6 z-10 p-2 md:p-3 bg-black/50 rounded-full hover:bg-black/70 transition-colors border border-gray-700"
           >
-            <X className="w-6 h-6 text-white" />
+            <X className="w-5 h-5 md:w-6 md:h-6 text-white" />
           </button>
 
           {/* Navigation buttons */}
           <button
             onClick={goToPrevious}
-            className="absolute left-6 z-10 p-3 bg-black/50 rounded-full hover:bg-black/70 transition-colors border border-gray-700"
+            className="absolute left-4 md:left-6 z-10 p-2 md:p-3 bg-black/50 rounded-full hover:bg-black/70 transition-colors border border-gray-700"
           >
-            <ChevronLeft className="w-6 h-6 text-white" />
+            <ChevronLeft className="w-5 h-5 md:w-6 md:h-6 text-white" />
           </button>
 
           <button
             onClick={goToNext}
-            className="absolute right-6 z-10 p-3 bg-black/50 rounded-full hover:bg-black/70 transition-colors border border-gray-700"
+            className="absolute right-4 md:right-6 z-10 p-2 md:p-3 bg-black/50 rounded-full hover:bg-black/70 transition-colors border border-gray-700"
           >
-            <ChevronRight className="w-6 h-6 text-white" />
+            <ChevronRight className="w-5 h-5 md:w-6 md:h-6 text-white" />
           </button>
 
           {/* Image container */}
-          <div className="relative max-w-6xl max-h-[80vh] w-full mx-6">
+          <div className="relative max-w-6xl max-h-[80vh] w-full">
             <img
               src={screenshots[currentImageIndex].image}
               alt={screenshots[currentImageIndex].title}
@@ -547,15 +573,15 @@ const CourseRegistration: React.FC = () => {
             />
 
             {/* Image info */}
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/95 via-black/80 to-transparent p-3 md:p-6">
+            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/95 via-black/80 to-transparent p-3 md:p-6 rounded-b-lg">
               <h3 className="text-base md:text-2xl font-bold text-white mb-1 md:mb-2">
                 {screenshots[currentImageIndex].title}
               </h3>
-              <p className="text-xs md:text-base text-gray-300 mb-1 md:mb-2 line-clamp-2">
+              <p className="text-xs md:text-base text-gray-300 mb-1 md:mb-2">
                 {screenshots[currentImageIndex].desc}
               </p>
-              <div className="flex items-center justify-between">
-                <code className="text-xs text-purple-300 bg-purple-900/30 px-2 py-1 rounded hidden md:inline-block">
+              <div className="flex items-center justify-between flex-wrap gap-2">
+                <code className="text-xs text-purple-300 bg-purple-900/30 px-2 py-1 rounded hidden md:inline-block break-all">
                   {screenshots[currentImageIndex].path}
                 </code>
                 <p className="text-xs text-gray-400">
