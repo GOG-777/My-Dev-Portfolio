@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Code, Zap, Database, Layers, Send, Server, Package, GitBranch, Cloud, BarChart3, FileSpreadsheet, Cpu, Menu, X, CheckCircle, Sparkles } from 'lucide-react';
-//import { Terminal, Boxes, Lock, Brain, Globe } from 'lucide-react';
 import GalaxyIcon from '../components/GalaxyIcon';
 import DeveloperCoding from '../components/DeveloperCoding';
 import DeveloperThinking from '../components/DeveloperThinking';
+import MyProjects from '../components/MyProjects';
 
 // Define types
 interface MousePosition {
@@ -18,16 +18,6 @@ interface Particle {
   size: number;
   speedX: number;
   speedY: number;
-}
-
-interface Project {
-  title: string;
-  type: string;
-  description: string;
-  tech: string[];
-  features: string[];
-  status: string;
-  link: string;
 }
 
 interface TechItem {
@@ -59,15 +49,12 @@ const HomePage: React.FC = () => {
   const particlesRef = useRef<Particle[]>([]);
   const animationRef = useRef<number | null>(null);
 
-  // Event handler
   const handleMouseMove = (e: MouseEvent) => {
     setMousePosition({ x: e.clientX, y: e.clientY });
   };
 
-  // Effects
   useEffect(() => {
     window.addEventListener('mousemove', handleMouseMove);
-
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
     };
@@ -80,9 +67,7 @@ const HomePage: React.FC = () => {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    // Store in refs
     ctxRef.current = ctx;
-
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
@@ -104,7 +89,6 @@ const HomePage: React.FC = () => {
     const animate = () => {
       const currentCtx = ctxRef.current;
       const currentCanvas = canvasRef.current;
-
       if (!currentCtx || !currentCanvas) return;
 
       currentCtx.clearRect(0, 0, currentCanvas.width, currentCanvas.height);
@@ -122,11 +106,9 @@ const HomePage: React.FC = () => {
         if (particle.y < 0 || particle.y > currentCanvas.height) particle.speedY *= -1;
       });
 
-      // Store animation frame ID
       animationRef.current = requestAnimationFrame(animate);
     };
 
-    // Start animation
     animationRef.current = requestAnimationFrame(animate);
 
     const handleResize = () => {
@@ -141,51 +123,17 @@ const HomePage: React.FC = () => {
 
     return () => {
       window.removeEventListener('resize', handleResize);
-
-      // Clean up animation
       if (animationRef.current !== null) {
         cancelAnimationFrame(animationRef.current);
         animationRef.current = null;
       }
-
-      // Clean up context ref
       ctxRef.current = null;
     };
   }, []);
 
-  const projects: Project[] = [
-    {
-      title: "Praise Fashion",
-      type: "E-Commerce Platform",
-      description: "Complete e-commerce solution built for fashion retail. Features Paystack payment integration, automated receipt generation (PDF & JPG), inventory management, admin dashboard, and full customer management system.",
-      tech: ["HTML5", "Node.js", "Express.js", "PostgreSQL", "Docker", "Paystack API", "Vanilla JavaScript", "Tailwind CSS"],
-      features: ["Payment Integration", "PDF Generation", "Email Automation", "Inventory Management", "Admin Panel"],
-      status: "Completed",
-      link: "/projects/praise-fashion"
-    },
-    {
-      title: "Digital Course Registration System",
-      type: "Educational Platform",
-      description: "UNIPORT Computer Science department solution. Level-based course registration (100-400L), integrated CGPA calculator, student dashboard, course management, semester planning, and academic analytics.",
-      tech: ["HTML5", "Node.js", "Express.js", "PostgreSQL", "Docker", "Nginx", "Vanilla JavaScript", "Tailwind CSS"],
-      features: ["Student Dashboard", "CGPA Calculator", "Course Scheduling", "Semester Planning"],
-      status: "Academic Project",
-      link: "/projects/course-registration"
-    },
-    {
-      title: "URL Shortener",
-      type: "Utility Tool",
-      description: "Custom link shortening service with analytics tracking, QR code generation, custom aliases, click tracking, geographic data, and detailed performance metrics.",
-      tech: ["Node.js", "PostgreSQL", "TypeScript", "Vite", "Tailwind CSS", "Lucide Icons", "Mock API"],
-      features: ["Analytics", "QR Codes", "Custom Aliases", "API Access"],
-      status: "Archived",
-      link: "/projects/url-shortener"
-    }
-  ];
-
   const techStack: TechItem[] = [
     { name: "React", icon: Code, color: "text-cyan-400", category: "Frontend" },
-    { name: "Next.js", icon: Layers, color: "text-white", category: "Frontend" },
+    { name: "Next.js", icon: Layers, color: "text-white", category: "Full-Stack" },
     { name: "TypeScript", icon: Code, color: "text-blue-400", category: "Languages" },
     { name: "JavaScript", icon: Code, color: "text-yellow-400", category: "Languages" },
     { name: "Python", icon: Zap, color: "text-blue-300", category: "Languages" },
@@ -197,9 +145,7 @@ const HomePage: React.FC = () => {
     { name: "Git", icon: GitBranch, color: "text-orange-500", category: "DevOps" },
     { name: "REST APIs", icon: Cloud, color: "text-purple-400", category: "Backend" },
     { name: "Data Analysis", icon: BarChart3, color: "text-green-400", category: "Data" },
-    { name: "Spreadsheets", icon: FileSpreadsheet, color: "text-emerald-400", category: "Data" },
-    //{ name: "Data Science", icon: Brain, color: "text-pink-400", category: "Data" }
-    { name: "Data Processing", icon: Cpu, color: "text-pink-400", category: "Data" }
+    { name: "Spreadsheets", icon: FileSpreadsheet, color: "text-emerald-400", category: "Data" }
   ];
 
   const stats: StatItem[] = [
@@ -276,12 +222,9 @@ const HomePage: React.FC = () => {
       <section id="home" className="relative z-10 min-h-screen flex items-center px-4 sm:px-6 lg:px-12 pt-32 pb-24">
         <div className="max-w-7xl mx-auto w-full">
 
-          {/* Main Content Grid */}
           <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center mb-24">
 
-            {/* Left: Text Content */}
             <div>
-              {/* Avatar + Name Row */}
               <div className="flex items-start gap-6 sm:gap-8 mb-12">
                 <div className="relative flex-shrink-0">
                   <div className="absolute inset-0 bg-purple-600/40 rounded-full blur-2xl"></div>
@@ -311,12 +254,11 @@ const HomePage: React.FC = () => {
               {/* Description */}
               <div className="space-y-5 sm:space-y-6 mb-10 sm:mb-12">
                 <p className="text-lg sm:text-xl md:text-2xl text-gray-300 leading-relaxed">
-                  I build scalable full-stack applications with clean architecture and robust backend systems. 
-                  From e-commerce platforms to data analytics, I deliver functional solutions.
+                  I build full-stack systems that work in production. Payment integrations, admin dashboards, 
+                  database architecture, containerised deployments. I handle the whole stack from frontend to server.
                 </p>
               </div>
 
-              {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-5">
                 <a
                   href="#projects"
@@ -333,7 +275,6 @@ const HomePage: React.FC = () => {
               </div>
             </div>
 
-            {/* Right: SVG Illustration */}
             <div className="hidden lg:block">
               <DeveloperCoding />
             </div>
@@ -368,12 +309,11 @@ const HomePage: React.FC = () => {
               About Me
             </h2>
             <p className="text-base md:text-lg lg:text-xl text-gray-400 max-w-3xl mx-auto px-4">
-              I specialize in building complete, functional solutions across the full development stack. 
-              My focus is on delivering systems that work and solve real problems.
+              I build complete systems across the full stack. Backend architecture is where I am most 
+              comfortable, but I work through everything from the UI down to the database and deployment.
             </p>
           </div>
 
-          {/* Add illustration for visual interest */}
           <div className="mb-12 md:mb-16 lg:mb-20 flex justify-center px-4">
             <div className="w-full max-w-2xl opacity-80 hover:opacity-100 transition-opacity duration-500">
               <DeveloperThinking />
@@ -385,8 +325,8 @@ const HomePage: React.FC = () => {
               <Server className="w-10 h-10 md:w-12 md:h-12 text-purple-400 mb-3 md:mb-4" />
               <h3 className="text-xl md:text-2xl font-bold mb-3 md:mb-4 text-purple-400">Full-Stack Expertise</h3>
               <p className="text-sm md:text-base text-gray-300 leading-relaxed">
-                From frontend interfaces to backend APIs and database architecture, I build complete systems. 
-                React, Next.js, Node.js, Express, PostgreSQL. I work across the entire development spectrum.
+                React, Next.js, Node.js, Express, PostgreSQL. I build from the frontend all the way through 
+                to the API layer and database. Full systems, not just pieces of one.
               </p>
             </div>
 
@@ -394,17 +334,17 @@ const HomePage: React.FC = () => {
               <Database className="w-10 h-10 md:w-12 md:h-12 text-blue-400 mb-3 md:mb-4" />
               <h3 className="text-xl md:text-2xl font-bold mb-3 md:mb-4 text-blue-400">System Architecture</h3>
               <p className="text-sm md:text-base text-gray-300 leading-relaxed">
-                I design scalable backend systems with proper database normalization, API design, and containerization. 
-                Every project is built with deployment and maintainability in mind.
+                Proper database normalisation, clean API design, Docker containerisation. 
+                Every project is built with deployment and long-term maintainability in mind from day one.
               </p>
             </div>
 
             <div className="bg-gradient-to-br from-cyan-900/20 to-purple-900/20 border border-cyan-500/30 rounded-2xl p-6 md:p-8 hover:border-cyan-500 transition-all duration-300">
               <BarChart3 className="w-10 h-10 md:w-12 md:h-12 text-cyan-400 mb-3 md:mb-4" />
-              <h3 className="text-xl md:text-2xl font-bold mb-3 md:mb-4 text-cyan-400">Data & Analytics</h3>
+              <h3 className="text-xl md:text-2xl font-bold mb-3 md:mb-4 text-cyan-400">Data and Analytics</h3>
               <p className="text-sm md:text-base text-gray-300 leading-relaxed">
-                Beyond web development, I work with data analysis, visualization, and extracting insights from complex datasets. 
-                Python, SQL, and spreadsheet modeling are part of my toolkit.
+                Beyond web development, I work with data analysis, visualisation, and extracting 
+                useful insights from complex datasets. Python, SQL, and spreadsheet modelling are part of the toolkit.
               </p>
             </div>
 
@@ -412,99 +352,26 @@ const HomePage: React.FC = () => {
               <Sparkles className="w-10 h-10 md:w-12 md:h-12 text-yellow-400 mb-3 md:mb-4" />
               <h3 className="text-xl md:text-2xl font-bold mb-3 md:mb-4 text-yellow-400">Vibe Coder Philosophy</h3>
               <p className="text-sm md:text-base text-gray-300 leading-relaxed">
-                I code with intuition and flow, but deliver with precision. "Vibe" doesn't mean careless, it means 
-                finding elegant solutions through experimentation and creative problem-solving. The code works, the systems scale.
+                Vibe coding is not careless work. It is finding the right solution through flow and intuition 
+                rather than overthinking everything. The code still works. The systems still scale. The delivery is still real.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      <section id="projects" className="relative z-10 py-20 md:py-32 px-4 sm:px-6 bg-gradient-to-b from-black via-purple-950/10 to-black">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12 md:mb-16">
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-4 md:mb-6 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
-              Featured Projects
-            </h2>
-            <p className="text-lg md:text-xl text-gray-400">Functional systems built to solve real problems</p>
-          </div>
+      <MyProjects />
 
-          <div className="space-y-6 md:space-y-8">
-            {projects.map((project, idx) => (
-              <div
-                key={idx}
-                className="group bg-gradient-to-br from-purple-900/20 to-blue-900/20 border border-purple-500/30 rounded-2xl p-6 md:p-8 hover:border-purple-500 transition-all duration-300 hover:scale-[1.01] hover:shadow-2xl hover:shadow-purple-500/20"
-              >
-                <div className="grid md:grid-cols-3 gap-6 md:gap-8">
-                  <div className="md:col-span-2">
-                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-4 gap-3">
-                      <div>
-                        <h3 className="text-2xl md:text-3xl font-bold mb-2 text-white group-hover:text-purple-400 transition-colors">
-                          {project.title}
-                        </h3>
-                        <p className="text-base md:text-lg text-purple-400 font-semibold">{project.type}</p>
-                      </div>
-                      <span className="px-4 py-2 bg-green-500/20 border border-green-500/50 rounded-full text-sm text-green-300 whitespace-nowrap text-center inline-block min-w-[140px] sm:min-w-[180px]">
-                        {project.status}
-                      </span>
-                    </div>
-
-                    <p className="text-gray-300 mb-6 leading-relaxed text-base md:text-lg">
-                      {project.description}
-                    </p>
-
-                    <div className="mb-6">
-                      <p className="text-sm text-gray-400 mb-3 font-semibold">KEY FEATURES:</p>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                        {project.features.map((feature, i) => (
-                          <div key={i} className="flex items-center gap-2 text-gray-400">
-                            <div className="w-1.5 h-1.5 bg-purple-400 rounded-full flex-shrink-0"></div>
-                            <span className="text-sm">{feature}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-col justify-between">
-                    <div>
-                      <p className="text-sm text-gray-400 mb-3 font-semibold">TECH STACK:</p>
-                      <div className="flex flex-wrap gap-2">
-                        {project.tech.map((tech, i) => (
-                          <span
-                            key={i}
-                            className="px-3 py-1.5 bg-purple-500/20 border border-purple-500/50 rounded-lg text-sm text-purple-300 hover:bg-purple-500/30 transition-colors"
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-
-                    <Link
-                      to={project.link}
-                      className="mt-6 w-full px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg font-semibold hover:from-purple-500 hover:to-blue-500 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-500/50 text-center"
-                    >
-                      View Details →
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
+      {/* Skills Section */}
       <section id="skills" className="relative z-10 py-20 md:py-32 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12 md:mb-16">
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-4 md:mb-6 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
-              Skills & Expertise
+              Skills and Expertise
             </h2>
             <p className="text-base md:text-lg lg:text-xl text-gray-400">Proficiency across the full development spectrum</p>
           </div>
 
-          {/* Developer illustration for visual appeal */}
           <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center mb-12 md:mb-16">
             <div className="order-2 lg:order-1">
               <div className="grid gap-4 md:gap-6">
@@ -534,13 +401,13 @@ const HomePage: React.FC = () => {
             <h3 className="text-3xl md:text-4xl font-bold mb-8 text-white">Technology Stack</h3>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6">
+          <div className="flex flex-wrap justify-center gap-4 md:gap-6">
             {techStack.map((tech, idx) => {
               const Icon = tech.icon;
               return (
                 <div
                   key={idx}
-                  className="bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-4 md:p-6 hover:border-purple-500 transition-all duration-300 hover:scale-110 group text-center"
+                  className="w-[calc(50%-8px)] sm:w-[calc(33.333%-11px)] md:w-[calc(25%-18px)] lg:w-[calc(20%-19px)] bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-4 md:p-6 hover:border-purple-500 transition-all duration-300 hover:scale-110 group text-center"
                 >
                   <Icon className={`w-10 h-10 md:w-12 md:h-12 ${tech.color} mb-3 mx-auto group-hover:scale-110 transition-transform`} />
                   <h3 className="text-sm md:text-base lg:text-lg font-bold text-white mb-1">{tech.name}</h3>
@@ -558,18 +425,19 @@ const HomePage: React.FC = () => {
             </div>
             <div className="p-6 bg-gradient-to-br from-blue-900/30 to-cyan-900/30 border border-blue-500/30 rounded-xl">
               <BarChart3 className="w-10 h-10 text-blue-400 mx-auto mb-3" />
-              <p className="text-lg font-bold text-white mb-2">Data Science</p>
-              <p className="text-sm text-gray-400">Analysis, Spreadsheets, Insights</p>
+              <p className="text-lg font-bold text-white mb-2">Data Analysis</p>
+              <p className="text-sm text-gray-400">Python, SQL, Spreadsheets</p>
             </div>
             <div className="p-6 bg-gradient-to-br from-cyan-900/30 to-purple-900/30 border border-cyan-500/30 rounded-xl sm:col-span-2 lg:col-span-1">
               <Package className="w-10 h-10 text-cyan-400 mx-auto mb-3" />
               <p className="text-lg font-bold text-white mb-2">DevOps</p>
-              <p className="text-sm text-gray-400">Docker, Git, Linux Mint</p>
+              <p className="text-sm text-gray-400">Docker, Git, Arch Linux</p>
             </div>
           </div>
         </div>
       </section>
 
+      {/* Contact Section */}
       <section id="contact" className="relative z-10 py-20 md:py-32 px-4 sm:px-6 bg-gradient-to-t from-purple-950/20 to-black">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 md:mb-8 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
@@ -577,8 +445,8 @@ const HomePage: React.FC = () => {
           </h2>
 
           <p className="text-lg md:text-xl text-gray-400 mb-8 md:mb-12 max-w-2xl mx-auto px-4">
-            Available for freelance projects, contract work, or full-time opportunities. 
-            Let's discuss how I can help bring your ideas to life.
+            Available for freelance projects, contract work, and full-time opportunities. 
+            Let's talk about what you need built.
           </p>
 
           <div className="flex justify-center gap-6 sm:gap-8 md:gap-12 mb-12 md:mb-16 flex-wrap px-4">
@@ -596,10 +464,10 @@ const HomePage: React.FC = () => {
               <span className="text-xs sm:text-sm text-gray-400 group-hover:text-blue-400">LinkedIn</span>
             </a>
 
-            <a 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              href="https://t.me/thegenius_001" 
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://t.me/thegenius_001"
               className="group flex flex-col items-center gap-3 hover:scale-110 transition-transform"
             >
               <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-blue-600 to-cyan-600 rounded-full flex items-center justify-center group-hover:shadow-2xl group-hover:shadow-blue-500/50 transition-all duration-300">
@@ -608,38 +476,44 @@ const HomePage: React.FC = () => {
               <span className="text-xs sm:text-sm text-gray-400 group-hover:text-blue-400">Telegram</span>
             </a>
 
-            <a 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              href="https://github.com/GOG-777" 
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://github.com/GOG-777"
               className="group flex flex-col items-center gap-3 hover:scale-110 transition-transform"
             >
               <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-gray-700 to-gray-900 rounded-full flex items-center justify-center group-hover:shadow-2xl group-hover:shadow-gray-500/50 transition-all duration-300">
-                <svg className="w-8 h-8 md:w-10 md:h-10" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" /></svg>
+                <svg className="w-8 h-8 md:w-10 md:h-10" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                </svg>
               </div>
               <span className="text-xs sm:text-sm text-gray-400 group-hover:text-gray-300">Github</span>
             </a>
 
-            <a 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              href="https://x.com/thegenius_xyz" 
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://x.com/thegenius_xyz"
               className="group flex flex-col items-center gap-3 hover:scale-110 transition-transform"
             >
               <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-purple-600 to-blue-600 rounded-full flex items-center justify-center group-hover:shadow-2xl group-hover:shadow-purple-500/50 transition-all duration-300">
-                <svg className="w-8 h-8 md:w-10 md:h-10" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg>
+                <svg className="w-8 h-8 md:w-10 md:h-10" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                </svg>
               </div>
               <span className="text-xs sm:text-sm text-gray-400 group-hover:text-purple-400">X (Twitter)</span>
             </a>
 
-            <a 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              href="https://instagram.com/thegenius_001" 
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://instagram.com/thegenius_001"
               className="group flex flex-col items-center gap-3 hover:scale-110 transition-transform"
             >
               <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-pink-600 to-purple-600 rounded-full flex items-center justify-center group-hover:shadow-2xl group-hover:shadow-pink-500/50 transition-all duration-300">
-                <svg className="w-8 h-8 md:w-10 md:h-10" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" /></svg>
+                <svg className="w-8 h-8 md:w-10 md:h-10" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                </svg>
               </div>
               <span className="text-xs sm:text-sm text-gray-400 group-hover:text-pink-400">Instagram</span>
             </a>
@@ -655,10 +529,10 @@ const HomePage: React.FC = () => {
               Copyright &copy; {currentYear}
             </p>
             <p className="text-gray-500 text-sm mb-2">
-              Full-Stack Developer • Data Scientist • Systems Architect
+              Full-Stack Developer • Systems Architect • Vibe Coder
             </p>
             <p className="text-gray-400 text-xs mt-4">
-              Built with TypeScript, React, Tailwind CSS, Docker, Linux Mint
+              Built with TypeScript, React, Tailwind CSS, Docker, Arch Linux
             </p>
           </div>
         </div>
