@@ -4,11 +4,15 @@ import PraiseFashion from './pages/PraiseFashion';
 import CourseRegistration from './pages/CourseRegistration';
 import URLShortener from './pages/URLShortener';
 import ScrollToTop from './components/ScrollToTop';
+import ThunderStrike from './components/ThunderStrike';
+import DepartureModal from './components/DepartureModal';
 
-const App: React.FC = () => {
+export const App = () => {
   return (
     <>
-      <ScrollToTop /> {/* Add this line */}
+      <ScrollToTop />
+      <ThunderStrike />
+      <DepartureModal />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/projects/praise-fashion" element={<PraiseFashion />} />

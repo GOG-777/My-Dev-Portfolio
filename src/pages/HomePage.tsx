@@ -1,542 +1,513 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
-import { Code, Zap, Database, Layers, Send, Server, Package, GitBranch, Cloud, BarChart3, FileSpreadsheet, Cpu, Menu, X, CheckCircle, Sparkles } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { 
+  ArrowUpRight, 
+  Terminal, 
+  Layers, 
+  Database, 
+  Cpu, 
+  Globe, 
+  Send, 
+  Github, 
+  Linkedin, 
+  Twitter, 
+  Instagram, 
+  Menu, 
+  X, 
+  BookOpen, 
+  Boxes 
+} from 'lucide-react';
 import GalaxyIcon from '../components/GalaxyIcon';
-import DeveloperCoding from '../components/DeveloperCoding';
-import DeveloperThinking from '../components/DeveloperThinking';
 import MyProjects from '../components/MyProjects';
+import ThemeToggle from '../components/ThemeToggle';
+import SfxToggle from '../components/SfxToggle';
+import SpotlightCard from '../components/SpotlightCard';
+import CopyEmailCard from '../components/CopyEmailCard';
+import { playMenuSound } from '../utils/sfx';
 
-// Define types
-interface MousePosition {
-  x: number;
-  y: number;
-}
-
-interface Particle {
-  x: number;
-  y: number;
-  size: number;
-  speedX: number;
-  speedY: number;
-}
-
-interface TechItem {
-  name: string;
-  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
-  color: string;
-  category: string;
-}
-
-interface StatItem {
-  label: string;
-  value: string;
-  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
-}
-
-interface Skill {
-  name: string;
-  level: number;
-}
-
-// Main component
-const HomePage: React.FC = () => {
-  const [mousePosition, setMousePosition] = useState<MousePosition>({ x: 0, y: 0 });
-  const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
-
-  // Refs
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const ctxRef = useRef<CanvasRenderingContext2D | null>(null);
-  const particlesRef = useRef<Particle[]>([]);
-  const animationRef = useRef<number | null>(null);
-
-  const handleMouseMove = (e: MouseEvent) => {
-    setMousePosition({ x: e.clientX, y: e.clientY });
-  };
-
-  useEffect(() => {
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-    };
-  }, []);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    ctxRef.current = ctx;
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    const particles: Particle[] = [];
-    const particleCount = 100;
-
-    for (let i = 0; i < particleCount; i++) {
-      particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        size: Math.random() * 2 + 0.5,
-        speedX: Math.random() * 0.5 - 0.25,
-        speedY: Math.random() * 0.5 - 0.25,
-      });
-    }
-
-    particlesRef.current = particles;
-
-    const animate = () => {
-      const currentCtx = ctxRef.current;
-      const currentCanvas = canvasRef.current;
-      if (!currentCtx || !currentCanvas) return;
-
-      currentCtx.clearRect(0, 0, currentCanvas.width, currentCanvas.height);
-      currentCtx.fillStyle = 'rgba(139, 92, 246, 0.5)';
-
-      particlesRef.current.forEach((particle) => {
-        currentCtx.beginPath();
-        currentCtx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-        currentCtx.fill();
-
-        particle.x += particle.speedX;
-        particle.y += particle.speedY;
-
-        if (particle.x < 0 || particle.x > currentCanvas.width) particle.speedX *= -1;
-        if (particle.y < 0 || particle.y > currentCanvas.height) particle.speedY *= -1;
-      });
-
-      animationRef.current = requestAnimationFrame(animate);
-    };
-
-    animationRef.current = requestAnimationFrame(animate);
-
-    const handleResize = () => {
-      const currentCanvas = canvasRef.current;
-      if (currentCanvas) {
-        currentCanvas.width = window.innerWidth;
-        currentCanvas.height = window.innerHeight;
-      }
-    };
-
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-      if (animationRef.current !== null) {
-        cancelAnimationFrame(animationRef.current);
-        animationRef.current = null;
-      }
-      ctxRef.current = null;
-    };
-  }, []);
-
-  const techStack: TechItem[] = [
-    { name: "React", icon: Code, color: "text-cyan-400", category: "Frontend" },
-    { name: "Next.js", icon: Layers, color: "text-white", category: "Full-Stack" },
-    { name: "TypeScript", icon: Code, color: "text-blue-400", category: "Languages" },
-    { name: "JavaScript", icon: Code, color: "text-yellow-400", category: "Languages" },
-    { name: "Python", icon: Zap, color: "text-blue-300", category: "Languages" },
-    { name: "Node.js", icon: Server, color: "text-green-400", category: "Backend" },
-    { name: "Express", icon: Server, color: "text-gray-400", category: "Backend" },
-    { name: "PostgreSQL", icon: Database, color: "text-cyan-400", category: "Database" },
-    { name: "SQL", icon: Database, color: "text-orange-400", category: "Database" },
-    { name: "Docker", icon: Package, color: "text-blue-500", category: "DevOps" },
-    { name: "Git", icon: GitBranch, color: "text-orange-500", category: "DevOps" },
-    { name: "REST APIs", icon: Cloud, color: "text-purple-400", category: "Backend" },
-    { name: "Data Analysis", icon: BarChart3, color: "text-green-400", category: "Data" },
-    { name: "Spreadsheets", icon: FileSpreadsheet, color: "text-emerald-400", category: "Data" }
-  ];
-
-  const stats: StatItem[] = [
-    { label: "Projects Deployed", value: "15+", icon: CheckCircle },
-    { label: "Lines of Code", value: "50K+", icon: Code },
-    { label: "Technologies", value: "20+", icon: Cpu },
-    { label: "Years Experience", value: "2+", icon: Zap }
-  ];
-
-  const skills: Skill[] = [
-    { name: "Full-Stack Development", level: 93 },
-    { name: "Backend Architecture", level: 90 },
-    { name: "Database Design", level: 92 },
-    { name: "Data Analysis", level: 85 },
-    { name: "Problem Solving", level: 96 },
-    { name: "Docker & DevOps", level: 88 }
-  ];
-
+export const HomePage = () => {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const currentYear = new Date().getFullYear();
 
+  // Close mobile menu on Escape key
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        playMenuSound(false);
+        setMobileMenuOpen(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [mobileMenuOpen]);
+
   return (
-    <div className="bg-black text-white min-h-screen overflow-x-hidden">
-      <canvas ref={canvasRef} className="fixed inset-0 z-0 opacity-30" />
+    <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100 transition-colors duration-200">
+      {/* ─── Navigation ─── */}
+      <header className="sticky top-0 z-50 w-full border-b border-neutral-200 dark:border-neutral-800/80 bg-white/80 dark:bg-neutral-950/80 backdrop-blur-md">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+          <a href="#" className="flex items-center gap-2.5 font-bold text-lg tracking-tight group">
+            <span className="text-neutral-950 dark:text-white group-hover:text-neutral-600 dark:group-hover:text-neutral-300 transition-colors">GOG</span>
+            <GalaxyIcon className="w-5 h-5" />
+            <span className="text-xs font-mono text-neutral-500 font-normal">thgenius.xyz</span>
+          </a>
 
-      <div className="fixed inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-900/30 via-black to-blue-900/30"></div>
-        <div
-          className="absolute w-96 h-96 bg-purple-600/20 rounded-full blur-3xl"
-          style={{
-            left: `${mousePosition.x - 192}px`,
-            top: `${mousePosition.y - 192}px`,
-            transition: 'all 0.3s ease'
-          }}
-        ></div>
-      </div>
+          <nav className="hidden md:flex items-center gap-6 text-sm text-neutral-600 dark:text-neutral-400 font-medium">
+            <a href="#projects" className="hover:text-neutral-950 dark:hover:text-neutral-100 transition-colors">Systems</a>
+            <a href="#ecosystem" className="hover:text-neutral-950 dark:hover:text-neutral-100 transition-colors">Ecosystem</a>
+            <a href="#capabilities" className="hover:text-neutral-950 dark:hover:text-neutral-100 transition-colors">Stack</a>
+            <a href="#about" className="hover:text-neutral-950 dark:hover:text-neutral-100 transition-colors">About</a>
+            <a href="#contact" className="hover:text-neutral-950 dark:hover:text-neutral-100 transition-colors">Contact</a>
+          </nav>
 
-      <nav className="fixed top-0 w-full z-50 bg-black/50 backdrop-blur-lg border-b border-purple-500/20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
-          <Link to="/" className="text-xl md:text-2xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent flex items-center gap-2">
-            <span>GOG</span>
-            <GalaxyIcon className="w-6 h-6 md:w-7 md:h-7" />
-          </Link>
-
-          <div className="hidden md:flex gap-8 text-sm">
-            <a href="#home" className="hover:text-purple-400 transition-colors">Home</a>
-            <a href="#about" className="hover:text-purple-400 transition-colors">About</a>
-            <a href="#projects" className="hover:text-purple-400 transition-colors">Projects</a>
-            <a href="#skills" className="hover:text-purple-400 transition-colors">Skills</a>
-            <a href="#contact" className="hover:text-purple-400 transition-colors">Contact</a>
+          <div className="flex items-center gap-2 sm:gap-3">
+            <SfxToggle />
+            <ThemeToggle />
+            <a
+              href="https://github.com/GOG-777"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub Profile"
+              className="hidden sm:inline-flex p-2 rounded-lg border border-neutral-300 dark:border-neutral-800 text-neutral-600 dark:text-neutral-400 hover:text-neutral-950 dark:hover:text-neutral-100 hover:bg-neutral-100 dark:hover:bg-neutral-900 transition-colors"
+            >
+              <Github className="w-4 h-4" />
+            </a>
+            <button
+              onClick={() => {
+                const next = !mobileMenuOpen;
+                playMenuSound(next);
+                setMobileMenuOpen(next);
+              }}
+              className="md:hidden p-2 text-neutral-600 dark:text-neutral-400 hover:text-neutral-950 dark:hover:text-neutral-100"
+              aria-label="Toggle Navigation Menu"
+            >
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
           </div>
-
-          <button
-            className="md:hidden text-white"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          >
-            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
         </div>
 
+        {/* Mobile menu overlay */}
         {mobileMenuOpen && (
-          <div className="md:hidden bg-black/95 backdrop-blur-lg border-t border-purple-500/20">
-            <div className="flex flex-col px-6 py-4 space-y-4">
-              <a href="#home" className="hover:text-purple-400 transition-colors" onClick={() => setMobileMenuOpen(false)}>Home</a>
-              <a href="#about" className="hover:text-purple-400 transition-colors" onClick={() => setMobileMenuOpen(false)}>About</a>
-              <a href="#projects" className="hover:text-purple-400 transition-colors" onClick={() => setMobileMenuOpen(false)}>Projects</a>
-              <a href="#skills" className="hover:text-purple-400 transition-colors" onClick={() => setMobileMenuOpen(false)}>Skills</a>
-              <a href="#contact" className="hover:text-purple-400 transition-colors" onClick={() => setMobileMenuOpen(false)}>Contact</a>
+          <div 
+            onClick={() => {
+              playMenuSound(false);
+              setMobileMenuOpen(false);
+            }}
+            className="md:hidden fixed inset-0 top-16 z-50 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200"
+          >
+            <div 
+              onClick={(e) => e.stopPropagation()}
+              className="bg-white dark:bg-neutral-900 border-b border-neutral-200 dark:border-neutral-800 p-6 space-y-4 shadow-2xl animate-in slide-in-from-top-2 duration-200"
+            >
+              <div className="flex flex-col space-y-3 font-medium text-base">
+                <a 
+                  href="#projects" 
+                  onClick={() => { playMenuSound(false); setMobileMenuOpen(false); }}
+                  className="text-neutral-700 dark:text-neutral-300 hover:text-neutral-950 dark:hover:text-white py-1 transition-colors"
+                >
+                  Systems & Work
+                </a>
+                <a 
+                  href="#ecosystem" 
+                  onClick={() => { playMenuSound(false); setMobileMenuOpen(false); }}
+                  className="text-neutral-700 dark:text-neutral-300 hover:text-neutral-950 dark:hover:text-white py-1 transition-colors"
+                >
+                  thgenius Ecosystem
+                </a>
+                <a 
+                  href="#capabilities" 
+                  onClick={() => { playMenuSound(false); setMobileMenuOpen(false); }}
+                  className="text-neutral-700 dark:text-neutral-300 hover:text-neutral-950 dark:hover:text-white py-1 transition-colors"
+                >
+                  Stack
+                </a>
+                <a 
+                  href="#about" 
+                  onClick={() => { playMenuSound(false); setMobileMenuOpen(false); }}
+                  className="text-neutral-700 dark:text-neutral-300 hover:text-neutral-950 dark:hover:text-white py-1 transition-colors"
+                >
+                  About
+                </a>
+                <a 
+                  href="#contact" 
+                  onClick={() => { playMenuSound(false); setMobileMenuOpen(false); }}
+                  className="text-neutral-700 dark:text-neutral-300 hover:text-neutral-950 dark:hover:text-white py-1 transition-colors"
+                >
+                  Contact
+                </a>
+              </div>
+
+              <div className="pt-4 border-t border-neutral-100 dark:border-neutral-800 flex items-center justify-between text-xs font-mono text-neutral-400">
+                <span>GOG 🌌 · thgenius.xyz</span>
+                <button 
+                  onClick={() => { playMenuSound(false); setMobileMenuOpen(false); }}
+                  className="hover:text-neutral-700 dark:hover:text-neutral-200 underline"
+                >
+                  Close
+                </button>
+              </div>
             </div>
           </div>
         )}
-      </nav>
+      </header>
 
-      {/* Hero Section */}
-      <section id="home" className="relative z-10 min-h-screen flex items-center px-4 sm:px-6 lg:px-12 pt-32 pb-24">
-        <div className="max-w-7xl mx-auto w-full">
-
-          <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center mb-24">
-
-            <div>
-              <div className="flex items-start gap-6 sm:gap-8 mb-12">
-                <div className="relative flex-shrink-0">
-                  <div className="absolute inset-0 bg-purple-600/40 rounded-full blur-2xl"></div>
-                  <img
-                    src="/images/avatar.jpg"
-                    alt="GOG"
-                    className="relative w-28 h-28 sm:w-36 sm:h-36 md:w-40 md:h-40 lg:w-44 lg:h-44 rounded-full object-cover border-4 border-purple-500/40 hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
-
-                <div className="flex-1 pt-2 sm:pt-3">
-                  <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
-                    <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
-                      GOG
-                    </h1>
-                    <GalaxyIcon className="w-10 h-10 sm:w-14 sm:h-14 md:w-16 md:h-16" />
-                  </div>
-                  <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-100 mb-3 sm:mb-5">
-                    Thegenius
-                  </h2>
-                  <p className="text-base sm:text-xl md:text-2xl text-purple-300 font-semibold">
-                    Full-Stack Developer • Systems Architect • Vibe Coder
-                  </p>
-                </div>
-              </div>
-
-              {/* Description */}
-              <div className="space-y-5 sm:space-y-6 mb-10 sm:mb-12">
-                <p className="text-lg sm:text-xl md:text-2xl text-gray-300 leading-relaxed">
-                  I build full-stack systems that work in production. Payment integrations, admin dashboards, 
-                  database architecture, containerised deployments. I handle the whole stack from frontend to server.
-                </p>
-              </div>
-
-              <div className="flex flex-col sm:flex-row gap-3 sm:gap-5">
-                <a
-                  href="#projects"
-                  className="px-6 sm:px-9 py-3.5 sm:py-4 bg-purple-600 hover:bg-purple-500 rounded-lg font-bold text-base sm:text-lg transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-purple-500/50 text-center"
-                >
-                  View Projects
-                </a>
-                <a
-                  href="#contact"
-                  className="px-6 sm:px-9 py-3.5 sm:py-4 border-2 border-blue-500/50 hover:border-blue-400 hover:bg-blue-500/10 rounded-lg font-bold text-base sm:text-lg transition-all duration-300 hover:scale-105 text-blue-300 text-center"
-                >
-                  Get In Touch
-                </a>
-              </div>
-            </div>
-
-            <div className="hidden lg:block">
-              <DeveloperCoding />
-            </div>
-
+      {/* ─── Hero Section ─── */}
+      <section className="pt-20 pb-16 md:pt-28 md:pb-24 px-4 sm:px-6 max-w-6xl mx-auto">
+        <div className="max-w-3xl">
+          <div className="text-xs font-mono uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-4">
+            Software Engineer & Systems Architect
           </div>
 
-          {/* Stats Row */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-5 md:gap-7">
-            {stats.map((stat, idx) => {
-              const Icon = stat.icon;
-              return (
-                <div
-                  key={idx}
-                  className="bg-gradient-to-br from-purple-900/30 to-blue-900/30 border border-purple-500/30 rounded-xl p-5 sm:p-6 md:p-7 hover:border-purple-500 transition-all duration-300 hover:scale-105 text-center"
-                >
-                  <Icon className="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 text-purple-400 mb-3 sm:mb-4 mx-auto" />
-                  <p className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-1 sm:mb-2">{stat.value}</p>
-                  <p className="text-xs sm:text-sm text-gray-400">{stat.label}</p>
-                </div>
-              );
-            })}
-          </div>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-neutral-950 dark:text-white leading-[1.1] mb-6">
+            Building software systems that actually work in production.
+          </h1>
 
-        </div>
-      </section>
-
-      {/* About Section */}
-      <section id="about" className="relative z-10 py-16 md:py-20 px-4 sm:px-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12 md:mb-16 lg:mb-20">
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-4 md:mb-6 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
-              About Me
-            </h2>
-            <p className="text-base md:text-lg lg:text-xl text-gray-400 max-w-3xl mx-auto px-4">
-              I build complete systems across the full stack. Backend architecture is where I am most 
-              comfortable, but I work through everything from the UI down to the database and deployment.
-            </p>
-          </div>
-
-          <div className="mb-12 md:mb-16 lg:mb-20 flex justify-center px-4">
-            <div className="w-full max-w-2xl opacity-80 hover:opacity-100 transition-opacity duration-500">
-              <DeveloperThinking />
-            </div>
-          </div>
-
-          <div className="grid sm:grid-cols-2 gap-6 md:gap-8">
-            <div className="bg-gradient-to-br from-purple-900/20 to-blue-900/20 border border-purple-500/30 rounded-2xl p-6 md:p-8 hover:border-purple-500 transition-all duration-300">
-              <Server className="w-10 h-10 md:w-12 md:h-12 text-purple-400 mb-3 md:mb-4" />
-              <h3 className="text-xl md:text-2xl font-bold mb-3 md:mb-4 text-purple-400">Full-Stack Expertise</h3>
-              <p className="text-sm md:text-base text-gray-300 leading-relaxed">
-                React, Next.js, Node.js, Express, PostgreSQL. I build from the frontend all the way through 
-                to the API layer and database. Full systems, not just pieces of one.
-              </p>
-            </div>
-
-            <div className="bg-gradient-to-br from-blue-900/20 to-cyan-900/20 border border-blue-500/30 rounded-2xl p-6 md:p-8 hover:border-blue-500 transition-all duration-300">
-              <Database className="w-10 h-10 md:w-12 md:h-12 text-blue-400 mb-3 md:mb-4" />
-              <h3 className="text-xl md:text-2xl font-bold mb-3 md:mb-4 text-blue-400">System Architecture</h3>
-              <p className="text-sm md:text-base text-gray-300 leading-relaxed">
-                Proper database normalisation, clean API design, Docker containerisation. 
-                Every project is built with deployment and long-term maintainability in mind from day one.
-              </p>
-            </div>
-
-            <div className="bg-gradient-to-br from-cyan-900/20 to-purple-900/20 border border-cyan-500/30 rounded-2xl p-6 md:p-8 hover:border-cyan-500 transition-all duration-300">
-              <BarChart3 className="w-10 h-10 md:w-12 md:h-12 text-cyan-400 mb-3 md:mb-4" />
-              <h3 className="text-xl md:text-2xl font-bold mb-3 md:mb-4 text-cyan-400">Data and Analytics</h3>
-              <p className="text-sm md:text-base text-gray-300 leading-relaxed">
-                Beyond web development, I work with data analysis, visualisation, and extracting 
-                useful insights from complex datasets. Python, SQL, and spreadsheet modelling are part of the toolkit.
-              </p>
-            </div>
-
-            <div className="bg-gradient-to-br from-yellow-900/20 to-orange-900/20 border border-yellow-500/30 rounded-2xl p-6 md:p-8 hover:border-yellow-500 transition-all duration-300">
-              <Sparkles className="w-10 h-10 md:w-12 md:h-12 text-yellow-400 mb-3 md:mb-4" />
-              <h3 className="text-xl md:text-2xl font-bold mb-3 md:mb-4 text-yellow-400">Vibe Coder Philosophy</h3>
-              <p className="text-sm md:text-base text-gray-300 leading-relaxed">
-                Vibe coding is not careless work. It is finding the right solution through flow and intuition 
-                rather than overthinking everything. The code still works. The systems still scale. The delivery is still real.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <MyProjects />
-
-      {/* Skills Section */}
-      <section id="skills" className="relative z-10 py-20 md:py-32 px-4 sm:px-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12 md:mb-16">
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-4 md:mb-6 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
-              Skills and Expertise
-            </h2>
-            <p className="text-base md:text-lg lg:text-xl text-gray-400">Proficiency across the full development spectrum</p>
-          </div>
-
-          <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center mb-12 md:mb-16">
-            <div className="order-2 lg:order-1">
-              <div className="grid gap-4 md:gap-6">
-                {skills.map((skill, idx) => (
-                  <div key={idx} className="bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-5 md:p-6 hover:border-purple-500 transition-all duration-300">
-                    <div className="flex justify-between items-center mb-3">
-                      <span className="text-base md:text-lg font-semibold text-white">{skill.name}</span>
-                      <span className="text-purple-400 font-bold">{skill.level}%</span>
-                    </div>
-                    <div className="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
-                      <div
-                        className="bg-gradient-to-r from-purple-500 to-blue-500 h-full rounded-full transition-all duration-1000 hover:from-purple-400 hover:to-blue-400"
-                        style={{ width: `${skill.level}%` }}
-                      ></div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="order-1 lg:order-2 opacity-90 hover:opacity-100 transition-opacity duration-500">
-              <DeveloperCoding />
-            </div>
-          </div>
-
-          <div className="text-center mb-8 md:mb-12">
-            <h3 className="text-3xl md:text-4xl font-bold mb-8 text-white">Technology Stack</h3>
-          </div>
-
-          <div className="flex flex-wrap justify-center gap-4 md:gap-6">
-            {techStack.map((tech, idx) => {
-              const Icon = tech.icon;
-              return (
-                <div
-                  key={idx}
-                  className="w-[calc(50%-8px)] sm:w-[calc(33.333%-11px)] md:w-[calc(25%-18px)] lg:w-[calc(20%-19px)] bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-4 md:p-6 hover:border-purple-500 transition-all duration-300 hover:scale-110 group text-center"
-                >
-                  <Icon className={`w-10 h-10 md:w-12 md:h-12 ${tech.color} mb-3 mx-auto group-hover:scale-110 transition-transform`} />
-                  <h3 className="text-sm md:text-base lg:text-lg font-bold text-white mb-1">{tech.name}</h3>
-                  <p className="text-xs text-gray-500">{tech.category}</p>
-                </div>
-              );
-            })}
-          </div>
-
-          <div className="mt-12 md:mt-16 grid sm:grid-cols-2 lg:grid-cols-3 gap-6 text-center">
-            <div className="p-6 bg-gradient-to-br from-purple-900/30 to-blue-900/30 border border-purple-500/30 rounded-xl">
-              <Server className="w-10 h-10 text-purple-400 mx-auto mb-3" />
-              <p className="text-lg font-bold text-white mb-2">Full-Stack Development</p>
-              <p className="text-sm text-gray-400">Frontend, Backend, APIs</p>
-            </div>
-            <div className="p-6 bg-gradient-to-br from-blue-900/30 to-cyan-900/30 border border-blue-500/30 rounded-xl">
-              <BarChart3 className="w-10 h-10 text-blue-400 mx-auto mb-3" />
-              <p className="text-lg font-bold text-white mb-2">Data Analysis</p>
-              <p className="text-sm text-gray-400">Python, SQL, Spreadsheets</p>
-            </div>
-            <div className="p-6 bg-gradient-to-br from-cyan-900/30 to-purple-900/30 border border-cyan-500/30 rounded-xl sm:col-span-2 lg:col-span-1">
-              <Package className="w-10 h-10 text-cyan-400 mx-auto mb-3" />
-              <p className="text-lg font-bold text-white mb-2">DevOps</p>
-              <p className="text-sm text-gray-400">Docker, Git, Arch Linux</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Section */}
-      <section id="contact" className="relative z-10 py-20 md:py-32 px-4 sm:px-6 bg-gradient-to-t from-purple-950/20 to-black">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 md:mb-8 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
-            Let's Work Together
-          </h2>
-
-          <p className="text-lg md:text-xl text-gray-400 mb-8 md:mb-12 max-w-2xl mx-auto px-4">
-            Available for freelance projects, contract work, and full-time opportunities. 
-            Let's talk about what you need built.
+          <p className="text-base sm:text-lg md:text-xl text-neutral-600 dark:text-neutral-300 leading-relaxed mb-8">
+            I engineer full-stack web applications, backend services, and AI messaging systems. From conversational commerce to fast database architecture and payment integrations, I build reliable software that delivers real results.
           </p>
 
-          <div className="flex justify-center gap-6 sm:gap-8 md:gap-12 mb-12 md:mb-16 flex-wrap px-4">
+          {/* Quick CTA */}
+          <div className="flex flex-wrap items-center gap-3">
             <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://www.linkedin.com/in/gog-thegenius"
-              className="group flex flex-col items-center gap-3 hover:scale-110 transition-transform"
+              href="#projects"
+              className="px-5 py-2.5 bg-neutral-950 hover:bg-neutral-800 dark:bg-neutral-100 dark:hover:bg-white text-white dark:text-neutral-950 font-semibold text-sm rounded-lg transition-colors inline-flex items-center gap-1.5"
             >
-              <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-blue-700 to-blue-900 rounded-full flex items-center justify-center group-hover:shadow-2xl group-hover:shadow-blue-500/50 transition-all duration-300">
-                <svg className="w-8 h-8 md:w-10 md:h-10" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                </svg>
-              </div>
-              <span className="text-xs sm:text-sm text-gray-400 group-hover:text-blue-400">LinkedIn</span>
+              View Work
+              <ArrowUpRight className="w-4 h-4" />
             </a>
-
             <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://t.me/thegenius_001"
-              className="group flex flex-col items-center gap-3 hover:scale-110 transition-transform"
+              href="#ecosystem"
+              className="px-5 py-2.5 border border-neutral-300 dark:border-neutral-800 hover:border-neutral-400 dark:hover:border-neutral-700 bg-white dark:bg-neutral-900 text-neutral-800 dark:text-neutral-300 font-medium text-sm rounded-lg transition-colors"
             >
-              <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-blue-600 to-cyan-600 rounded-full flex items-center justify-center group-hover:shadow-2xl group-hover:shadow-blue-500/50 transition-all duration-300">
-                <Send className="w-8 h-8 md:w-10 md:h-10" />
-              </div>
-              <span className="text-xs sm:text-sm text-gray-400 group-hover:text-blue-400">Telegram</span>
+              The Ecosystem
             </a>
-
             <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://github.com/GOG-777"
-              className="group flex flex-col items-center gap-3 hover:scale-110 transition-transform"
+              href="#contact"
+              className="px-5 py-2.5 text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-200 text-sm font-medium transition-colors"
             >
-              <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-gray-700 to-gray-900 rounded-full flex items-center justify-center group-hover:shadow-2xl group-hover:shadow-gray-500/50 transition-all duration-300">
-                <svg className="w-8 h-8 md:w-10 md:h-10" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-                </svg>
-              </div>
-              <span className="text-xs sm:text-sm text-gray-400 group-hover:text-gray-300">Github</span>
-            </a>
-
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://x.com/thegenius_xyz"
-              className="group flex flex-col items-center gap-3 hover:scale-110 transition-transform"
-            >
-              <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-purple-600 to-blue-600 rounded-full flex items-center justify-center group-hover:shadow-2xl group-hover:shadow-purple-500/50 transition-all duration-300">
-                <svg className="w-8 h-8 md:w-10 md:h-10" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                </svg>
-              </div>
-              <span className="text-xs sm:text-sm text-gray-400 group-hover:text-purple-400">X (Twitter)</span>
-            </a>
-
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://instagram.com/thegenius_001"
-              className="group flex flex-col items-center gap-3 hover:scale-110 transition-transform"
-            >
-              <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-pink-600 to-purple-600 rounded-full flex items-center justify-center group-hover:shadow-2xl group-hover:shadow-pink-500/50 transition-all duration-300">
-                <svg className="w-8 h-8 md:w-10 md:h-10" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
-                </svg>
-              </div>
-              <span className="text-xs sm:text-sm text-gray-400 group-hover:text-pink-400">Instagram</span>
+              Get in touch →
             </a>
           </div>
+        </div>
+      </section>
 
-          <div className="border-t border-gray-800 pt-8 md:pt-12 px-4">
-            <p className="text-gray-500 text-base md:text-lg mb-3 flex items-center justify-center gap-2 flex-wrap">
-              <span>GOG</span>
-              <GalaxyIcon className="w-5 h-5 md:w-6 md:h-6" />
-              <span>• Thegenius</span>
+      {/* ─── Projects & Systems ─── */}
+      <MyProjects />
+
+      {/* ─── thgenius.xyz Ecosystem ─── */}
+      <section id="ecosystem" className="py-20 px-4 sm:px-6 max-w-6xl mx-auto border-t border-neutral-200 dark:border-neutral-800/60">
+        <div className="mb-12">
+          <div className="text-xs font-mono uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-2">
+            The Network
+          </div>
+          <h2 className="text-3xl md:text-4xl font-extrabold text-neutral-950 dark:text-neutral-100 tracking-tight">
+            thgenius.xyz Ecosystem
+          </h2>
+          <p className="text-neutral-600 dark:text-neutral-400 text-sm md:text-base mt-2 max-w-2xl">
+            Independent services, developer tools, technical articles, and experimental projects under the thgenius umbrella.
+          </p>
+        </div>
+
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {/* Item 1 */}
+          <SpotlightCard>
+            <div>
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-xs font-mono uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
+                  Primary Node
+                </span>
+                <Globe className="w-4 h-4 text-neutral-400 dark:text-neutral-500" />
+              </div>
+              <h3 className="text-lg font-bold text-neutral-900 dark:text-neutral-100 mb-2">thgenius.xyz</h3>
+              <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+                The central portfolio and engineering hub showcasing production systems and active projects. Currently live at portfolio.thgenius.xyz.
+              </p>
+            </div>
+            <div className="text-xs font-mono text-neutral-400 dark:text-neutral-500 pt-3 border-t border-neutral-100 dark:border-neutral-800/60">
+              Live Hub
+            </div>
+          </SpotlightCard>
+
+          {/* Item 2 */}
+          <SpotlightCard>
+            <div>
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-xs font-mono uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
+                  Live Platform
+                </span>
+                <a 
+                  href="https://eerina.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white"
+                >
+                  <ArrowUpRight className="w-4 h-4" />
+                </a>
+              </div>
+              <h3 className="text-lg font-bold text-neutral-900 dark:text-neutral-100 mb-2">eerina.com</h3>
+              <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+                Conversational AI business platform that handles sales inquiries and orders automatically over WhatsApp and the web.
+              </p>
+            </div>
+            <div className="text-xs font-mono text-neutral-400 dark:text-neutral-500 pt-3 border-t border-neutral-100 dark:border-neutral-800/60">
+              Live Production
+            </div>
+          </SpotlightCard>
+
+          {/* Item 3 */}
+          <SpotlightCard>
+            <div>
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-xs font-mono uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
+                  Planned
+                </span>
+                <BookOpen className="w-4 h-4 text-neutral-400 dark:text-neutral-500" />
+              </div>
+              <h3 className="text-lg font-bold text-neutral-900 dark:text-neutral-100 mb-2">learn.thgenius.xyz</h3>
+              <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+                Planned knowledge base for technical write-ups, backend architecture breakdowns, developer guides, and cryptocurrency research.
+              </p>
+            </div>
+            <div className="text-xs font-mono text-neutral-400 dark:text-neutral-500 pt-3 border-t border-neutral-100 dark:border-neutral-800/60">
+              Future Knowledge Base
+            </div>
+          </SpotlightCard>
+
+          {/* Item 4 */}
+          <SpotlightCard>
+            <div>
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-xs font-mono uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
+                  Roadmap
+                </span>
+                <Boxes className="w-4 h-4 text-neutral-400 dark:text-neutral-500" />
+              </div>
+              <h3 className="text-lg font-bold text-neutral-900 dark:text-neutral-100 mb-2">Developer Tools & Crypto Labs</h3>
+              <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+                Experimental blockchain utilities, smart contract experiments, and standalone developer tools.
+              </p>
+            </div>
+            <div className="text-xs font-mono text-neutral-400 dark:text-neutral-500 pt-3 border-t border-neutral-100 dark:border-neutral-800/60">
+              Upcoming Subdomains
+            </div>
+          </SpotlightCard>
+        </div>
+      </section>
+
+      {/* ─── Engineering Capabilities ─── */}
+      <section id="capabilities" className="py-20 px-4 sm:px-6 max-w-6xl mx-auto border-t border-neutral-200 dark:border-neutral-800/60">
+        <div className="mb-12">
+          <div className="text-xs font-mono uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-2">
+            Technical Stack
+          </div>
+          <h2 className="text-3xl md:text-4xl font-extrabold text-neutral-950 dark:text-neutral-100 tracking-tight">
+            How I Build
+          </h2>
+          <p className="text-neutral-600 dark:text-neutral-400 text-sm md:text-base mt-2 max-w-2xl">
+            A clear summary of the technologies, tools, and practices I use across projects.
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="p-6 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/30">
+            <div className="flex items-center gap-2 mb-4 text-neutral-900 dark:text-neutral-200 font-bold">
+              <Terminal className="w-4 h-4 text-neutral-500 dark:text-neutral-400" />
+              <h3>System Architecture</h3>
+            </div>
+            <ul className="space-y-2 text-xs sm:text-sm text-neutral-600 dark:text-neutral-400">
+              <li>• Multi-provider AI failovers</li>
+              <li>• Context-based user routing</li>
+              <li>• Containerized Docker services</li>
+              <li>• WhatsApp message gateways</li>
+              <li>• Background task workers</li>
+            </ul>
+          </div>
+
+          <div className="p-6 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/30">
+            <div className="flex items-center gap-2 mb-4 text-neutral-900 dark:text-neutral-200 font-bold">
+              <Database className="w-4 h-4 text-neutral-500 dark:text-neutral-400" />
+              <h3>Backend & Data</h3>
+            </div>
+            <ul className="space-y-2 text-xs sm:text-sm text-neutral-600 dark:text-neutral-400">
+              <li>• PostgreSQL and Supabase</li>
+              <li>• Row Level Security (RLS) policies</li>
+              <li>• Node.js and Express APIs</li>
+              <li>• Paystack payment webhooks</li>
+              <li>• Redis data caching</li>
+            </ul>
+          </div>
+
+          <div className="p-6 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/30">
+            <div className="flex items-center gap-2 mb-4 text-neutral-900 dark:text-neutral-200 font-bold">
+              <Cpu className="w-4 h-4 text-neutral-500 dark:text-neutral-400" />
+              <h3>AI & Automation</h3>
+            </div>
+            <ul className="space-y-2 text-xs sm:text-sm text-neutral-600 dark:text-neutral-400">
+              <li>• Groq and DeepSeek orchestration</li>
+              <li>• Custom tool and function calling</li>
+              <li>• Real-time stock overrides</li>
+              <li>• Dynamic catalog prompt injections</li>
+              <li>• Structured JSON data extraction</li>
+            </ul>
+          </div>
+
+          <div className="p-6 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/30">
+            <div className="flex items-center gap-2 mb-4 text-neutral-900 dark:text-neutral-200 font-bold">
+              <Layers className="w-4 h-4 text-neutral-500 dark:text-neutral-400" />
+              <h3>Frontend & Mobile</h3>
+            </div>
+            <ul className="space-y-2 text-xs sm:text-sm text-neutral-600 dark:text-neutral-400">
+              <li>• Next.js and App Router</li>
+              <li>• React 19 and TypeScript</li>
+              <li>• Tailwind CSS responsive design</li>
+              <li>• Capacitor for Android apps</li>
+              <li>• Web Push notification standards</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── About Section ─── */}
+      <section id="about" className="py-20 px-4 sm:px-6 max-w-6xl mx-auto border-t border-neutral-200 dark:border-neutral-800/60">
+        <div className="grid md:grid-cols-3 gap-10 items-start">
+          <div>
+            <div className="text-xs font-mono uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-2">
+              Background
+            </div>
+            <h2 className="text-3xl font-extrabold text-neutral-950 dark:text-neutral-100 tracking-tight">
+              About GOG 🌌
+            </h2>
+            <p className="text-xs font-mono text-neutral-500 mt-1">known as Genius / thegenius · Neverland</p>
+          </div>
+
+          <div className="md:col-span-2 space-y-4 text-sm sm:text-base text-neutral-700 dark:text-neutral-300 leading-relaxed">
+            <p>
+              I am a software engineer focused on building practical, high-performance web applications and backend systems.
             </p>
-            <p className="text-gray-500 text-sm mb-2">
-              Copyright &copy; {currentYear}
+            <p>
+              I like understanding how software works from the database layer all the way up to user interfaces. Rather than chasing flashy visuals or gimmicks, I care about writing straightforward code, securing user data, and making sure production services remain up and responsive.
             </p>
-            <p className="text-gray-500 text-sm mb-2">
-              Full-Stack Developer • Systems Architect • Vibe Coder
-            </p>
-            <p className="text-gray-400 text-xs mt-4">
-              Built with TypeScript, React, Tailwind CSS, Docker, Arch Linux
+            <p>
+              Under the <span className="text-neutral-950 dark:text-neutral-100 font-medium">thgenius.xyz</span> domain, I am building out independent web services, developer tools, and technical documentation.
             </p>
           </div>
         </div>
       </section>
+
+      {/* ─── Contact & Socials ─── */}
+      <section id="contact" className="py-20 px-4 sm:px-6 max-w-6xl mx-auto border-t border-neutral-200 dark:border-neutral-800/60">
+        <div className="max-w-3xl">
+          <div className="text-xs font-mono uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-2">
+            Get In Touch
+          </div>
+          <h2 className="text-3xl md:text-4xl font-extrabold text-neutral-950 dark:text-neutral-100 tracking-tight mb-4">
+            Connect & Collaborate
+          </h2>
+          <p className="text-neutral-600 dark:text-neutral-400 text-sm sm:text-base leading-relaxed mb-8">
+            Reach out directly across any of the channels below if you want to discuss software engineering, technical projects, or potential work.
+          </p>
+
+          <div className="grid sm:grid-cols-2 gap-4 mb-10">
+            <a
+              href="https://github.com/GOG-777"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-4 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/30 hover:border-neutral-400 dark:hover:border-neutral-700 flex items-center justify-between text-neutral-800 dark:text-neutral-200 transition-colors"
+            >
+              <div className="flex items-center gap-3">
+                <Github className="w-5 h-5 text-neutral-500 dark:text-neutral-400" />
+                <div>
+                  <div className="text-sm font-semibold">GitHub</div>
+                  <div className="text-xs font-mono text-neutral-500">github.com/GOG-777</div>
+                </div>
+              </div>
+              <ArrowUpRight className="w-4 h-4 text-neutral-400 dark:text-neutral-500" />
+            </a>
+
+            <a
+              href="https://x.com/thegenius_xyz"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-4 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/30 hover:border-neutral-400 dark:hover:border-neutral-700 flex items-center justify-between text-neutral-800 dark:text-neutral-200 transition-colors"
+            >
+              <div className="flex items-center gap-3">
+                <Twitter className="w-5 h-5 text-neutral-500 dark:text-neutral-400" />
+                <div>
+                  <div className="text-sm font-semibold">X (Twitter)</div>
+                  <div className="text-xs font-mono text-neutral-500">@thegenius_xyz</div>
+                </div>
+              </div>
+              <ArrowUpRight className="w-4 h-4 text-neutral-400 dark:text-neutral-500" />
+            </a>
+
+            <a
+              href="https://t.me/thegenius_001"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-4 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/30 hover:border-neutral-400 dark:hover:border-neutral-700 flex items-center justify-between text-neutral-800 dark:text-neutral-200 transition-colors"
+            >
+              <div className="flex items-center gap-3">
+                <Send className="w-5 h-5 text-neutral-500 dark:text-neutral-400" />
+                <div>
+                  <div className="text-sm font-semibold">Telegram</div>
+                  <div className="text-xs font-mono text-neutral-500">@thegenius_001</div>
+                </div>
+              </div>
+              <ArrowUpRight className="w-4 h-4 text-neutral-400 dark:text-neutral-500" />
+            </a>
+
+            <a
+              href="https://www.linkedin.com/in/gog-thegenius"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-4 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/30 hover:border-neutral-400 dark:hover:border-neutral-700 flex items-center justify-between text-neutral-800 dark:text-neutral-200 transition-colors"
+            >
+              <div className="flex items-center gap-3">
+                <Linkedin className="w-5 h-5 text-neutral-500 dark:text-neutral-400" />
+                <div>
+                  <div className="text-sm font-semibold">LinkedIn</div>
+                  <div className="text-xs font-mono text-neutral-500">in/gog-thegenius</div>
+                </div>
+              </div>
+              <ArrowUpRight className="w-4 h-4 text-neutral-400 dark:text-neutral-500" />
+            </a>
+
+            <a
+              href="https://instagram.com/thegenius_001"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-4 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/30 hover:border-neutral-400 dark:hover:border-neutral-700 flex items-center justify-between text-neutral-800 dark:text-neutral-200 transition-colors"
+            >
+              <div className="flex items-center gap-3">
+                <Instagram className="w-5 h-5 text-neutral-500 dark:text-neutral-400" />
+                <div>
+                  <div className="text-sm font-semibold">Instagram</div>
+                  <div className="text-xs font-mono text-neutral-500">@thegenius_001</div>
+                </div>
+              </div>
+              <ArrowUpRight className="w-4 h-4 text-neutral-400 dark:text-neutral-500" />
+            </a>
+
+            <CopyEmailCard />
+          </div>
+        </div>
+      </section>
+
+      {/* ─── Footer ─── */}
+      <footer className="border-t border-neutral-200 dark:border-neutral-800/80 py-8 px-4 sm:px-6 max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-neutral-500">
+        <div className="flex items-center gap-2">
+          <span className="text-neutral-800 dark:text-neutral-300 font-semibold">GOG 🌌</span>
+          <span>•</span>
+          <span>Neverland</span>
+          <span>•</span>
+          <span>thgenius.xyz</span>
+          <span>•</span>
+          <span>© {currentYear}</span>
+        </div>
+        <div className="text-neutral-500">
+          Built with React 19, TypeScript & Tailwind CSS
+        </div>
+      </footer>
     </div>
   );
 };

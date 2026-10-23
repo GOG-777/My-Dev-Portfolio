@@ -2,27 +2,86 @@
 @tailwind components;
 @tailwind utilities;
 
-.emoji {
-  font-family: 'Noto Color Emoji', sans-serif;
+@layer base {
+  :root {
+    color-scheme: light dark;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-neutral-950 text-neutral-100 selection:bg-purple-500/30 selection:text-purple-200 min-h-screen transition-colors duration-200;
+  }
+
+  html:not(.dark) body {
+    @apply bg-neutral-50 text-neutral-900 selection:bg-purple-600/20 selection:text-purple-900;
+  }
+
+  /* Accessible focus rings */
+  :focus-visible {
+    @apply outline-none ring-2 ring-purple-500 ring-offset-2 ring-offset-neutral-950;
+  }
+
+  html:not(.dark) :focus-visible {
+    @apply ring-offset-white;
+  }
 }
 
-.modal-enter {
-  opacity: 0;
-  transform: scale(0.9);
+/* ─── Cinematic Thunder Strike Keyframes ─── */
+@keyframes thunderFlash {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.85;
+  }
+  20% {
+    opacity: 0.15;
+  }
+  35% {
+    opacity: 0.95;
+  }
+  50% {
+    opacity: 0.45;
+  }
+  70% {
+    opacity: 0.15;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 
-.modal-enter-active {
-  opacity: 1;
-  transform: scale(1);
-  transition: opacity 300ms, transform 300ms;
-}
-
-.modal-exit {
-  opacity: 1;
-}
-
-.modal-exit-active {
-  opacity: 0;
-  transform: scale(0.9);
-  transition: opacity 300ms, transform 300ms;
+@keyframes lightningBolt {
+  0% {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  8% {
+    opacity: 0.9;
+    transform: scale(1.01);
+  }
+  18% {
+    opacity: 0.2;
+    transform: scale(1);
+  }
+  32% {
+    opacity: 1;
+    transform: scale(1.015);
+  }
+  48% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  75% {
+    opacity: 0.15;
+  }
+  100% {
+    opacity: 0;
+  }
 }

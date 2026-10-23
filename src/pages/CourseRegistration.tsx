@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Check, BookOpen, Calculator, Users, Lock, BarChart3, Calendar, Award, Server, ImageIcon, X, ChevronLeft, ChevronRight, Github, ExternalLink } from 'lucide-react';
+import { ArrowLeft, BookOpen, Calculator, Users, Lock, BarChart3, Calendar, Award, Server, X, ChevronLeft, ChevronRight, Github, ArrowUpRight } from 'lucide-react';
 import GalaxyIcon from '../components/GalaxyIcon';
-
-// Fix for Lucide icons - they're React components with SVG props
-type IconComponent = React.ComponentType<React.SVGProps<SVGSVGElement>>;
+import ThemeToggle from '../components/ThemeToggle';
+import SfxToggle from '../components/SfxToggle';
 
 interface Feature {
-  icon: IconComponent; 
+  icon: typeof BookOpen;
   title: string;
   description: string;
 }
@@ -22,161 +21,136 @@ interface Architecture {
   items: string[];
 }
 
-interface Level {
-  level: string;
-  courses: number;
-  credits: number;
-  desc: string;
-}
-
 interface Screenshot {
   title: string;
   desc: string;
   image: string;
-  path: string;
 }
 
-const CourseRegistration: React.FC = () => {
+export const CourseRegistration = () => {
   const [selectedImage, setSelectedImage] = useState<Screenshot | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
 
   const features: Feature[] = [
     {
-      icon: BookOpen as IconComponent,
-      title: "Level-Based Registration",
-      description: "Intelligent course filtering system showing only eligible courses based on student level (100L-400L) with automatic validation"
+      icon: BookOpen,
+      title: "Level-Based Filtering",
+      description: "Intelligent course filtering showing only eligible courses based on student level (100L to 400L) with automatic prerequisite validation."
     },
     {
-      icon: Calculator as IconComponent,
-      title: "CGPA Calculator",
-      description: "Built-in CGPA calculator with semester-by-semester tracking, grade point computation, and academic performance analytics"
+      icon: Calculator,
+      title: "CGPA Computation Engine",
+      description: "Integrated calculator with semester-by-semester tracking, grade point computation, and academic standing analytics."
     },
     {
-      icon: Users as IconComponent,
+      icon: Users,
       title: "Student Dashboard",
-      description: "Personalized dashboard displaying registered courses, academic progress, semester overview, and course enrollment status"
+      description: "Personalized portal displaying registered courses, semester units, academic progress, and enrollment status."
     },
     {
-      icon: Lock as IconComponent,
+      icon: Lock,
       title: "JWT Authentication",
-      description: "Secure authentication system with JWT tokens, password hashing with bcrypt, and role-based access control"
+      description: "Session management using JSON Web Tokens, password hashing with bcrypt, and role-based access control."
     },
     {
-      icon: Calendar as IconComponent,
-      title: "Semester Management",
-      description: "Academic calendar integration with registration periods, semester tracking, and deadline management"
+      icon: Calendar,
+      title: "Semester Deadlines",
+      description: "Academic calendar integration enforcing registration windows, course add/drop deadlines, and semester tracking."
     },
     {
-      icon: BarChart3 as IconComponent,
-      title: "Analytics Dashboard",
-      description: "Real-time statistics on course enrollment, student distribution across levels, and registration trends"
+      icon: BarChart3,
+      title: "Department Analytics",
+      description: "Real-time statistics on course enrollment capacity, student distribution across academic levels, and registration patterns."
     },
     {
-      icon: Award as IconComponent,
-      title: "Course Management",
-      description: "Complete CRUD operations for courses with prerequisites validation, credit unit tracking, and course code management"
+      icon: Award,
+      title: "Curriculum Management",
+      description: "Full administrative controls for courses, credit unit weighting, elective definitions, and prerequisite requirements."
     },
     {
-      icon: Server as IconComponent,
+      icon: Server,
       title: "Nginx Reverse Proxy",
-      description: "Production-ready deployment with Nginx handling static files, load balancing, and SSL termination"
+      description: "Production-ready reverse proxy handling static asset caching, upstream load distribution, and security headers."
     }
   ];
 
   const techStack: TechItem[] = [
-    { name: "HTML/CSS/JavaScript", role: "Frontend (Vanilla JS)" },
-    { name: "Tailwind CSS", role: "UI Styling" },
-    { name: "Node.js", role: "Backend Runtime" },
-    { name: "Express.js", role: "RESTful API" },
+    { name: "JavaScript & HTML5", role: "Frontend UI Logic" },
+    { name: "Tailwind CSS", role: "Responsive Layouts" },
+    { name: "Node.js & Express", role: "RESTful API Engine" },
     { name: "PostgreSQL", role: "Relational Database" },
-    { name: "JWT", role: "Authentication Tokens" },
-    { name: "Bcrypt", role: "Password Hashing" },
-    { name: "Nginx", role: "Reverse Proxy" },
-    { name: "Docker", role: "Containerization" }
+    { name: "JWT & Bcrypt", role: "Authentication & Security" },
+    { name: "Docker Compose", role: "Container Orchestration" },
+    { name: "Nginx", role: "Reverse Proxy & Static Files" }
   ];
 
   const architecture: Architecture[] = [
     {
-      section: "Frontend Structure",
+      section: "Frontend Architecture",
       items: [
-        "6 HTML pages: index, login, register, dashboard, courses, and CGPA calculator",
-        "Vanilla JavaScript modules for auth, course management, and CGPA calculations",
-        "Tailwind CSS for responsive, mobile-first design",
-        "courses-data.js containing complete CS department curriculum (100L-400L)"
+        "Static page templates covering authentication, dashboard, course registration, and CGPA calculator",
+        "Modular client scripts managing enrollment state and real-time GPA calculations",
+        "Curriculum dataset containing complete Computer Science department course mappings (100L to 400L)",
+        "Mobile-responsive table and card layouts built with Tailwind CSS"
       ]
     },
     {
       section: "Backend Architecture",
       items: [
-        "Express.js RESTful API with modular routing (auth, courses, enrollment)",
-        "JWT middleware for protected route authentication",
-        "PostgreSQL connection pooling with pg library",
-        "Separated controllers for business logic (auth, course, enrollment)"
+        "Modular Express.js API separating authentication, course management, and enrollment controllers",
+        "JWT middleware enforcing protected student and administrator access",
+        "Database connection pooling handling high concurrent registration loads",
+        "Input sanitization protecting against SQL injection and duplicate enrollments"
       ]
     },
     {
-      section: "Database Design",
+      section: "Database Schema",
       items: [
-        "Initialization SQL with users, courses, enrollments, and sessions tables",
-        "Foreign key relationships ensuring data integrity",
-        "Indexes on frequently queried columns for performance",
-        "Support for multi-semester tracking and historical data"
+        "PostgreSQL schema modeling students, academic sessions, courses, prerequisites, and enrollments",
+        "Foreign key constraints ensuring consistency across course registrations and grades",
+        "Indexes on matriculation numbers and course codes for sub-millisecond lookups"
       ]
     },
     {
-      section: "DevOps & Deployment",
+      section: "Containerization & Proxy",
       items: [
-        "Docker Compose orchestrating backend, frontend, database, and Nginx",
-        "Nginx configuration for reverse proxy and static file serving",
-        "Environment-based configuration for scalability",
-        "Health checks and container restart policies"
+        "Docker Compose setup linking backend, frontend, database, and Nginx containers",
+        "Nginx reverse proxy routing API requests and serving static assets efficiently",
+        "Container health checks and restart policies for operational resilience"
       ]
     }
   ];
 
-  const levels: Level[] = [
-    { level: "100 Level", courses: 12, credits: 48, desc: "Foundation courses" },
-    { level: "200 Level", courses: 14, credits: 52, desc: "Core CS concepts" },
-    { level: "300 Level", courses: 16, credits: 58, desc: "Advanced topics" },
-    { level: "400 Level", courses: 10, credits: 42, desc: "Specialization" }
-  ];
-
   const screenshots: Screenshot[] = [
     {
-      title: "Homepage",
-      desc: "Welcome page with academic branding and navigation",
-      image: "/images/projects/course-registration/homepage.png",
-      path: "frontend/pages/index.html"
+      title: "Portal Homepage",
+      desc: "Welcome landing page with academic portal navigation",
+      image: "/images/projects/course-registration/homepage.png"
     },
     {
-      title: "Login/Register",
-      desc: "Authentication interface with validation",
-      image: "/images/projects/course-registration/login.png",
-      path: "frontend/pages/login.html + register.html"
+      title: "Student Authentication",
+      desc: "Secure login and registration interface with client-side verification",
+      image: "/images/projects/course-registration/login.png"
     },
     {
-      title: "Student Dashboard",
-      desc: "Overview of enrolled courses and academic stats",
-      image: "/images/projects/course-registration/dashboard.png",
-      path: "frontend/pages/dashboard.html"
+      title: "Academic Dashboard",
+      desc: "Overview of registered courses, semester units, and academic stats",
+      image: "/images/projects/course-registration/dashboard.png"
     },
     {
-      title: "Course Registration",
-      desc: "Level-filtered course selection interface",
-      image: "/images/projects/course-registration/courses.png",
-      path: "frontend/pages/courses.html + js/courses.js"
+      title: "Course Registration View",
+      desc: "Level-filtered course catalog with dynamic unit calculation",
+      image: "/images/projects/course-registration/courses.png"
     },
     {
       title: "CGPA Calculator",
-      desc: "Semester-wise GPA computation tool",
-      image: "/images/projects/course-registration/cgpa-calculator.png",
-      path: "frontend/pages/cgpa-calculator.html + js/cgpa-calculator.js"
+      desc: "Interactive grade point average calculator across all academic levels",
+      image: "/images/projects/course-registration/cgpa-calculator.png"
     },
     {
-      title: "API Documentation",
-      desc: "RESTful endpoints documentation and testing",
-      image: "/images/projects/course-registration/api-docs.png",
-      path: "backend/routes/ + Postman collection"
+      title: "API Endpoints & Documentation",
+      desc: "Backend route documentation and API testing collection",
+      image: "/images/projects/course-registration/api-docs.png"
     }
   ];
 
@@ -185,419 +159,285 @@ const CourseRegistration: React.FC = () => {
     setCurrentImageIndex(index);
   };
 
-  const closeModal = () => {
-    setSelectedImage(null);
-  };
+  const closeModal = () => setSelectedImage(null);
 
   const goToNext = () => {
-    setCurrentImageIndex((prevIndex) =>
-      prevIndex === screenshots.length - 1 ? 0 : prevIndex + 1
-    );
+    setCurrentImageIndex((prev) => (prev === screenshots.length - 1 ? 0 : prev + 1));
   };
 
   const goToPrevious = () => {
-    setCurrentImageIndex((prevIndex) =>
-      prevIndex === 0 ? screenshots.length - 1 : prevIndex - 1
-    );
+    setCurrentImageIndex((prev) => (prev === 0 ? screenshots.length - 1 : prev - 1));
   };
 
-  // Handle keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (!selectedImage) return;
-
       if (e.key === 'Escape') closeModal();
       if (e.key === 'ArrowRight') goToNext();
       if (e.key === 'ArrowLeft') goToPrevious();
     };
-
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [selectedImage]);
 
-  // Handle image error with proper TypeScript typing
-  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-    const target = e.target as HTMLImageElement;
-    target.style.display = 'none';
-    
-    const nextSibling = target.nextSibling as HTMLElement;
-    if (nextSibling) {
-      nextSibling.style.display = 'flex';
-    }
-  };
-
   return (
-    <div className="bg-black text-white min-h-screen">
-      <div className="fixed inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-900/30 via-black to-blue-900/30"></div>
-      </div>
-
-      <nav className="fixed top-0 w-full z-50 bg-black/50 backdrop-blur-lg border-b border-purple-500/20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
-          <Link to="/" className="text-xl md:text-2xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent flex items-center gap-2">
-            <span>GOG</span>
-            <GalaxyIcon className="w-6 h-6 md:w-7 md:h-7" />
+    <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100 transition-colors duration-200">
+      {/* ─── Navigation ─── */}
+      <header className="sticky top-0 z-40 w-full border-b border-neutral-200 dark:border-neutral-800 bg-white/80 dark:bg-neutral-950/80 backdrop-blur-md">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+          <Link to="/" className="flex items-center gap-2.5 font-bold text-lg tracking-tight group">
+            <span className="text-neutral-950 dark:text-white group-hover:text-neutral-600 dark:group-hover:text-neutral-300 transition-colors">GOG</span>
+            <GalaxyIcon className="w-5 h-5" />
+            <span className="text-xs font-mono text-neutral-500 font-normal">thgenius.xyz</span>
           </Link>
-          <Link to="/" className="flex items-center gap-2 text-gray-400 hover:text-purple-400 transition-colors text-sm md:text-base">
-            <ArrowLeft className="w-4 h-4 md:w-5 md:h-5" />
-            <span>Back to Portfolio</span>
-          </Link>
-        </div>
-      </nav>
 
-      <section className="relative z-10 pt-24 md:pt-32 pb-16 md:pb-20 px-4 sm:px-6">
-        <div className="max-w-6xl mx-auto">
-          <div className="mb-6 md:mb-8">
-            <span className="px-4 py-2 bg-green-500/20 border border-green-500/50 rounded-full text-sm text-green-300">
-              Academic Project
-            </span>
+          <div className="flex items-center gap-2 sm:gap-3">
+            <SfxToggle />
+            <ThemeToggle />
+            <Link 
+              to="/#projects" 
+              className="inline-flex items-center gap-1.5 text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-950 dark:hover:text-white transition-colors"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              <span>Back to Systems</span>
+            </Link>
           </div>
+        </div>
+      </header>
 
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black mb-4 md:mb-6 bg-gradient-to-r from-purple-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
+      {/* ─── Header & Overview ─── */}
+      <section className="pt-16 pb-12 px-4 sm:px-6 max-w-6xl mx-auto">
+        <div className="max-w-3xl">
+          <div className="text-xs font-mono uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-3">
+            Case Study · Departmental Platform
+          </div>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-neutral-950 dark:text-white mb-4">
             Course Registration System
           </h1>
-
-          <p className="text-xl md:text-2xl lg:text-3xl text-gray-300 mb-6 md:mb-8">
-            UNIPORT Computer Science Department Platform
-          </p>
-
-          <p className="text-base md:text-lg lg:text-xl text-gray-400 max-w-4xl leading-relaxed mb-10 md:mb-12">
-            A comprehensive course registration platform built specifically for the Computer Science department at the University of Port Harcourt.
-            Features intelligent level-based course filtering, integrated CGPA calculator with semester tracking, JWT authentication, and complete
-            academic management for students from 100 to 400 level. Deployed with Docker and Nginx for production-ready scalability.
+          <p className="text-base sm:text-lg text-neutral-600 dark:text-neutral-300 leading-relaxed mb-6">
+            A specialized academic registration and student records portal built for the University of Port Harcourt Computer Science department. Features automatic level-based prerequisite checks, an automated CGPA calculator, and containerized deployment with Docker and Nginx.
           </p>
 
           {/* GitHub Links */}
-          <div className="flex flex-col sm:flex-row gap-4 mb-10 md:mb-12">
-            
+          <div className="flex flex-wrap gap-3 mb-8">
             <a
               href="https://github.com/GOG-777/IT-Defense-Project"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 px-6 py-3 bg-gray-800/50 border border-gray-700 hover:border-purple-500 rounded-lg transition-all duration-300 hover:scale-105 group"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-neutral-300 dark:border-neutral-800 bg-white dark:bg-neutral-900 text-neutral-800 dark:text-neutral-200 hover:border-neutral-500 text-sm font-medium transition-colors"
             >
-              <Github className="w-5 h-5 text-gray-400 group-hover:text-purple-400 transition-colors" />
-              <span className="text-gray-300 group-hover:text-white transition-colors">Original (Vanilla JS)</span>
-              <ExternalLink className="w-4 h-4 text-gray-500 group-hover:text-purple-400 transition-colors" />
+              <Github className="w-4 h-4 text-neutral-500" />
+              <span>Core Source (Vanilla JS)</span>
+              <ArrowUpRight className="w-3.5 h-3.5 text-neutral-400" />
             </a>
-            
+
             <a
               href="https://github.com/GOG-777/course-registration-system-react-version"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 px-6 py-3 bg-blue-900/20 border border-blue-700 hover:border-blue-500 rounded-lg transition-all duration-300 hover:scale-105 group"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-neutral-300 dark:border-neutral-800 bg-white dark:bg-neutral-900 text-neutral-800 dark:text-neutral-200 hover:border-neutral-500 text-sm font-medium transition-colors"
             >
-              <Github className="w-5 h-5 text-blue-400 group-hover:text-blue-300 transition-colors" />
-              <span className="text-gray-300 group-hover:text-white transition-colors">Re-implemented in React</span>
-              <ExternalLink className="w-4 h-4 text-blue-500 group-hover:text-blue-400 transition-colors" />
+              <Github className="w-4 h-4 text-neutral-500" />
+              <span>React Re-Implementation</span>
+              <ArrowUpRight className="w-3.5 h-3.5 text-neutral-400" />
             </a>
           </div>
+        </div>
 
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 mb-12">
-            <div className="bg-gradient-to-br from-purple-900/30 to-blue-900/30 border border-purple-500/30 rounded-xl p-5 md:p-6">
-              <p className="text-sm text-gray-400 mb-2">Development Period</p>
-              <p className="text-xl md:text-2xl font-bold text-white">1 Week +</p>
-            </div>
-            <div className="bg-gradient-to-br from-blue-900/30 to-cyan-900/30 border border-blue-500/30 rounded-xl p-5 md:p-6">
-              <p className="text-sm text-gray-400 mb-2">Architecture</p>
-              <p className="text-xl md:text-2xl font-bold text-white">Vanilla JS + Express</p>
-            </div>
-            <div className="bg-gradient-to-br from-cyan-900/30 to-purple-900/30 border border-cyan-500/30 rounded-xl p-5 md:p-6 sm:col-span-2 md:col-span-1">
-              <p className="text-sm text-gray-400 mb-2">Deployment</p>
-              <p className="text-xl md:text-2xl font-bold text-white">Docker + Nginx</p>
-            </div>
+        {/* System Specs Grid */}
+        <div className="grid sm:grid-cols-3 gap-4 pt-4 border-t border-neutral-200 dark:border-neutral-800">
+          <div className="p-4 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/30">
+            <div className="text-xs font-mono text-neutral-400 mb-1">Architecture</div>
+            <div className="text-sm font-bold text-neutral-900 dark:text-neutral-100">Node.js + Express + Nginx</div>
+          </div>
+          <div className="p-4 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/30">
+            <div className="text-xs font-mono text-neutral-400 mb-1">Database</div>
+            <div className="text-sm font-bold text-neutral-900 dark:text-neutral-100">PostgreSQL (Relational)</div>
+          </div>
+          <div className="p-4 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/30">
+            <div className="text-xs font-mono text-neutral-400 mb-1">Deployment</div>
+            <div className="text-sm font-bold text-neutral-900 dark:text-neutral-100">Docker Compose & Nginx Proxy</div>
           </div>
         </div>
       </section>
 
-      <section className="relative z-10 py-16 md:py-20 px-4 sm:px-6">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-12 md:mb-16 text-center bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
-            UNIPORT CS Course Structure
+      {/* ─── Core Features ─── */}
+      <section className="py-12 px-4 sm:px-6 max-w-6xl mx-auto border-t border-neutral-200 dark:border-neutral-800">
+        <div className="mb-8">
+          <div className="text-xs font-mono uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-1">
+            Functionality
+          </div>
+          <h2 className="text-2xl font-bold text-neutral-950 dark:text-neutral-100">
+            System Features
           </h2>
+        </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-8 md:mb-12">
-            {levels.map((item, idx) => (
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {features.map((feature, idx) => {
+            const Icon = feature.icon;
+            return (
               <div
                 key={idx}
-                className="bg-gradient-to-br from-purple-900/20 to-blue-900/20 border border-purple-500/30 rounded-xl p-5 md:p-6 hover:border-purple-500 transition-all duration-300 hover:scale-105 text-center"
+                className="p-5 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/30"
               >
-                <p className="text-xl md:text-2xl font-bold text-purple-400 mb-3 md:mb-4">{item.level}</p>
-                <div className="space-y-2">
-                  <p className="text-2xl md:text-3xl font-black text-white">{item.courses}</p>
-                  <p className="text-xs md:text-sm text-gray-400">Courses</p>
-                  <div className="border-t border-gray-700 my-2 md:my-3"></div>
-                  <p className="text-xl md:text-2xl font-bold text-blue-400">{item.credits}</p>
-                  <p className="text-xs md:text-sm text-gray-400">Credit Units</p>
-                  <div className="border-t border-gray-700 my-2 md:my-3"></div>
-                  <p className="text-xs text-gray-500">{item.desc}</p>
-                </div>
+                <Icon className="w-5 h-5 text-neutral-700 dark:text-neutral-300 mb-3" />
+                <h3 className="text-base font-bold text-neutral-900 dark:text-neutral-100 mb-1.5">{feature.title}</h3>
+                <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">{feature.description}</p>
               </div>
-            ))}
-          </div>
-
-          <div className="bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-6 md:p-8">
-            <h3 className="text-xl md:text-2xl font-bold text-white mb-3 md:mb-4">Department Coverage</h3>
-            <p className="text-sm md:text-base text-gray-300 leading-relaxed mb-3 md:mb-4">
-              Complete course catalog for UNIPORT Computer Science department covering all four years of undergraduate study.
-              The system includes core courses (Programming, Data Structures, Algorithms, Databases), electives, general studies,
-              and department-specific requirements with proper prerequisite tracking and credit unit management.
-            </p>
-            <p className="text-gray-400 text-xs md:text-sm">
-              All course data stored in <code className="text-purple-300 bg-purple-900/30 px-2 py-1 rounded">frontend/js/courses-data.js</code>
-              {" "}for easy updates and maintenance.
-            </p>
-          </div>
+            );
+          })}
         </div>
       </section>
 
-      <section className="relative z-10 py-16 md:py-20 px-4 sm:px-6 bg-gradient-to-b from-black via-purple-950/10 to-black">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-12 md:mb-16 text-center bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
-            Key Features
-          </h2>
-
-          <div className="grid sm:grid-cols-2 gap-6 md:gap-8">
-            {features.map((feature, idx) => {
-              const Icon = feature.icon;
-              return (
-                <div
-                  key={idx}
-                  className="bg-gradient-to-br from-purple-900/20 to-blue-900/20 border border-purple-500/30 rounded-xl p-6 md:p-8 hover:border-purple-500 transition-all duration-300 hover:scale-105"
-                >
-                  <Icon className="w-10 h-10 md:w-12 md:h-12 text-purple-400 mb-3 md:mb-4" />
-                  <h3 className="text-xl md:text-2xl font-bold mb-2 md:mb-3 text-white">{feature.title}</h3>
-                  <p className="text-sm md:text-base text-gray-400 leading-relaxed">{feature.description}</p>
-                </div>
-              );
-            })}
+      {/* ─── Tech Stack ─── */}
+      <section className="py-12 px-4 sm:px-6 max-w-6xl mx-auto border-t border-neutral-200 dark:border-neutral-800">
+        <div className="mb-8">
+          <div className="text-xs font-mono uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-1">
+            Technology
           </div>
+          <h2 className="text-2xl font-bold text-neutral-950 dark:text-neutral-100">
+            Stack Breakdown
+          </h2>
         </div>
-      </section>
 
-      <section className="relative z-10 py-16 md:py-20 px-4 sm:px-6">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-12 md:mb-16 text-center bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
-            Technology Stack & Architecture
-          </h2>
-
-          <div className="grid sm:grid-cols-2 gap-4 md:gap-6 mb-8 md:mb-12">
-            {techStack.map((tech, idx) => (
-              <div
-                key={idx}
-                className="bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-5 md:p-6 hover:border-purple-500 transition-all duration-300 flex justify-between items-center"
-              >
-                <div>
-                  <h3 className="text-lg md:text-xl font-bold text-white mb-1">{tech.name}</h3>
-                  <p className="text-xs md:text-sm text-gray-400">{tech.role}</p>
-                </div>
-                <Check className="w-5 h-5 md:w-6 md:h-6 text-green-400 flex-shrink-0" />
-              </div>
-            ))}
-          </div>
-
-          <div className="space-y-6 md:space-y-8">
-            {architecture.map((arch, idx) => (
-              <div key={idx} className="bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-6 md:p-8">
-                <h3 className="text-xl md:text-2xl font-bold text-purple-400 mb-3 md:mb-4">{arch.section}</h3>
-                <ul className="space-y-3 text-gray-300">
-                  {arch.items.map((item, i) => (
-                    <li key={i} className="flex items-start gap-3">
-                      <Check className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
-                      <span className="text-sm md:text-base">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="relative z-10 py-16 md:py-20 px-4 sm:px-6 bg-gradient-to-b from-black via-purple-950/10 to-black">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-12 md:mb-16 text-center bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
-            Project Screenshots
-          </h2>
-
-          <div className="grid sm:grid-cols-2 gap-6 md:gap-8">
-            {screenshots.map((shot, idx) => (
-              <div
-                key={idx}
-                className="bg-gradient-to-br from-purple-900/20 to-blue-900/20 border border-purple-500/30 rounded-xl overflow-hidden hover:border-purple-500 transition-all duration-300 hover:scale-105 group cursor-pointer"
-                onClick={() => openModal(idx)}
-              >
-                <div className="aspect-video bg-gradient-to-br from-purple-500/20 to-blue-500/20 flex items-center justify-center overflow-hidden relative">
-                  <img
-                    src={shot.image}
-                    alt={shot.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    onError={handleImageError}
-                  />
-                  <div className="hidden absolute inset-0 flex items-center justify-center">
-                    <BookOpen className="w-16 h-16 text-purple-300" />
-                  </div>
-
-                  {/* Overlay with click hint */}
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
-                    <div className="bg-black/50 rounded-full p-3 backdrop-blur-sm">
-                      <ImageIcon className="w-8 h-8 text-white" />
-                    </div>
-                  </div>
-                </div>
-                <div className="p-5 md:p-6">
-                  <h3 className="text-lg md:text-xl font-bold text-white mb-2">{shot.title}</h3>
-                  <p className="text-sm md:text-base text-gray-400 mb-3">{shot.desc}</p>
-                  <code className="text-xs text-purple-300 bg-purple-900/30 px-2 py-1 rounded break-all">{shot.path}</code>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="relative z-10 py-16 md:py-20 px-4 sm:px-6 bg-gradient-to-t from-purple-950/20 to-black">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-12 md:mb-16 text-center bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
-            Project Impact & Achievements
-          </h2>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-8 md:mb-12">
-            <div className="bg-gradient-to-br from-green-900/30 to-emerald-900/30 border border-green-500/30 rounded-xl p-5 md:p-6 text-center">
-              <p className="text-3xl md:text-4xl font-bold text-green-400 mb-2">52</p>
-              <p className="text-xs md:text-sm text-gray-300">Total Courses</p>
-            </div>
-            <div className="bg-gradient-to-br from-blue-900/30 to-cyan-900/30 border border-blue-500/30 rounded-xl p-5 md:p-6 text-center">
-              <p className="text-3xl md:text-4xl font-bold text-blue-400 mb-2">4</p>
-              <p className="text-xs md:text-sm text-gray-300">Academic Levels</p>
-            </div>
-            <div className="bg-gradient-to-br from-purple-900/30 to-pink-900/30 border border-purple-500/30 rounded-xl p-5 md:p-6 text-center">
-              <p className="text-3xl md:text-4xl font-bold text-purple-400 mb-2">200</p>
-              <p className="text-xs md:text-sm text-gray-300">Total Credits</p>
-            </div>
-            <div className="bg-gradient-to-br from-orange-900/30 to-red-900/30 border border-orange-500/30 rounded-xl p-5 md:p-6 text-center">
-              <p className="text-3xl md:text-4xl font-bold text-orange-400 mb-2">6</p>
-              <p className="text-xs md:text-sm text-gray-300">Pages Built</p>
-            </div>
-          </div>
-
-          <div className="bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-xl p-6 md:p-8">
-            <h3 className="text-xl md:text-2xl font-bold text-white mb-4">Technical Achievements</h3>
-            <ul className="space-y-3 text-gray-300">
-              <li className="flex items-start gap-3">
-                <Check className="w-5 h-5 md:w-6 md:h-6 text-green-400 flex-shrink-0 mt-1" />
-                <span className="text-sm md:text-base">Built complete course database for all UNIPORT CS courses from 100L to 400L</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <Check className="w-5 h-5 md:w-6 md:h-6 text-green-400 flex-shrink-0 mt-1" />
-                <span className="text-sm md:text-base">Implemented intelligent filtering showing only eligible courses based on student level</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <Check className="w-5 h-5 md:w-6 md:h-6 text-green-400 flex-shrink-0 mt-1" />
-                <span className="text-sm md:text-base">Created fully functional CGPA calculator with semester-by-semester grade tracking</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <Check className="w-5 h-5 md:w-6 md:h-6 text-green-400 flex-shrink-0 mt-1" />
-                <span className="text-sm md:text-base">Deployed with Docker Compose orchestrating multi-container architecture</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <Check className="w-5 h-5 md:w-6 md:h-6 text-green-400 flex-shrink-0 mt-1" />
-                <span className="text-sm md:text-base">Configured Nginx as reverse proxy for production-grade performance</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <Check className="w-5 h-5 md:w-6 md:h-6 text-green-400 flex-shrink-0 mt-1" />
-                <span className="text-sm md:text-base">Re-implemented the entire system in React with enhanced state management and UI</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <section className="relative z-10 py-16 md:py-20 px-4 sm:px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 md:mb-6 text-white">
-            Interested in Similar Work?
-          </h2>
-          <p className="text-lg md:text-xl text-gray-400 mb-6 md:mb-8">
-            I build custom solutions for educational institutions and academic management systems.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center">
-            <Link
-              to="/#contact"
-              className="px-6 md:px-8 py-3 md:py-4 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg font-semibold hover:from-purple-500 hover:to-blue-500 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-500/50 text-center"
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {techStack.map((item, idx) => (
+            <div
+              key={idx}
+              className="p-4 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/30"
             >
-              Get In Touch
-            </Link>
-            <Link
-              to="/#projects"
-              className="px-6 md:px-8 py-3 md:py-4 bg-blue-600/20 border border-blue-500/50 hover:border-blue-500 rounded-lg font-semibold transition-all duration-300 hover:scale-105 text-center"
-            >
-              View Other Projects
-            </Link>
-          </div>
+              <div className="text-sm font-bold text-neutral-900 dark:text-neutral-100 mb-0.5">{item.name}</div>
+              <div className="text-xs text-neutral-500 dark:text-neutral-400">{item.role}</div>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* Image Modal */}
+      {/* ─── Architecture ─── */}
+      <section className="py-12 px-4 sm:px-6 max-w-6xl mx-auto border-t border-neutral-200 dark:border-neutral-800">
+        <div className="mb-8">
+          <div className="text-xs font-mono uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-1">
+            System Design
+          </div>
+          <h2 className="text-2xl font-bold text-neutral-950 dark:text-neutral-100">
+            Architecture Structure
+          </h2>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-6">
+          {architecture.map((arch, idx) => (
+            <div
+              key={idx}
+              className="p-6 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/30"
+            >
+              <h3 className="text-base font-bold text-neutral-900 dark:text-neutral-100 mb-3">{arch.section}</h3>
+              <ul className="space-y-2">
+                {arch.items.map((item, itemIdx) => (
+                  <li key={itemIdx} className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed flex items-start gap-2">
+                    <span className="text-neutral-400 mt-1">•</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ─── Screenshots ─── */}
+      <section className="py-12 px-4 sm:px-6 max-w-6xl mx-auto border-t border-neutral-200 dark:border-neutral-800 mb-16">
+        <div className="mb-8">
+          <div className="text-xs font-mono uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-1">
+            Visuals
+          </div>
+          <h2 className="text-2xl font-bold text-neutral-950 dark:text-neutral-100">
+            Interface Screenshots
+          </h2>
+        </div>
+
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {screenshots.map((shot, idx) => (
+            <div
+              key={idx}
+              onClick={() => openModal(idx)}
+              className="group cursor-pointer rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/30 overflow-hidden hover:border-neutral-400 dark:hover:border-neutral-600 transition-colors"
+            >
+              <div className="aspect-[16/10] bg-neutral-100 dark:bg-neutral-900 overflow-hidden">
+                <img
+                  src={shot.image}
+                  alt={shot.title}
+                  className="w-full h-full object-cover object-top group-hover:scale-102 transition-transform duration-200"
+                  loading="lazy"
+                />
+              </div>
+              <div className="p-4">
+                <div className="flex items-center justify-between mb-1">
+                  <h3 className="text-sm font-bold text-neutral-900 dark:text-neutral-100">{shot.title}</h3>
+                  <ArrowUpRight className="w-3.5 h-3.5 text-neutral-400 group-hover:text-neutral-600 dark:group-hover:text-neutral-200 transition-colors" />
+                </div>
+                <p className="text-xs text-neutral-500 dark:text-neutral-400 line-clamp-2">{shot.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ─── Modal Lightbox ─── */}
       {selectedImage && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-lg p-4">
-          {/* Close button */}
-          <button
-            onClick={closeModal}
-            className="absolute top-4 right-4 md:top-6 md:right-6 z-10 p-2 md:p-3 bg-black/50 rounded-full hover:bg-black/70 transition-colors border border-gray-700"
-          >
-            <X className="w-5 h-5 md:w-6 md:h-6 text-white" />
-          </button>
-
-          {/* Navigation buttons */}
-          <button
-            onClick={goToPrevious}
-            className="absolute left-4 md:left-6 z-10 p-2 md:p-3 bg-black/50 rounded-full hover:bg-black/70 transition-colors border border-gray-700"
-          >
-            <ChevronLeft className="w-5 h-5 md:w-6 md:h-6 text-white" />
-          </button>
-
-          <button
-            onClick={goToNext}
-            className="absolute right-4 md:right-6 z-10 p-2 md:p-3 bg-black/50 rounded-full hover:bg-black/70 transition-colors border border-gray-700"
-          >
-            <ChevronRight className="w-5 h-5 md:w-6 md:h-6 text-white" />
-          </button>
-
-          {/* Image container */}
-          <div className="relative max-w-6xl max-h-[80vh] w-full">
-            <img
-              src={screenshots[currentImageIndex].image}
-              alt={screenshots[currentImageIndex].title}
-              className="w-full h-full object-contain max-h-[70vh] rounded-lg"
-            />
-
-            {/* Image info */}
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/95 via-black/80 to-transparent p-3 md:p-6 rounded-b-lg">
-              <h3 className="text-base md:text-2xl font-bold text-white mb-1 md:mb-2">
-                {screenshots[currentImageIndex].title}
-              </h3>
-              <p className="text-xs md:text-base text-gray-300 mb-1 md:mb-2">
-                {screenshots[currentImageIndex].desc}
-              </p>
-              <div className="flex items-center justify-between flex-wrap gap-2">
-                <code className="text-xs text-purple-300 bg-purple-900/30 px-2 py-1 rounded hidden md:inline-block break-all">
-                  {screenshots[currentImageIndex].path}
-                </code>
-                <p className="text-xs text-gray-400">
-                  {currentImageIndex + 1}/{screenshots.length}
-                </p>
+        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="relative max-w-4xl w-full bg-neutral-900 border border-neutral-800 rounded-xl overflow-hidden">
+            <div className="p-4 border-b border-neutral-800 flex items-center justify-between">
+              <div>
+                <h3 className="text-base font-bold text-white">{selectedImage.title}</h3>
+                <p className="text-xs text-neutral-400">{selectedImage.desc}</p>
               </div>
+              <button
+                onClick={closeModal}
+                className="p-1 rounded-lg text-neutral-400 hover:text-white hover:bg-neutral-800"
+                aria-label="Close Preview"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            <div className="max-h-[70vh] overflow-auto p-4 flex items-center justify-center bg-black">
+              <img
+                src={screenshots[currentImageIndex].image}
+                alt={screenshots[currentImageIndex].title}
+                className="max-h-[65vh] w-auto object-contain rounded"
+              />
+            </div>
+            <div className="p-3 border-t border-neutral-800 flex items-center justify-between text-xs font-mono text-neutral-400">
+              <button
+                onClick={goToPrevious}
+                className="inline-flex items-center gap-1 hover:text-white px-2 py-1"
+              >
+                <ChevronLeft className="w-4 h-4" /> Previous
+              </button>
+              <span>{currentImageIndex + 1} / {screenshots.length}</span>
+              <button
+                onClick={goToNext}
+                className="inline-flex items-center gap-1 hover:text-white px-2 py-1"
+              >
+                Next <ChevronRight className="w-4 h-4" />
+              </button>
             </div>
           </div>
-
-          {/* Click outside to close */}
-          <div
-            className="absolute inset-0 -z-10"
-            onClick={closeModal}
-          />
         </div>
       )}
+
+      {/* ─── Footer ─── */}
+      <footer className="border-t border-neutral-200 dark:border-neutral-800/80 py-8 px-4 sm:px-6 max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-neutral-500">
+        <div className="flex items-center gap-2">
+          <span className="text-neutral-800 dark:text-neutral-300 font-semibold">GOG 🌌</span>
+          <span>•</span>
+          <span>Neverland</span>
+          <span>•</span>
+          <span>thgenius.xyz</span>
+        </div>
+        <Link to="/#projects" className="text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-300">
+          Return to Portfolio
+        </Link>
+      </footer>
     </div>
   );
 };
