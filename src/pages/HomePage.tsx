@@ -5,7 +5,6 @@ import {
   Layers, 
   Database, 
   Cpu, 
-  Globe, 
   Send, 
   Github, 
   Linkedin, 
@@ -13,8 +12,7 @@ import {
   Instagram, 
   Menu, 
   X, 
-  BookOpen, 
-  Boxes 
+  BookOpen 
 } from 'lucide-react';
 import GalaxyIcon from '../components/GalaxyIcon';
 import MyProjects from '../components/MyProjects';
@@ -209,34 +207,15 @@ export const HomePage = () => {
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {/* Item 1 */}
+          {/* Item 1: Root Umbrella */}
           <SpotlightCard>
             <div>
               <div className="flex items-center justify-between mb-3">
                 <span className="text-xs font-mono uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
-                  Primary Node
-                </span>
-                <Globe className="w-4 h-4 text-neutral-400 dark:text-neutral-500" />
-              </div>
-              <h3 className="text-lg font-bold text-neutral-900 dark:text-neutral-100 mb-2">thgenius.xyz</h3>
-              <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
-                The central portfolio and engineering hub showcasing production systems and active projects. Currently live at portfolio.thgenius.xyz.
-              </p>
-            </div>
-            <div className="text-xs font-mono text-neutral-400 dark:text-neutral-500 pt-3 border-t border-neutral-100 dark:border-neutral-800/60">
-              Live Hub
-            </div>
-          </SpotlightCard>
-
-          {/* Item 2 */}
-          <SpotlightCard>
-            <div>
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-xs font-mono uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
-                  Live Platform
+                  Ecosystem Portal
                 </span>
                 <a 
-                  href="https://eerina.com" 
+                  href="https://thgenius.xyz" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white"
@@ -244,51 +223,110 @@ export const HomePage = () => {
                   <ArrowUpRight className="w-4 h-4" />
                 </a>
               </div>
-              <h3 className="text-lg font-bold text-neutral-900 dark:text-neutral-100 mb-2">eerina.com</h3>
+              <h3 className="text-lg font-bold text-neutral-900 dark:text-neutral-100 mb-2">thgenius.xyz</h3>
               <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
-                Conversational AI business platform that handles sales inquiries and orders automatically over WhatsApp and the web.
+                The central homepage for everything I build. A directory connecting our digital currency tools, celebration services, and software engineering projects under one clean address.
               </p>
             </div>
             <div className="text-xs font-mono text-neutral-400 dark:text-neutral-500 pt-3 border-t border-neutral-100 dark:border-neutral-800/60">
-              Live Production
+              Main Gateway
             </div>
           </SpotlightCard>
 
-          {/* Item 3 */}
+          {/* Item 2: gNGN Stablecoin */}
           <SpotlightCard>
             <div>
               <div className="flex items-center justify-between mb-3">
                 <span className="text-xs font-mono uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
-                  Planned
+                  Digital Currency
+                </span>
+                <a 
+                  href="https://ngn.thgenius.xyz" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white"
+                >
+                  <ArrowUpRight className="w-4 h-4" />
+                </a>
+              </div>
+              <h3 className="text-lg font-bold text-neutral-900 dark:text-neutral-100 mb-2">ngn.thgenius.xyz</h3>
+              <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+                A digital Nigerian Naira designed for internet payments. Deposit crypto as security to mint 1-to-1 digital Naira with zero extra transaction fees.
+              </p>
+            </div>
+            <div className="text-xs font-mono text-emerald-600 dark:text-emerald-400 pt-3 border-t border-neutral-100 dark:border-neutral-800/60">
+              Testnet Live
+            </div>
+          </SpotlightCard>
+
+          {/* Item 3: Neverland Protocol */}
+          <SpotlightCard>
+            <div>
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-xs font-mono uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
+                  Celebration Service
+                </span>
+                <a 
+                  href="https://neverland.thgenius.xyz" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white"
+                >
+                  <ArrowUpRight className="w-4 h-4" />
+                </a>
+              </div>
+              <h3 className="text-lg font-bold text-neutral-900 dark:text-neutral-100 mb-2">neverland.thgenius.xyz</h3>
+              <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+                A digital card and gift delivery service. Write your message, choose a future date like a birthday or anniversary, and it arrives right on schedule with a 3D unboxing experience.
+              </p>
+            </div>
+            <div className="text-xs font-mono text-neutral-400 dark:text-neutral-500 pt-3 border-t border-neutral-100 dark:border-neutral-800/60">
+              Live Service
+            </div>
+          </SpotlightCard>
+
+          {/* Item 4: Snip Protocol */}
+          <SpotlightCard>
+            <div>
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-xs font-mono uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
+                  Developer Tool
+                </span>
+                <a 
+                  href="https://snip.thgenius.xyz" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white"
+                >
+                  <ArrowUpRight className="w-4 h-4" />
+                </a>
+              </div>
+              <h3 className="text-lg font-bold text-neutral-900 dark:text-neutral-100 mb-2">snip.thgenius.xyz</h3>
+              <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+                A fast, private way to share code and diagrams. Paste your work and get an instant link with a live preview, without needing to create an account or save files on a database.
+              </p>
+            </div>
+            <div className="text-xs font-mono text-neutral-400 dark:text-neutral-500 pt-3 border-t border-neutral-100 dark:border-neutral-800/60">
+              Active Project
+            </div>
+          </SpotlightCard>
+
+          {/* Item 5: Knowledge Base */}
+          <SpotlightCard>
+            <div>
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-xs font-mono uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
+                  Articles &amp; Guides
                 </span>
                 <BookOpen className="w-4 h-4 text-neutral-400 dark:text-neutral-500" />
               </div>
               <h3 className="text-lg font-bold text-neutral-900 dark:text-neutral-100 mb-2">learn.thgenius.xyz</h3>
               <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
-                Planned knowledge base for technical write-ups, backend architecture breakdowns, developer guides, and cryptocurrency research.
+                A planned technical library where I write clear, easy-to-follow explanations on how modern software systems work, blockchain concepts, and practical coding guides.
               </p>
             </div>
             <div className="text-xs font-mono text-neutral-400 dark:text-neutral-500 pt-3 border-t border-neutral-100 dark:border-neutral-800/60">
-              Future Knowledge Base
-            </div>
-          </SpotlightCard>
-
-          {/* Item 4 */}
-          <SpotlightCard>
-            <div>
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-xs font-mono uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
-                  Roadmap
-                </span>
-                <Boxes className="w-4 h-4 text-neutral-400 dark:text-neutral-500" />
-              </div>
-              <h3 className="text-lg font-bold text-neutral-900 dark:text-neutral-100 mb-2">Developer Tools & Crypto Labs</h3>
-              <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
-                Experimental blockchain utilities, smart contract experiments, and standalone developer tools.
-              </p>
-            </div>
-            <div className="text-xs font-mono text-neutral-400 dark:text-neutral-500 pt-3 border-t border-neutral-100 dark:border-neutral-800/60">
-              Upcoming Subdomains
+              Coming Soon
             </div>
           </SpotlightCard>
         </div>

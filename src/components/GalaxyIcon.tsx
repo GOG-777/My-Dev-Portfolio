@@ -33,14 +33,14 @@ export const GalaxyIcon: React.FC<GalaxyIconProps> = ({ className = "w-8 h-8", i
         fill="none" 
         xmlns="http://www.w3.org/2000/svg"
       >
-        {/* Outer glow */}
-        <circle cx="50" cy="50" r="45" fill="url(#galaxyGlow)" opacity="0.3" />
+        {/* Outer subtle dark blue glow */}
+        <circle cx="50" cy="50" r="45" fill="url(#galaxyBlueGlow)" opacity="0.25" />
         
-        {/* Main galaxy spiral */}
+        {/* Main galaxy spiral - rich dark blue */}
         <path 
           d="M50 20 Q65 30 70 50 Q65 70 50 80 Q35 70 30 50 Q35 30 50 20Z" 
-          fill="url(#galaxyGradient)" 
-          opacity="0.8"
+          fill="url(#galaxyBlueGradient)" 
+          opacity="0.95"
         >
           <animateTransform
             attributeName="transform"
@@ -52,11 +52,11 @@ export const GalaxyIcon: React.FC<GalaxyIconProps> = ({ className = "w-8 h-8", i
           />
         </path>
         
-        {/* Inner spiral */}
+        {/* Inner spiral - deep royal contrast */}
         <path 
           d="M50 30 Q60 35 63 50 Q60 65 50 70 Q40 65 37 50 Q40 35 50 30Z" 
-          fill="url(#innerGradient)" 
-          opacity="0.9"
+          fill="url(#innerBlueGradient)" 
+          opacity="0.95"
         >
           <animateTransform
             attributeName="transform"
@@ -68,53 +68,54 @@ export const GalaxyIcon: React.FC<GalaxyIconProps> = ({ className = "w-8 h-8", i
           />
         </path>
         
-        {/* Stars */}
-        <circle cx="25" cy="25" r="1.5" fill="#fff">
-          <animate attributeName="opacity" values="0.3;1;0.3" dur="3s" repeatCount="indefinite" />
+        {/* High-visibility stars with dark blue tone for clarity on light mode */}
+        <circle cx="25" cy="25" r="1.8" fill="#1e3a8a">
+          <animate attributeName="opacity" values="0.4;1;0.4" dur="3s" repeatCount="indefinite" />
         </circle>
-        <circle cx="75" cy="30" r="1" fill="#fff">
+        <circle cx="75" cy="30" r="1.5" fill="#1d4ed8">
           <animate attributeName="opacity" values="0.5;1;0.5" dur="2.5s" repeatCount="indefinite" />
         </circle>
-        <circle cx="70" cy="75" r="1.5" fill="#fff">
+        <circle cx="70" cy="75" r="1.8" fill="#1e3a8a">
           <animate attributeName="opacity" values="0.4;1;0.4" dur="3.5s" repeatCount="indefinite" />
         </circle>
-        <circle cx="30" cy="70" r="1" fill="#fff">
+        <circle cx="30" cy="70" r="1.5" fill="#1d4ed8">
           <animate attributeName="opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite" />
         </circle>
-        <circle cx="85" cy="50" r="1" fill="#fff">
-          <animate attributeName="opacity" values="0.3;1;0.3" dur="4s" repeatCount="indefinite" />
+        <circle cx="85" cy="50" r="1.5" fill="#1e3a8a">
+          <animate attributeName="opacity" values="0.4;1;0.4" dur="4s" repeatCount="indefinite" />
         </circle>
-        <circle cx="15" cy="50" r="1" fill="#fff">
-          <animate attributeName="opacity" values="0.7;1;0.7" dur="2.8s" repeatCount="indefinite" />
-        </circle>
-        
-        {/* Center bright core */}
-        <circle cx="50" cy="50" r="8" fill="url(#coreGradient)">
-          <animate attributeName="r" values="8;10;8" dur="4s" repeatCount="indefinite" />
+        <circle cx="15" cy="50" r="1.5" fill="#1d4ed8">
+          <animate attributeName="opacity" values="0.6;1;0.6" dur="2.8s" repeatCount="indefinite" />
         </circle>
         
-        {/* Gradients */}
+        {/* Center bright core with dark blue rim */}
+        <circle cx="50" cy="50" r="8" fill="url(#coreBlueGradient)" stroke="#1e3a8a" strokeWidth="1">
+          <animate attributeName="r" values="7.5;9.5;7.5" dur="4s" repeatCount="indefinite" />
+        </circle>
+        
+        {/* High-contrast dark blue gradients */}
         <defs>
-          <radialGradient id="galaxyGlow">
-            <stop offset="0%" stopColor="#8b5cf6" />
-            <stop offset="100%" stopColor="#3b82f6" stopOpacity="0" />
+          <radialGradient id="galaxyBlueGlow">
+            <stop offset="0%" stopColor="#1d4ed8" />
+            <stop offset="100%" stopColor="#0f172a" stopOpacity="0" />
           </radialGradient>
           
-          <linearGradient id="galaxyGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#a78bfa" />
-            <stop offset="50%" stopColor="#8b5cf6" />
-            <stop offset="100%" stopColor="#6366f1" />
+          <linearGradient id="galaxyBlueGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#1e3a8a" />
+            <stop offset="50%" stopColor="#1d4ed8" />
+            <stop offset="100%" stopColor="#2563eb" />
           </linearGradient>
           
-          <linearGradient id="innerGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#c4b5fd" />
-            <stop offset="50%" stopColor="#8b5cf6" />
+          <linearGradient id="innerBlueGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#3b82f6" />
+            <stop offset="50%" stopColor="#1d4ed8" />
+            <stop offset="100%" stopColor="#1e3a8a" />
           </linearGradient>
           
-          <radialGradient id="coreGradient">
+          <radialGradient id="coreBlueGradient">
             <stop offset="0%" stopColor="#ffffff" />
-            <stop offset="50%" stopColor="#ddd6fe" />
-            <stop offset="100%" stopColor="#8b5cf6" />
+            <stop offset="50%" stopColor="#93c5fd" />
+            <stop offset="100%" stopColor="#1e40af" />
           </radialGradient>
         </defs>
       </svg>

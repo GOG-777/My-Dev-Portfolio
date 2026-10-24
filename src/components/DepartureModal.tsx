@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { ArrowUpRight, X, ShieldAlert, Check } from 'lucide-react';
+import { ArrowUpRight, X } from 'lucide-react';
 import { playDepartureSound, playCopySound } from '../utils/sfx';
 
 interface DepartureRequest {
@@ -103,82 +103,79 @@ export const DepartureModal: React.FC = () => {
 
   if (!request) return null;
 
+  const kbd =
+  'font-mono text-[10px] leading-none px-1 py-0.5 rounded-[4px] border';
+
   return (
-    <div 
-      className="fixed inset-0 z-[9999] bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-200"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="departure-title"
+    <div
+    className="fixed inset-0 z-[9999] bg-black/50 backdrop-blur-[2px] flex items-center justify-center p-4 animate-in fade-in duration-150"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="departure-title"
     >
-      <div 
-        className="w-full max-w-md rounded-2xl border border-neutral-300 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-6 shadow-2xl transition-all"
-        onClick={(e) => e.stopPropagation()}
-      >
-        {/* Header */}
-        <div className="flex items-start justify-between gap-4 mb-4">
-          <div className="flex items-center gap-2.5">
-            <div className="p-2 rounded-lg bg-neutral-100 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200">
-              <ShieldAlert className="w-5 h-5 text-purple-600 dark:text-purple-400" />
-            </div>
-            <div>
-              <h3 id="departure-title" className="text-base font-bold text-neutral-950 dark:text-white">
-                Departing thgenius.xyz
-              </h3>
-              <p className="text-xs text-neutral-500">
-                External Link Interceptor
-              </p>
-            </div>
-          </div>
-          <button
-            onClick={closeModal}
-            className="p-1 rounded-lg text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
-            aria-label="Cancel Departure"
-          >
-            <X className="w-4 h-4" />
-          </button>
-        </div>
+    <div
+    className="w-full max-w-sm rounded-lg border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 shadow-xl"
+    onClick={(e) => e.stopPropagation()}
+    >
+    {/* Header */}
+    <div className="flex items-center justify-between px-4 py-3 border-b border-neutral-200 dark:border-neutral-800">
+    <h3
+    id="departure-title"
+    className="text-sm font-medium text-neutral-900 dark:text-neutral-100"
+    >
+    Leaving thgenius.xyz
+    </h3>
+    <button
+    onClick={closeModal}
+    className="p-1 -mr-1 rounded-md text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+    aria-label="Cancel Departure"
+    >
+    <X className="w-4 h-4" />
+    </button>
+    </div>
 
-        {/* Content */}
-        <div className="space-y-3 mb-6">
-          <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed">
-            You are about to leave the thgenius.xyz network to an external service:
-          </p>
+    {/* Content */}
+    <div className="px-4 py-4 space-y-3">
+    <p className="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed">
+    This link opens a site we do not control.
+    </p>
 
-          <div className="p-3 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-950 font-mono text-xs text-neutral-700 dark:text-neutral-300 break-all select-all flex items-center justify-between gap-2">
-            <span>{request.url}</span>
-            <ArrowUpRight className="w-3.5 h-3.5 text-neutral-400 flex-shrink-0" />
-          </div>
+    <div className="flex items-center justify-between gap-2 rounded-md border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900 px-3 py-2 font-mono text-xs text-neutral-800 dark:text-neutral-200 break-all select-all">
+    <span>{request.url}</span>
+    <ArrowUpRight className="w-3.5 h-3.5 text-neutral-400 flex-shrink-0" />
+    </div>
 
-          <label className="flex items-center gap-2 cursor-pointer pt-1 text-xs text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300 transition-colors select-none">
-            <input
-              type="checkbox"
-              checked={dontAskAgain}
-              onChange={(e) => setDontAskAgain(e.target.checked)}
-              className="rounded border-neutral-300 dark:border-neutral-700 text-purple-600 focus:ring-purple-500"
-            />
-            <span>Do not ask again this session</span>
-          </label>
-        </div>
+    <label className="flex items-center gap-2 cursor-pointer text-xs text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-200 transition-colors select-none">
+    <input
+    type="checkbox"
+    checked={dontAskAgain}
+    onChange={(e) => setDontAskAgain(e.target.checked)}
+    className="w-3.5 h-3.5 rounded-[4px] border-neutral-300 dark:border-neutral-700 accent-neutral-900 dark:accent-neutral-100"
+    />
+    <span>Do not ask again this session</span>
+    </label>
+    </div>
 
-        {/* Action Buttons */}
-        <div className="flex items-center justify-end gap-3 pt-2 border-t border-neutral-100 dark:border-neutral-800">
-          <button
-            onClick={closeModal}
-            type="button"
-            className="px-4 py-2 rounded-lg border border-neutral-300 dark:border-neutral-700 hover:border-neutral-400 dark:hover:border-neutral-600 text-neutral-700 dark:text-neutral-300 text-xs font-semibold hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors"
-          >
-            Stay Here (Esc)
-          </button>
-          <button
-            onClick={proceed}
-            type="button"
-            className="px-4 py-2 rounded-lg bg-neutral-950 hover:bg-neutral-800 dark:bg-neutral-100 dark:hover:bg-white text-white dark:text-neutral-950 text-xs font-semibold transition-colors inline-flex items-center gap-1.5"
-          >
-            <span>Proceed to Link</span>
-            <Check className="w-3.5 h-3.5" />
-          </button>
-        </div>
-      </div>
+    {/* Action Buttons */}
+    <div className="flex items-center justify-end gap-2 px-4 py-3 border-t border-neutral-200 dark:border-neutral-800">
+    <button
+    onClick={closeModal}
+    type="button"
+    className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md border border-neutral-300 dark:border-neutral-700 text-neutral-700 dark:text-neutral-300 text-xs font-medium hover:bg-neutral-100 dark:hover:bg-neutral-900 transition-colors"
+    >
+    <span>Stay here</span>
+    <kbd className={kbd + ' border-neutral-300 dark:border-neutral-700 text-neutral-500'}>Esc</kbd>
+    </button>
+    <button
+    onClick={proceed}
+    type="button"
+    className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-neutral-900 hover:bg-neutral-700 dark:bg-neutral-100 dark:hover:bg-white text-white dark:text-neutral-950 text-xs font-medium transition-colors"
+    >
+    <span>Continue</span>
+    <kbd className={kbd + ' border-white/30 dark:border-neutral-950/30 text-white/70 dark:text-neutral-950/60'}>Enter</kbd>
+    </button>
+    </div>
+    </div>
     </div>
   );
 };

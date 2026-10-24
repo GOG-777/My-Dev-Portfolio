@@ -19,6 +19,26 @@ interface ProductionProject {
 
 const systemsProjects: ProductionProject[] = [
   {
+    title: "G NGN Stablecoin",
+    type: "Digital Currency & Lending Protocol",
+    description:
+      "A digital Nigerian Naira backed 1-to-1 by cryptocurrency collateral. Anyone can lock in crypto to mint digital Naira with zero hidden fees and use it on modern blockchain networks.",
+    badge: "Live Protocol",
+    route: "https://ngn.thgenius.xyz",
+    isExternal: true,
+    techStack: ["Solidity", "Foundry", "Next.js", "TypeScript", "Base Sepolia", "Arbitrum", "Pyth Network"],
+  },
+  {
+    title: "Snip Protocol",
+    type: "Code & Diagram Sharing Tool",
+    description:
+      "A privacy-first tool that lets you paste code, diagrams, or website designs and creates an instant live preview link. It compresses everything directly into the web address, so nothing is saved on a central database.",
+    badge: "Active Dev",
+    route: "https://snip.thgenius.xyz",
+    isExternal: true,
+    techStack: ["Next.js", "React 19", "TypeScript", "Tailwind CSS", "LZ-String", "Mermaid.js"],
+  },
+  {
     title: "Eerina",
     type: "AI Business Messaging & Commerce Engine",
     description:
