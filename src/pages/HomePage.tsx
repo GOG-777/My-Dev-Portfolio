@@ -407,18 +407,22 @@ export const HomePage = () => {
 
       {/* ─── About Section ─── */}
       <section id="about" className="py-20 px-4 sm:px-6 max-w-6xl mx-auto border-t border-neutral-200 dark:border-neutral-800/60">
-        <div className="grid md:grid-cols-3 gap-10 items-start">
-          <div>
-            <div className="text-xs font-mono uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-2">
-              Background
-            </div>
-            <h2 className="text-3xl font-extrabold text-neutral-950 dark:text-neutral-100 tracking-tight">
-              About GOG 🌌
+        <div className="grid md:grid-cols-12 gap-8 md:gap-12 items-start">
+          {/* Identity Column */}
+          <div className="md:col-span-5 flex items-center gap-4 sm:gap-5">
+            <img
+              src="/images/avatar.jpg"
+              alt="GOG"
+              className="w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover border-2 border-neutral-200 dark:border-neutral-800 shadow-sm shrink-0"
+            />
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-neutral-950 dark:text-neutral-100 tracking-tight flex items-center gap-2 whitespace-nowrap">
+              <span>About GOG</span>
+              <span>🌌</span>
             </h2>
-            <p className="text-xs font-mono text-neutral-500 mt-1">known as Genius / thegenius · Neverland</p>
           </div>
 
-          <div className="md:col-span-2 space-y-4 text-sm sm:text-base text-neutral-700 dark:text-neutral-300 leading-relaxed">
+          {/* Bio Column */}
+          <div className="md:col-span-7 space-y-4 text-sm sm:text-base text-neutral-700 dark:text-neutral-300 leading-relaxed md:pt-1 text-justify">
             <p>
               I am a software engineer focused on building practical, high-performance web applications and backend systems.
             </p>
@@ -427,6 +431,9 @@ export const HomePage = () => {
             </p>
             <p>
               Under the <span className="text-neutral-950 dark:text-neutral-100 font-medium">thgenius.xyz</span> domain, I am building out independent web services, developer tools, and technical documentation.
+            </p>
+            <p className="pt-2 font-mono text-xs sm:text-[13px] text-neutral-400 dark:text-neutral-500 tracking-wider text-left">
+              ¡️⅁ꟽHS •uɐɯnɥ ʇou sᴉ ɹǝsn sᴉɥꞱ
             </p>
           </div>
         </div>
