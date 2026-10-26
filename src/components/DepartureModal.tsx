@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { ArrowUpRight, X } from 'lucide-react';
 import { playDepartureSound, playCopySound } from '../utils/sfx';
 
@@ -9,27 +9,11 @@ interface DepartureRequest {
 
 export const DepartureModal: React.FC = () => {
   const [request, setRequest] = useState<DepartureRequest | null>(null);
+  const continueRef = useRef<HTMLAnchorElement>(null);
 
   const closeModal = useCallback(() => {
     setRequest(null);
   }, []);
-
-  const proceed = useCallback(() => {
-    if (!request) return;
-    playCopySound();
-
-    const targetUrl = request.url;
-    closeModal();
-
-    // Reliably open in new tab without browser popup blocker interference
-    const link = document.createElement('a');
-    link.href = targetUrl;
-    link.target = '_blank';
-    link.rel = 'noopener noreferrer';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  }, [request, closeModal]);
 
   useEffect(() => {
     const handleGlobalClick = (e: MouseEvent) => {
@@ -37,15 +21,24 @@ export const DepartureModal: React.FC = () => {
       const target = (e.target as Element)?.closest?.('a');
       if (!target) return;
 
+      // Never intercept links explicitly marked as allowed (e.g. the Continue button)
+      if (
+        target.hasAttribute('data-departure-allow') ||
+        target.closest('[data-departure-allow]')
+      ) {
+        return;
+      }
+
       const href = target.getAttribute('href');
       if (!href) return;
 
-      // Ignore in-page anchors, relative paths, mailto, tel
+      // Ignore in-page anchors, relative paths, mailto, tel, javascript:
       if (
         href.startsWith('#') ||
         href.startsWith('/') ||
         href.startsWith('mailto:') ||
-        href.startsWith('tel:')
+        href.startsWith('tel:') ||
+        href.startsWith('javascript:')
       ) {
         return;
       }
@@ -93,13 +86,15 @@ export const DepartureModal: React.FC = () => {
         closeModal();
       } else if (e.key === 'Enter') {
         e.preventDefault();
-        proceed();
+        if (continueRef.current) {
+          continueRef.current.click();
+        }
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [request, closeModal, proceed]);
+  }, [request, closeModal]);
 
   if (!request) return null;
 
@@ -156,14 +151,21 @@ export const DepartureModal: React.FC = () => {
             <span>Stay here</span>
             <kbd className={`${kbd} border-neutral-300 dark:border-neutral-700 text-neutral-500`}>Esc</kbd>
           </button>
-          <button
-            onClick={proceed}
-            type="button"
+          <a
+            ref={continueRef}
+            href={request.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-departure-allow="true"
+            onClick={() => {
+              playCopySound();
+              closeModal();
+            }}
             className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-neutral-950 hover:bg-neutral-800 dark:bg-neutral-100 dark:hover:bg-white text-white dark:text-neutral-950 text-xs font-medium transition-colors cursor-pointer"
           >
             <span>Continue</span>
             <kbd className={`${kbd} border-white/30 dark:border-neutral-950/30 text-white/70 dark:text-neutral-950/60`}>Enter</kbd>
-          </button>
+          </a>
         </div>
       </div>
     </div>
