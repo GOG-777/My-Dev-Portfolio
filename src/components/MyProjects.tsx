@@ -33,7 +33,7 @@ const systemsProjects: ProductionProject[] = [
     type: "Code & Diagram Sharing Tool",
     description:
       "A privacy-first tool that lets you paste code, diagrams, or website designs and creates an instant live preview link. It compresses everything directly into the web address, so nothing is saved on a central database.",
-    badge: "Active Dev",
+    badge: "Live Service",
     route: "https://snip.thgenius.xyz",
     isExternal: true,
     techStack: ["Next.js", "React 19", "TypeScript", "Tailwind CSS", "LZ-String", "Mermaid.js"],
@@ -69,14 +69,14 @@ const systemsProjects: ProductionProject[] = [
     techStack: ["Node.js", "Express", "PostgreSQL", "Docker", "Tailwind CSS"],
   },
   {
-    title: "URL Shortener Service",
-    type: "Link Redirection & Analytics",
+    title: "Wrap Link Router",
+    type: "Edge URL Shortener & Cryptographic Router",
     description:
-      "A fast link shortening tool that generates QR codes, tracks total clicks, and provides geographic analytics on visitor traffic.",
-    badge: "Utility Service",
-    route: "/projects/url-shortener",
-    isExternal: false,
-    techStack: ["TypeScript", "Node.js", "PostgreSQL", "Express"],
+      "A fast link shortener written in pure Go that generates Base62 aliases, self-verifying HMAC-SHA256 stateless links, scannable QR matrices, and live click telemetry with per-IP token bucket rate limiting.",
+    badge: "Live Service",
+    route: "https://wrap.thgenius.xyz",
+    isExternal: true,
+    techStack: ["Go", "HMAC-SHA256", "Flate", "Token Bucket", "SSRF Guard"],
   },
 ];
 

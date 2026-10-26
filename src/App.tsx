@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import PraiseFashion from './pages/PraiseFashion';
 import CourseRegistration from './pages/CourseRegistration';
@@ -15,6 +15,8 @@ export const App = () => {
       <DepartureModal />
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/projects" element={<Navigate to="/#projects" replace />} />
+        <Route path="/projects/" element={<Navigate to="/#projects" replace />} />
         <Route path="/projects/praise-fashion" element={<PraiseFashion />} />
         <Route path="/projects/course-registration" element={<CourseRegistration />} />
         <Route path="/projects/url-shortener" element={<URLShortener />} />

@@ -307,11 +307,37 @@ export const HomePage = () => {
               </p>
             </div>
             <div className="text-xs font-mono text-neutral-400 dark:text-neutral-500 pt-3 border-t border-neutral-100 dark:border-neutral-800/60">
-              Active Project
+              Live Service
             </div>
           </SpotlightCard>
 
-          {/* Item 5: Knowledge Base */}
+          {/* Item 5: Wrap Link Router */}
+          <SpotlightCard>
+            <div>
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-xs font-mono uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
+                  Edge Link Router
+                </span>
+                <a 
+                  href="https://wrap.thgenius.xyz" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white"
+                >
+                  <ArrowUpRight className="w-4 h-4" />
+                </a>
+              </div>
+              <h3 className="text-lg font-bold text-neutral-900 dark:text-neutral-100 mb-2">wrap.thgenius.xyz</h3>
+              <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+                An open source URL shortener built in pure Go. Wraps long links into short Base62 aliases and HMAC-signed stateless tokens with QR matrices, click telemetry, and per-IP rate limiting.
+              </p>
+            </div>
+            <div className="text-xs font-mono text-neutral-400 dark:text-neutral-500 pt-3 border-t border-neutral-100 dark:border-neutral-800/60">
+              Live Service
+            </div>
+          </SpotlightCard>
+
+          {/* Item 6: Knowledge Base */}
           <SpotlightCard>
             <div>
               <div className="flex items-center justify-between mb-3">
