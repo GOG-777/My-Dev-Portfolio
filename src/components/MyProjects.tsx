@@ -26,7 +26,7 @@ const systemsProjects: ProductionProject[] = [
     badge: "Live Protocol",
     route: "https://ngn.thgenius.xyz",
     isExternal: true,
-    techStack: ["Solidity", "Foundry", "Next.js", "TypeScript", "Base Sepolia", "Arbitrum", "Pyth Network"],
+    techStack: ["Solidity", "Foundry", "Next.js", "TypeScript", "Base", "Arbitrum", "BSC", "Chainlink"],
   },
   {
     title: "Snip Protocol",
